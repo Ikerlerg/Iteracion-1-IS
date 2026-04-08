@@ -22,16 +22,16 @@ public class User implements Serializable {
     private String email;    
     private String password;
     private String name; 
-    private Boolean vendedor;   //True=vendedor False=Comprador   
+    private int tipo;   //1=vendedor 2=Comprador -1=admin  
     
     public User() {
     }
 
-    public User(String email, String password, String name, boolean vendedor) {
+    public User(String email, String password, String name, int tipo) {
         this.email = email;
         this.password = password;
         this.name = name;
-        this.vendedor = vendedor;
+        this.tipo = tipo;
     }
     public String getEmail() { 
     	return email; 
@@ -43,7 +43,7 @@ public class User implements Serializable {
     	return name; 
     	}
     
-    public boolean isVendedor() { 
-    	return vendedor; 
+    public int getTipo() { 
+    	return tipo; 
     	}
 }

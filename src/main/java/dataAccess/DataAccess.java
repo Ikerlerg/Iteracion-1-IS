@@ -73,62 +73,61 @@ public class DataAccess  {
 	 * This method  initializes the database with some products and sellers.
 	 * This method is invoked by the business logic (constructor of BLFacadeImplementation) when the option "initialize" is declared in the tag dataBaseOpenMode of resources/config.xml file
 	 */	
-	public void initializeDB(){
+    public void initializeDB(){
 		
-		db.getTransaction().begin();
-		//if(inicializar) {
-			try { 
-				//User user1= new User("seller1@gmail.com","Aitor Fernandez", "12345", true);
-				//db.persist(user1);
-				//Create sellers 
-				Seller seller1=new Seller("seller1@gmail.com","12345","Aitor Fernandez");
-				Seller seller2=new Seller("seller22@gmail.com","54321","Ane Gaztañaga");
-				Seller seller3=new Seller("seller3@gmail.com","12121","Test Seller");
+        try { 
+            db.getTransaction().begin();
 
+            // Create sellers y admin
+            Seller admin = new Seller("admin@gmail.com", "admin", "admin", -1);
+            Seller seller1 = new Seller("seller1@gmail.com","12345","Aitor Fernandez",1);
+            Seller seller2 = new Seller("seller22@gmail.com","54321","Ane Gaztañaga",1);
+            Seller seller3 = new Seller("seller3@gmail.com","12121","Test Seller",1);
 
-				//Create products
-				Date today = UtilDate.trim(new Date());
+            // Create products
+            Date today = UtilDate.trim(new Date());
 
+            seller1.addSale("futbol baloia", "oso polita, gutxi erabilita", 2, 10,  today, null);
+            seller1.addSale("salomon mendiko botak", "44 zenbakia, 3 ateraldi",2, 20,  today, null);
+            seller1.addSale("samsung 42\" telebista", "berria, erabili gabe", 2, 175,  today, null);
 
-				seller1.addSale("futbol baloia", "oso polita, gutxi erabilita", 2, 10,  today, null);
-				seller1.addSale("salomon mendiko botak", "44 zenbakia, 3 ateraldi",2, 20,  today, null);
-				seller1.addSale("samsung 42\" telebista", "berria, erabili gabe", 2, 175,  today, null);
+            seller2.addSale("imac 27", "7 urte, dena ondo dabil", 1, 200,today, null);
+            seller2.addSale("iphone 17", "oso gutxi erabilita", 2, 400, today, null);
+            seller2.addSale("orbea mendiko bizikleta", "29\" 10 urte, mantenua behar du", 3,225, today, null);
+            seller2.addSale("polar kilor erlojua", "Vantage M, ondo dago", 3, 30, today, null);
 
+            seller3.addSale("sukaldeko mahaia", "1.8*0.8, 4 aulkiekin. Prezio finkoa", 3,45, today, null);
+            
+            // Create offers para seller 1
+            seller1.addOffer(10.0, "seller1@gmail.com", true);
+            seller1.addOffer(20.0, "seller1@gmail.com", true);
+            seller1.addOffer(175.0, "seller1@gmail.com", true);
 
-				seller2.addSale("imac 27", "7 urte, dena ondo dabil", 1, 200,today, null);
-				seller2.addSale("iphone 17", "oso gutxi erabilita", 2, 400, today, null);
-				seller2.addSale("orbea mendiko bizikleta", "29\" 10 urte, mantenua behar du", 3,225, today, null);
-				seller2.addSale("polar kilor erlojua", "Vantage M, ondo dago", 3, 30, today, null);
+            // Create offers para seller 2
+            seller2.addOffer(200.0, "seller22@gmail.com", true);
+            seller2.addOffer(400.0, "seller22@gmail.com", true);
+            seller2.addOffer(225.0, "seller22@gmail.com", true);
+            seller2.addOffer(30.0, "seller22@gmail.com", true);
 
-				seller3.addSale("sukaldeko mahaia", "1.8*0.8, 4 aulkiekin. Prezio finkoa", 3,45, today, null);
-				
-				// Create offers para seller 1
-				seller1.addOffer(10.0, "seller1@gmail.com", true);
-				seller1.addOffer(20.0, "seller1@gmail.com", true);
-				seller1.addOffer(175.0, "seller1@gmail.com", true);
+            // Create offers para seller 3
+            seller3.addOffer(45.0, "seller3@gmail.com", true);
 
-				// Create offers para seller 2
-				seller2.addOffer(200.0, "seller22@gmail.com", true);
-				seller2.addOffer(400.0, "seller22@gmail.com", true);
-				seller2.addOffer(225.0, "seller22@gmail.com", true);
-				seller2.addOffer(30.0, "seller22@gmail.com", true);
+            db.persist(seller1);
+            db.persist(seller2);
+            db.persist(seller3);
+            db.persist(admin);
 
-				// Create offers para seller 3
-				seller3.addOffer(45.0, "seller3@gmail.com", true);
-
-				db.persist(seller1);
-				db.persist(seller2);
-				db.persist(seller3);
-
-
-				db.getTransaction().commit();
-				System.out.println("Db initialized");
-			}
-			catch (Exception e){
-				e.printStackTrace();
-			}
-		//}
-	}
+            db.getTransaction().commit();
+            System.out.println("Db initialized");
+        }
+        catch (Exception e){
+            e.printStackTrace();
+            if(db.getTransaction().isActive()) {
+                db.getTransaction().rollback();
+            }
+        }
+    }
+	
 	
 	
 	/**
@@ -266,6 +265,8 @@ public void open(){
     }
 	//Hacer Login 
 	 public User Login(String email, String password) {
+		 
+		 
 		 User intentoLog= db.find(User.class, email);
 		 //System.out.println(intentoLog.toString());
 		 if(intentoLog==null || !intentoLog.getPassword().equals(password)) {
@@ -277,18 +278,19 @@ public void open(){
 		 } 
 	 }
 	 //Registro
-	public boolean Registro(String name, String email, String password, boolean vendedor) {
+	public boolean Registro(String email, String password, String name, int tipo) {
 		 db.getTransaction().begin();
-		 if(this.Login(email, password) == null) {
-			 if(!vendedor) {
-				 User registrar= new User(name, email, password, vendedor);
-				 db.persist(registrar);
-			 }else {
-				 Seller registrar= new Seller(name,email,password);
-				 db.persist(registrar);
-			 }
-			 db.getTransaction().commit();
-			 return true;
+		 if(db.find(User.class, email) == null) {
+			 User registrar;
+		        if (tipo == 1) {
+		            registrar = new Seller(email, password, name, tipo);
+		        } else {
+		            registrar = new User(email, password, name, tipo);
+		        }
+		        
+		        db.persist(registrar);
+		        db.getTransaction().commit();
+		        return true;
 		 }
 		 else {
 			 db.getTransaction().rollback();
@@ -302,15 +304,9 @@ public void open(){
 	    
 	    // 2. Comprobamos si el usuario EXISTE antes de hacerle preguntas
 	    if (usuario != null) {
-	        
-	        // Si existe, comprobamos qué tipo de usuario es
-	        if (usuario.isVendedor()) {
-	            return 1; // Es vendedor
-	        } else {
-	            return 2; // Es comprador
-	        }
-	        
-	    } else {
+	        return usuario.getTipo();	        	        
+	    } 
+	    else {
 	        // 3. Si el usuario no existe (es null), devolvemos 0
 	        // Así tu MainGUI sabrá que es un usuario inválido y mantendrá el botón oculto
 	        return 0; 
@@ -340,11 +336,20 @@ public void open(){
 				return false;
 			}
 		}
-		public List<Offer> getAcceptedOffers(String sellerEmail) {
-			System.out.println(">> DataAccess: getAcceptedOffers => seller=" + sellerEmail);
-			// Buscamos ofertas donde el email coincida y el estado sea false (aceptada)
-			TypedQuery<Offer> query = db.createQuery("SELECT o FROM Offer o WHERE o.estado = false AND o.email_vendedor = '" + sellerEmail + "'", Offer.class);
-			return query.getResultList();
+		public List<Offer> getAcceptedOffers(String email) {
+		    System.out.println(">> DataAccess: getAcceptedOffers => user=" + email);
+		    User u = db.find(User.class, email);
+		    int tipo = (u != null) ? u.getTipo() : 0;
+		    TypedQuery<Offer> query;
+		    if (tipo == -1) {
+		        query = db.createQuery("SELECT o FROM Offer o WHERE o.estado = false", Offer.class);
+		    } 
+		    else {
+		        query = db.createQuery("SELECT o FROM Offer o WHERE o.estado = false AND o.email_vendedor = :email", Offer.class);
+		        query.setParameter("email", email);
+		    }
+		    
+		    return query.getResultList();
 		}
 	public void close(){
 		db.close();

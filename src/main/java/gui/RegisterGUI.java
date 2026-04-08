@@ -76,12 +76,21 @@ public class RegisterGUI extends JFrame {
 				String psw= pswField.getText();
 				boolean vendedor=seller_f.isSelected();
 				BLFacade facade = MainGUI.getBusinessLogic();
-				
-				if(!correo.contains("@gmail.com")) {
+			  if(!correo.contains("@gmail.com")) {
+				  
 					errorLabel.setText(ResourceBundle.getBundle("Etiquetas").getString("RegisterGUI.errorLabel"));
+				  
+				}
+				else if(facade.obtUser(correo) != 0) {
+					errorLabel.setText(ResourceBundle.getBundle("Etiquetas").getString("RegisterGUI.registrado"));
 				}
 				else {
-					facade.Registro(correo, psw, nombre, vendedor);
+					if(vendedor) {
+						facade.Registro(correo, psw, nombre, 1);
+					}
+					else {
+						facade.Registro(correo, psw, nombre, 2);
+					}
 					//MainGUI.mode = seller_f.isSelected();
 					ventanaPrincipal.bLogin.setEnabled(false);
 					ventanaPrincipal.bLogin.setVisible(false);

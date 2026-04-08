@@ -49,8 +49,8 @@ public class LoginGUI extends JFrame{
 				String correo= mailField.getText();
 				String pswd= passwordField.getText();
 				BLFacade facade = MainGUI.getBusinessLogic(); 
-
-			    if(!correo.contains("@gmail.com")) {
+				//!correo.contains("@")||!correo.contains(".")||correo.indexOf(".")<correo.indexOf("@") + 2||correo.length()-correo.replace("@", "").length() != 1)
+			if(!correo.contains("@gmail.com")) {
 			        Errorlabel.setText(ResourceBundle.getBundle("Etiquetas").getString("LoginGUI.FormatoError"));
 			    }
 			   
@@ -64,8 +64,8 @@ public class LoginGUI extends JFrame{
 			        ventanaPrincipal.bLogin.setVisible(false);
 			        ventanaPrincipal.bRegist.setEnabled(false);
 			        ventanaPrincipal.bRegist.setVisible(false);
-			        ventanaPrincipal.jButtonCreateQuery.setEnabled(facade.Login(correo, pswd).isVendedor());
-			        ventanaPrincipal.jButtonQueryQueries.setEnabled(!facade.Login(correo, pswd).isVendedor());
+			        ventanaPrincipal.jButtonCreateQuery.setEnabled(facade.Login(correo, pswd).getTipo()==1||facade.Login(correo, pswd).getTipo()==-1);//activar si el usuario es vendedor o admin
+			        ventanaPrincipal.jButtonQueryQueries.setEnabled(facade.Login(correo, pswd).getTipo()==2||facade.Login(correo, pswd).getTipo()==-1);//activar si el usuario es comprador o admin
 			        ventanaPrincipal.setTitle(ResourceBundle.getBundle("Etiquetas").getString("MainGUI.MainTitle")+": " + correo);
 			        ventanaPrincipal.loged.setText(facade.Login(correo, pswd).getEmail());
 			        Errorlabel.setText(ResourceBundle.getBundle("Etiquetas").getString("RegisterGUI.bienvenida")+ " " + facade.Login(correo, pswd).getName()); 

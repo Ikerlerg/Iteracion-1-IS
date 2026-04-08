@@ -115,9 +115,9 @@ public class BLFacadeImplementation  implements BLFacade {
         return u; 
     }
     @WebMethod 
-    public boolean Registro(String email, String password, String name, boolean vendedor) {
+    public boolean Registro(String email, String password, String name, int tipo) {
     	dbManager.open(); 
-        boolean resultado = dbManager.Registro(email, password, name, vendedor); 
+        boolean resultado = dbManager.Registro(email, password, name, tipo); 
         dbManager.close(); 
         return resultado;
     }

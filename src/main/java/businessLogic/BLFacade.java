@@ -63,7 +63,7 @@ public interface BLFacade  {
 	
 	@WebMethod public User Login(String email, String password);
 	
-	@WebMethod  public boolean Registro(String email, String password, String name, boolean vendedor);
+	@WebMethod  public boolean Registro(String email, String password, String name, int tipo);
 		
 	@WebMethod public Image downloadImage(String imageName);
 	@WebMethod public int obtUser(String email);

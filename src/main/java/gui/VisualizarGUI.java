@@ -41,7 +41,14 @@ public class VisualizarGUI extends JFrame {
 		this.setTitle(ResourceBundle.getBundle("Etiquetas").getString("MainGUI.Ofertas")); // Título de la ventana
 		this.setLocationRelativeTo(parentFrame);
 
-		JLabel lblTitle = new JLabel("Tus ofertas que han sido aceptadas:");
+		BLFacade facade = MainGUI.getBusinessLogic();
+		JLabel lblTitle = new JLabel();
+		int tipo = facade.obtUser(sellerMail);
+		if (tipo == -1) {
+			lblTitle.setText("Todas las ofertas aceptadas en el sistema (Modo Admin):");
+		} else {
+			lblTitle.setText("Tus ofertas que han sido aceptadas:");
+		}
 		lblTitle.setBounds(new Rectangle(30, 20, 300, 20));
 		this.getContentPane().add(lblTitle);
 
@@ -78,9 +85,11 @@ public class VisualizarGUI extends JFrame {
 			// Llamamos al nuevo método pasándole el correo del vendedor
 			List<Offer> offers = facade.getAcceptedOffers(sellerMail);
 			
+			
 			for (Offer o : offers) {
 				listModel.addElement(o);
 			}
+
 			
 			if (offers.isEmpty()) {
 				jLabelMsg.setForeground(java.awt.Color.BLUE);

@@ -114,7 +114,7 @@ public class MainGUI extends JFrame {
 		jButtonCreateQuery.setText(ResourceBundle.getBundle("Etiquetas").getString("MainGUI.CreateSale"));
 		jButtonCreateQuery.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent e) {
-				JFrame a = new CreateSaleGUI(sellerMail);
+				JFrame a = new CreateSaleGUI(loged.getText());
 				a.setVisible(true);
 				
 			}
@@ -165,7 +165,7 @@ public class MainGUI extends JFrame {
 
 			}
 		});
-		loged = new JLabel(""); 
+		loged = new JLabel("Sin usuario"); 
 		loged.setBounds(0, 38, 92, 24);
 		panel.add(loged);
 		
@@ -174,6 +174,13 @@ public class MainGUI extends JFrame {
 		JButton aceptar_visuali = new JButton(""); 
 		aceptar_visuali.setBounds(198, 33, 264, 22);
 		panel.add(aceptar_visuali);
+		
+		JButton adminButton = new JButton();
+		adminButton.setBounds(196, 5, 266, 20);
+		panel.add(adminButton);
+		adminButton.setVisible(false);
+		
+		
 		aceptar_visuali.setVisible(false);
 		//Cambiar de modo, una vez se cambia ofrecemos la opción correspondiente
 		loged.addPropertyChangeListener("text", new java.beans.PropertyChangeListener() {
@@ -196,7 +203,15 @@ public class MainGUI extends JFrame {
 		                    aceptar_visuali.setText(ResourceBundle.getBundle("Etiquetas").getString("MainGUI.aceptar"));
 		                    aceptar_visuali.setVisible(true);
 		                    
-		                } else {
+		                    
+		                } 
+		                else if(mode==-1) {
+		                    aceptar_visuali.setText(ResourceBundle.getBundle("Etiquetas").getString("MainGUI.Ofertas"));
+		                    aceptar_visuali.setVisible(true);
+		                    adminButton.setText(ResourceBundle.getBundle("Etiquetas").getString("MainGUI.aceptar"));
+		                    adminButton.setVisible(true);
+		                }
+		                else {
 		                    aceptar_visuali.setVisible(false);
 		                }
 		                
@@ -216,7 +231,7 @@ public class MainGUI extends JFrame {
 				if (mode==2) {
 					JFrame ventanaAceptar= new AceptarGUI(MainGUI.this, loged.getText().toString());
 					ventanaAceptar.setVisible(true);
-				}else if(mode==1) {
+				}else if(mode==1||mode==-1) {
 					JFrame ventanaVisualizar= new VisualizarGUI(MainGUI.this, loged.getText().toString());
 					ventanaVisualizar.setVisible(true);
 				}
@@ -225,7 +240,17 @@ public class MainGUI extends JFrame {
 
 			}
 		});
-		
+		adminButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (mode==-1) {
+					JFrame ventanaAceptar= new AceptarGUI(MainGUI.this, loged.getText().toString());
+					ventanaAceptar.setVisible(true);
+				}
+				
+				//System.out.println(mode);
+
+			}
+		});
 		
 		setContentPane(jContentPane);
 		setTitle(ResourceBundle.getBundle("Etiquetas").getString("MainGUI.MainTitle"));

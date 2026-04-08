@@ -40,8 +40,8 @@ public class Seller extends User {
 		super();
 	}
 
-	public Seller(String email, String password, String name) {
-		super(email, password, name, true);
+	public Seller(String email, String password, String name, int tipo){
+		super(email, password, name, tipo);
 	}
 	
 	public String toString(){

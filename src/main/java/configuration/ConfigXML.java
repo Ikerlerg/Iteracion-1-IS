@@ -26,7 +26,8 @@ public class ConfigXML {
 	private static String dbFilename;
 
 	//Two possible values: true (if the database must be initialized ) or false (in other case)
-	private boolean isDatabaseInitialized=false;
+	//false=la base de datos no se reiniciará, true= sí lo hará
+	private boolean isDatabaseInitialized=true;
 
 	//Two possible values: true (no instance of RemoteServer needs to be launched) or false (RemoteServer needs to be run first)
 	private boolean businessLogicLocal;
@@ -159,9 +160,9 @@ public class ConfigXML {
 	public String getDbFilename(){
 		return dbFilename;
 	}
-	private boolean inicializada = false; 
+	 private boolean inicializado=true;
 	public boolean isDatabaseInitialized(){
-		return inicializada;
+		return inicializado;
 	}
 
 	public String getDatabaseNode() {
