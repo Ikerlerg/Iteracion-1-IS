@@ -47,9 +47,12 @@ public class MainGUI extends JFrame {
 	private final ButtonGroup buttonGroup = new ButtonGroup();
 	protected final JButton bLogin = new JButton(); 
 	protected final JButton bRegist = new JButton();
+	protected JButton close = new JButton(); 
 	
 	protected User log=null;
 	protected JLabel loged;
+	protected JButton adminButton = new JButton();
+	protected JButton aceptar_visuali = new JButton(""); 
 	//variable para controlar si soy vendedor o comprador
 	 //(0=nada,1=vendedor,2=comprador)
 	private int mode = 0;
@@ -70,6 +73,7 @@ public class MainGUI extends JFrame {
 		
 		this.setSize(495, 290);
 		jLabelSelectOption = new JLabel(ResourceBundle.getBundle("Etiquetas").getString("MainGUI.SelectOption"));
+		jLabelSelectOption.setBounds(0, 0, 481, 63);
 		jLabelSelectOption.setFont(new Font("Tahoma", Font.BOLD, 13));
 		jLabelSelectOption.setForeground(Color.BLACK);
 		jLabelSelectOption.setHorizontalAlignment(SwingConstants.CENTER);
@@ -104,12 +108,14 @@ public class MainGUI extends JFrame {
 		buttonGroup.add(rdbtnNewRadioButton_2);
 	
 		panel = new JPanel();
+		panel.setBounds(0, 189, 481, 63);
 		panel.setLayout(null);
 		panel.add(rdbtnNewRadioButton_1);
 		panel.add(rdbtnNewRadioButton_2);
 		panel.add(rdbtnNewRadioButton);
 		
 		jButtonCreateQuery = new JButton();
+		jButtonCreateQuery.setBounds(0, 63, 481, 63);
 		jButtonCreateQuery.setEnabled(false);
 		jButtonCreateQuery.setText(ResourceBundle.getBundle("Etiquetas").getString("MainGUI.CreateSale"));
 		jButtonCreateQuery.addActionListener(new java.awt.event.ActionListener() {
@@ -121,6 +127,7 @@ public class MainGUI extends JFrame {
 		});
 		
 		jButtonQueryQueries = new JButton();
+		jButtonQueryQueries.setBounds(0, 126, 481, 63);
 		jButtonQueryQueries.setEnabled(false);
 		jButtonQueryQueries.setText(ResourceBundle.getBundle("Etiquetas").getString("MainGUI.QuerySales"));
 		jButtonQueryQueries.addActionListener(new java.awt.event.ActionListener() {
@@ -132,7 +139,7 @@ public class MainGUI extends JFrame {
 		});
 		
 		jContentPane = new JPanel();
-		jContentPane.setLayout(new GridLayout(4, 1, 0, 0));
+		jContentPane.setLayout(null);
 		jContentPane.add(jLabelSelectOption);
 		jContentPane.add(jButtonCreateQuery);
 		jContentPane.add(jButtonQueryQueries);
@@ -148,13 +155,13 @@ public class MainGUI extends JFrame {
 		});
 		bLogin.setBounds(328, 5, 143, 21);
 		bLogin.setHorizontalAlignment(SwingConstants.LEADING);
-		bLogin.setText("Iniciar sesión");
+		bLogin.setText(ResourceBundle.getBundle("Etiquetas").getString("MainGUI.Login")); //
 		panel.add(bLogin);
 		
 		
 		bRegist.setHorizontalAlignment(SwingConstants.LEADING);
 		bRegist.setBounds(328, 30, 143, 21);
-		bRegist.setText("Registrar usuario");
+		bRegist.setText(ResourceBundle.getBundle("Etiquetas").getString("MainGUI.Register"));
 		panel.add(bRegist);
 		//invocación de la ventana de Registro
 		bRegist.addActionListener(new ActionListener() {
@@ -171,14 +178,15 @@ public class MainGUI extends JFrame {
 		
 		
 		
-		JButton aceptar_visuali = new JButton(""); 
-		aceptar_visuali.setBounds(198, 33, 264, 22);
+		
+		aceptar_visuali.setBounds(276, 33, 186, 22);
 		panel.add(aceptar_visuali);
 		
-		JButton adminButton = new JButton();
-		adminButton.setBounds(196, 5, 266, 20);
+		
+		adminButton.setBounds(276, 5, 186, 20);
 		panel.add(adminButton);
 		adminButton.setVisible(false);
+		
 		
 		
 		aceptar_visuali.setVisible(false);
@@ -189,7 +197,7 @@ public class MainGUI extends JFrame {
 		        // Este código se ejecuta AUTOMÁTICAMENTE solo cuando el texto cambia
 		        String nuevoTexto = loged.getText();
 		        
-		        if (nuevoTexto != null && !nuevoTexto.isEmpty()) {
+		        if (nuevoTexto != null &&nuevoTexto!="Sin Usuario"&& !nuevoTexto.isEmpty()) {
 		            try {
 		                // Buscamos al usuario en la base de datos
 		                appFacadeInterface = getBusinessLogic();
@@ -197,19 +205,21 @@ public class MainGUI extends JFrame {
 		                
 		                // Mostramos el botón según el modo
 		                if (mode == 1) {
-		                    aceptar_visuali.setText(ResourceBundle.getBundle("Etiquetas").getString("MainGUI.Ofertas"));
+		                    aceptar_visuali.setText(ResourceBundle.getBundle("Etiquetas").getString("MainGUI.Visualizar"));
 		                    aceptar_visuali.setVisible(true);
+		                    close.setVisible(true);
 		                } else if (mode == 2) {
-		                    aceptar_visuali.setText(ResourceBundle.getBundle("Etiquetas").getString("MainGUI.aceptar"));
+		                    aceptar_visuali.setText(ResourceBundle.getBundle("Etiquetas").getString("MainGUI.Aceptar"));
 		                    aceptar_visuali.setVisible(true);
-		                    
+		                    close.setVisible(true);
 		                    
 		                } 
 		                else if(mode==-1) {
-		                    aceptar_visuali.setText(ResourceBundle.getBundle("Etiquetas").getString("MainGUI.Ofertas"));
+		                    aceptar_visuali.setText(ResourceBundle.getBundle("Etiquetas").getString("MainGUI.Visualizar"));
 		                    aceptar_visuali.setVisible(true);
-		                    adminButton.setText(ResourceBundle.getBundle("Etiquetas").getString("MainGUI.aceptar"));
+		                    adminButton.setText(ResourceBundle.getBundle("Etiquetas").getString("MainGUI.Aceptar"));
 		                    adminButton.setVisible(true);
+		                    close.setVisible(true);
 		                }
 		                else {
 		                    aceptar_visuali.setVisible(false);
@@ -251,7 +261,6 @@ public class MainGUI extends JFrame {
 
 			}
 		});
-		
 		setContentPane(jContentPane);
 		setTitle(ResourceBundle.getBundle("Etiquetas").getString("MainGUI.MainTitle"));
 		
@@ -261,7 +270,36 @@ public class MainGUI extends JFrame {
 				System.exit(1);
 			}
 		});
-	}
+	
+		
+		
+		
+		
+		close.setBounds(307, 22, 153, 20);
+		jContentPane.add(close);
+		close.setText(ResourceBundle.getBundle("Etiquetas").getString("MainGUI.close"));
+		close.setVisible(false);
+		close.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				close.setVisible(false);
+				loged.setText("Sin usuario");
+				jButtonCreateQuery.setEnabled(false);
+				jButtonQueryQueries.setEnabled(false);
+				bLogin.setEnabled(true);
+				bLogin.setVisible(true);
+				bRegist.setEnabled(true);
+				bRegist.setVisible(true);
+				adminButton.setVisible(false);
+				aceptar_visuali.setVisible(false);
+				MainGUI.this.setTitle(ResourceBundle.getBundle("Etiquetas").getString("MainGUI.MainTitle"));
+				
+				
+			}});
+		
+		}
+	
+
+
 	
 	private void paintAgain() {
 		jLabelSelectOption.setText(ResourceBundle.getBundle("Etiquetas").getString("MainGUI.SelectOption"));
@@ -269,7 +307,26 @@ public class MainGUI extends JFrame {
 		jButtonCreateQuery.setText(ResourceBundle.getBundle("Etiquetas").getString("MainGUI.CreateSale"));
 		bLogin.setText(ResourceBundle.getBundle("Etiquetas").getString("MainGUI.Login"));
 	    bRegist.setText(ResourceBundle.getBundle("Etiquetas").getString("MainGUI.Register"));
+	    
 		this.setTitle(ResourceBundle.getBundle("Etiquetas").getString("MainGUI.MainTitle")+ ": "+sellerMail);
+		int tipo = appFacadeInterface.obtUser(loged.getText());
+		 if (tipo == 1) {
+             aceptar_visuali.setText(ResourceBundle.getBundle("Etiquetas").getString("MainGUI.Visualizar"));
+          
+         } else if (tipo == 2) {
+             aceptar_visuali.setText(ResourceBundle.getBundle("Etiquetas").getString("MainGUI.Aceptar"));
+            
+             
+         } 
+         else if(tipo==-1) {
+             aceptar_visuali.setText(ResourceBundle.getBundle("Etiquetas").getString("MainGUI.Visualizar"));
+           
+             adminButton.setText(ResourceBundle.getBundle("Etiquetas").getString("MainGUI.Aceptar"));
+             
+         }
+	   
+	    	
+	    
 	}
 } // @jve:decl-index=0:visual-constraint="0,0"
 

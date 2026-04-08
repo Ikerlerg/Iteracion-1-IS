@@ -68,6 +68,7 @@ public class LoginGUI extends JFrame{
 			        ventanaPrincipal.jButtonQueryQueries.setEnabled(facade.Login(correo, pswd).getTipo()==2||facade.Login(correo, pswd).getTipo()==-1);//activar si el usuario es comprador o admin
 			        ventanaPrincipal.setTitle(ResourceBundle.getBundle("Etiquetas").getString("MainGUI.MainTitle")+": " + correo);
 			        ventanaPrincipal.loged.setText(facade.Login(correo, pswd).getEmail());
+			        //ventanaPrincipal.close.setEnabled(true);
 			        Errorlabel.setText(ResourceBundle.getBundle("Etiquetas").getString("RegisterGUI.bienvenida")+ " " + facade.Login(correo, pswd).getName()); 
 			        //cerrar ventana 
 			        dispose();
