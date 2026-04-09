@@ -4,29 +4,25 @@ CASOS DE USO - SEGUNDA ITERACIÓN
 
 1. ACEPTAR PROPUESTA Y COBRO:
 
-Caso de Uso: Aceptar propuesta de compra
+CASO DE USO 0: Aceptar propuesta de compra
 Clase de dominio pricipal: Vendedor
 Descripción: El vendedor visualiza un listado con todas las propuestas realizadas por los distintos compradores para un producto específico. El vendedor selecciona la propuesta que le interesa y el sistema procesa la transacción y cobra automáticamente al comprador el precio acordado y el producto pasa a estado "Vendido".
 
 
 2. NUEVOS CASOS DE USO PROPUESTOS:
 
-Caso de Uso A: Añadir producto a Lista de Favoritos
-Actor principal: Comprador
-Descripción: Un usuario guarda un producto que le interesa en una lista privada para poder acceder a este rápidamente.
-Nueva clase de dominio: 
-- ListaDeseos (agrupa los productos guardados por el usuario y su disponibilidad).
+CASO DE USO 1: Modo Admin
+Clase de dominio pricipal: Admin
+Descripción: Un modo administrador el cual solo se accede mediante cambios de variables en el codigo.
 
-
-Caso de Uso B: Publicar una valoración de productos
+CASO DE USO 2: Publicar una valoración de productos
 Clase de dominio pricipal: Comprador
 Descripción: Una vez realizada la compra, el usuario puede dejar una puntuación y un comentario valorando al vendedor y el producto.
 Nuevas clases de dominio implicadas:
-- Valoracion (almacena la nota numérica, el texto y la fecha).
+- Review (almacena la nota numérica, el texto, la fecha, quien lo compro y a quien se lo compro).
 
-
-Caso de Uso C: Abrir una reclamación
-Clase de dominio pricipal: Comprador
-Descripción: Si el producto recibido no coincide con la descripción o está roto, el comprador puede solicitar un reembolso antes de que el dinero sea transferido definitivamente al vendedor. El comprador debe aportar un texto explicativo y fotografías.
+CASO DE USO 3: Modo Invitado
+Clase de dominio pricipal: Guest
+Descripción: Un modo invitado para cuando no se registre o inicie sesion un usuario, entonces pueda acceder a las listas de los productos disponibles pero no tiene permisos para editar/crear y tampoco para comprar productos.
 Nuevas clases de dominio implicadas:
-- "Reclamacion" (guardarda el motivo, pruebas del problema y si se ha cerrado la reclamación).
+- Guest ().
