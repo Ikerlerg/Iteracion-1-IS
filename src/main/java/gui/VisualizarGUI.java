@@ -31,6 +31,8 @@ public class VisualizarGUI extends JFrame {
 	
 	private JButton jButtonClose = new JButton(ResourceBundle.getBundle("Etiquetas").getString("Close"));
 	private JLabel jLabelMsg = new JLabel();
+	private final JButton SoliButton = new JButton(ResourceBundle.getBundle("Etiquetas").getString("VisualizarGUI.Solicitudes"));
+	
 
 	public VisualizarGUI(MainGUI parent, String mail) {
 		this.parentFrame = parent;
@@ -64,7 +66,7 @@ public class VisualizarGUI extends JFrame {
 		loadAcceptedOffers();
 
 		// Botón de Cerrar centrado
-		jButtonClose.setBounds(new Rectangle(190, 200, 100, 30));
+		jButtonClose.setBounds(new Rectangle(129, 200, 100, 30));
 		jButtonClose.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				dispose(); // Cierra esta ventana
@@ -75,6 +77,18 @@ public class VisualizarGUI extends JFrame {
 
 		this.getContentPane().add(jButtonClose);
 		this.getContentPane().add(jLabelMsg);
+		
+		SoliButton.setBounds(new Rectangle(129, 200, 100, 30));
+		SoliButton.setBounds(269, 200, 100, 30);
+		
+		getContentPane().add(SoliButton);
+		SoliButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JFrame Solicitudes = new SolicitudesGUI(VisualizarGUI.this, sellerMail);
+				Solicitudes.setVisible(true);
+			}
+		});
+		
 	}
 
 	private void loadAcceptedOffers() {

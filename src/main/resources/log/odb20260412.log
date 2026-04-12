@@ -1,0 +1,451 @@
+------------------------------------------------------------------------------------------------------------------------
+
+[2026-04-12 01:05:15 #1 store] 
+Database 'C:\Users\Iker Lerga\eclipse-workspace prueba\Market26\src\main\resources\products.temp' is opened by 18644@DESKTOP-DFS19DM
+
+[2026-04-12 01:05:15 #2 type.registry] 
+New type domain.User
+
+[2026-04-12 01:05:15 #3 type.registry] 
+New type domain.Seller
+
+[2026-04-12 01:05:15 #4 type] 
+Type domain.User is not enhanced.
+
+[2026-04-12 01:05:15 #5 type] 
+Type domain.Seller is not enhanced.
+
+[2026-04-12 01:05:15 #6 type.registry] 
+New type domain.Offer
+
+[2026-04-12 01:05:15 #7 type.registry] 
+New type domain.Sale
+
+[2026-04-12 01:05:15 #8 type] 
+Type domain.Offer is not enhanced.
+
+[2026-04-12 01:05:15 #9 type] 
+Type domain.Sale is not enhanced.
+
+[2026-04-12 01:05:15 #10 type.registry] 
+New type java.util.ArrayList<java.lang.Object>
+
+[2026-04-12 01:05:15 #11 type.registry] 
+New type java.util.ArrayList<domain.Sale>
+
+[2026-04-12 01:05:15 #12 type.registry] 
+New type java.util.ArrayList<domain.Offer>
+
+[2026-04-12 01:05:15 #13 type.registry] 
+New type java.util.ArrayList<java.lang.String>
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2026-04-12 01:08:42 #1 store] 
+Database 'C:\Users\Iker Lerga\eclipse-workspace prueba\Market26\src\main\resources\products.temp' is opened by 28344@DESKTOP-DFS19DM
+
+[2026-04-12 01:08:43 #2 type.registry] 
+New type domain.User
+
+[2026-04-12 01:08:43 #3 type.registry] 
+New type domain.Seller
+
+[2026-04-12 01:08:43 #4 type] 
+Type domain.User is not enhanced.
+
+[2026-04-12 01:08:43 #5 type] 
+Type domain.Seller is not enhanced.
+
+[2026-04-12 01:08:43 #6 type.registry] 
+New type domain.Offer
+
+[2026-04-12 01:08:43 #7 type.registry] 
+New type domain.Sale
+
+[2026-04-12 01:08:43 #8 type] 
+Type domain.Offer is not enhanced.
+
+[2026-04-12 01:08:43 #9 type] 
+Type domain.Sale is not enhanced.
+
+[2026-04-12 01:08:43 #10 type.registry] 
+New type java.util.ArrayList<java.lang.Object>
+
+[2026-04-12 01:08:43 #11 type.registry] 
+New type java.util.ArrayList<domain.Sale>
+
+[2026-04-12 01:08:43 #12 type.registry] 
+New type java.util.ArrayList<domain.Offer>
+
+[2026-04-12 01:08:43 #13 type.registry] 
+New type java.util.ArrayList<java.lang.String>
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2026-04-12 01:17:21 #1 store] 
+Database 'C:\Users\Iker Lerga\eclipse-workspace prueba\Market26\src\main\resources\products.temp' is opened by 22988@DESKTOP-DFS19DM
+
+[2026-04-12 01:17:21 #2 type.registry] 
+New type domain.User
+
+[2026-04-12 01:17:21 #3 type.registry] 
+New type domain.Seller
+
+[2026-04-12 01:17:21 #4 type] 
+Type domain.User is not enhanced.
+
+[2026-04-12 01:17:21 #5 type] 
+Type domain.Seller is not enhanced.
+
+[2026-04-12 01:17:21 #6 type.registry] 
+New type domain.Offer
+
+[2026-04-12 01:17:21 #7 type.registry] 
+New type domain.Sale
+
+[2026-04-12 01:17:21 #8 type] 
+Type domain.Offer is not enhanced.
+
+[2026-04-12 01:17:21 #9 type] 
+Type domain.Sale is not enhanced.
+
+[2026-04-12 01:17:21 #10 type.registry] 
+New type java.util.ArrayList<java.lang.Object>
+
+[2026-04-12 01:17:22 #11 type.registry] 
+New type java.util.ArrayList<domain.Sale>
+
+[2026-04-12 01:17:22 #12 type.registry] 
+New type java.util.ArrayList<domain.Offer>
+
+[2026-04-12 01:17:22 #13 type.registry] 
+New type java.util.ArrayList<java.lang.String>
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2026-04-12 01:18:01 #1 store] 
+Database 'C:\Users\Iker Lerga\eclipse-workspace prueba\Market26\src\main\resources\products.temp' is opened by 32688@DESKTOP-DFS19DM
+
+[2026-04-12 01:18:01 #2 type.registry] 
+New type domain.User
+
+[2026-04-12 01:18:01 #3 type.registry] 
+New type domain.Seller
+
+[2026-04-12 01:18:01 #4 type] 
+Type domain.User is not enhanced.
+
+[2026-04-12 01:18:01 #5 type] 
+Type domain.Seller is not enhanced.
+
+[2026-04-12 01:18:01 #6 type.registry] 
+New type domain.Offer
+
+[2026-04-12 01:18:01 #7 type.registry] 
+New type domain.Sale
+
+[2026-04-12 01:18:01 #8 type] 
+Type domain.Offer is not enhanced.
+
+[2026-04-12 01:18:01 #9 type] 
+Type domain.Sale is not enhanced.
+
+[2026-04-12 01:18:01 #10 type.registry] 
+New type java.util.ArrayList<java.lang.Object>
+
+[2026-04-12 01:18:01 #11 type.registry] 
+New type java.util.ArrayList<domain.Sale>
+
+[2026-04-12 01:18:01 #12 type.registry] 
+New type java.util.ArrayList<domain.Offer>
+
+[2026-04-12 01:18:01 #13 type.registry] 
+New type java.util.ArrayList<java.lang.String>
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2026-04-12 01:49:54 #1 store] 
+Database 'C:\Users\Iker Lerga\eclipse-workspace prueba\Market26\src\main\resources\products.temp' is opened by 30384@DESKTOP-DFS19DM
+
+[2026-04-12 01:49:54 #2 type.registry] 
+New type domain.User
+
+[2026-04-12 01:49:54 #3 type.registry] 
+New type domain.Seller
+
+[2026-04-12 01:49:54 #4 type] 
+Type domain.User is not enhanced.
+
+[2026-04-12 01:49:54 #5 type] 
+Type domain.Seller is not enhanced.
+
+[2026-04-12 01:49:54 #6 type.registry] 
+New type domain.Offer
+
+[2026-04-12 01:49:54 #7 type.registry] 
+New type domain.Sale
+
+[2026-04-12 01:49:54 #8 type] 
+Type domain.Offer is not enhanced.
+
+[2026-04-12 01:49:54 #9 type] 
+Type domain.Sale is not enhanced.
+
+[2026-04-12 01:49:54 #10 type.registry] 
+New type java.util.ArrayList<java.lang.Object>
+
+[2026-04-12 01:49:54 #11 type.registry] 
+New type java.util.ArrayList<domain.Sale>
+
+[2026-04-12 01:49:54 #12 type.registry] 
+New type java.util.ArrayList<domain.Offer>
+
+[2026-04-12 01:49:54 #13 type.registry] 
+New type java.util.ArrayList<java.lang.String>
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2026-04-12 03:10:27 #1 store] 
+Database 'C:\Users\Iker Lerga\eclipse-workspace prueba\Market26\src\main\resources\products.temp' is opened by 32428@DESKTOP-DFS19DM
+
+[2026-04-12 03:10:27 #2 type.registry] 
+New type domain.User
+
+[2026-04-12 03:10:27 #3 type.registry] 
+New type domain.Seller
+
+[2026-04-12 03:10:27 #4 type] 
+Type domain.User is not enhanced.
+
+[2026-04-12 03:10:27 #5 type] 
+Type domain.Seller is not enhanced.
+
+[2026-04-12 03:10:27 #6 type.registry] 
+New type domain.Offer
+
+[2026-04-12 03:10:27 #7 type.registry] 
+New type domain.Sale
+
+[2026-04-12 03:10:27 #8 type] 
+Type domain.Offer is not enhanced.
+
+[2026-04-12 03:10:27 #9 type] 
+Type domain.Sale is not enhanced.
+
+[2026-04-12 03:10:27 #10 type.registry] 
+New type java.util.ArrayList<java.lang.Object>
+
+[2026-04-12 03:10:27 #11 type.registry] 
+New type java.util.ArrayList<domain.Sale>
+
+[2026-04-12 03:10:27 #12 type.registry] 
+New type java.util.ArrayList<domain.Offer>
+
+[2026-04-12 03:10:27 #13 type.registry] 
+New type java.util.ArrayList<java.lang.String>
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2026-04-12 03:17:23 #1 store] 
+Database 'C:\Users\Iker Lerga\eclipse-workspace prueba\Market26\src\main\resources\products.temp' is opened by 36952@DESKTOP-DFS19DM
+
+[2026-04-12 03:17:23 #2 type.registry] 
+New type domain.User
+
+[2026-04-12 03:17:23 #3 type.registry] 
+New type domain.Seller
+
+[2026-04-12 03:17:23 #4 type] 
+Type domain.User is not enhanced.
+
+[2026-04-12 03:17:23 #5 type] 
+Type domain.Seller is not enhanced.
+
+[2026-04-12 03:17:23 #6 type.registry] 
+New type domain.Offer
+
+[2026-04-12 03:17:23 #7 type.registry] 
+New type domain.Sale
+
+[2026-04-12 03:17:23 #8 type] 
+Type domain.Offer is not enhanced.
+
+[2026-04-12 03:17:23 #9 type] 
+Type domain.Sale is not enhanced.
+
+[2026-04-12 03:17:23 #10 type.registry] 
+New type java.util.ArrayList<java.lang.Object>
+
+[2026-04-12 03:17:23 #11 type.registry] 
+New type java.util.ArrayList<domain.Sale>
+
+[2026-04-12 03:17:23 #12 type.registry] 
+New type java.util.ArrayList<domain.Offer>
+
+[2026-04-12 03:17:23 #13 type.registry] 
+New type java.util.ArrayList<java.lang.String>
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2026-04-12 03:27:06 #1 store] 
+Database 'C:\Users\Iker Lerga\eclipse-workspace prueba\Market26\src\main\resources\products.temp' is opened by 26836@DESKTOP-DFS19DM
+
+[2026-04-12 03:27:07 #2 type.registry] 
+New type domain.User
+
+[2026-04-12 03:27:07 #3 type.registry] 
+New type domain.Seller
+
+[2026-04-12 03:27:07 #4 type] 
+Type domain.User is not enhanced.
+
+[2026-04-12 03:27:07 #5 type] 
+Type domain.Seller is not enhanced.
+
+[2026-04-12 03:27:07 #6 type.registry] 
+New type domain.Offer
+
+[2026-04-12 03:27:07 #7 type.registry] 
+New type domain.Sale
+
+[2026-04-12 03:27:07 #8 type] 
+Type domain.Offer is not enhanced.
+
+[2026-04-12 03:27:07 #9 type] 
+Type domain.Sale is not enhanced.
+
+[2026-04-12 03:27:07 #10 type.registry] 
+New type java.util.ArrayList<java.lang.Object>
+
+[2026-04-12 03:27:07 #11 type.registry] 
+New type java.util.ArrayList<domain.Sale>
+
+[2026-04-12 03:27:07 #12 type.registry] 
+New type java.util.ArrayList<domain.Offer>
+
+[2026-04-12 03:27:07 #13 type.registry] 
+New type java.util.ArrayList<java.lang.String>
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2026-04-12 03:30:03 #1 store] 
+Database 'C:\Users\Iker Lerga\eclipse-workspace prueba\Market26\src\main\resources\products.temp' is opened by 5080@DESKTOP-DFS19DM
+
+[2026-04-12 03:30:03 #2 type.registry] 
+New type domain.User
+
+[2026-04-12 03:30:03 #3 type.registry] 
+New type domain.Seller
+
+[2026-04-12 03:30:03 #4 type] 
+Type domain.User is not enhanced.
+
+[2026-04-12 03:30:03 #5 type] 
+Type domain.Seller is not enhanced.
+
+[2026-04-12 03:30:03 #6 type.registry] 
+New type domain.Offer
+
+[2026-04-12 03:30:03 #7 type.registry] 
+New type domain.Sale
+
+[2026-04-12 03:30:03 #8 type] 
+Type domain.Offer is not enhanced.
+
+[2026-04-12 03:30:03 #9 type] 
+Type domain.Sale is not enhanced.
+
+[2026-04-12 03:30:03 #10 type.registry] 
+New type java.util.ArrayList<java.lang.Object>
+
+[2026-04-12 03:30:03 #11 type.registry] 
+New type java.util.ArrayList<domain.Sale>
+
+[2026-04-12 03:30:03 #12 type.registry] 
+New type java.util.ArrayList<domain.Offer>
+
+[2026-04-12 03:30:03 #13 type.registry] 
+New type java.util.ArrayList<java.lang.String>
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2026-04-12 03:31:45 #1 store] 
+Database 'C:\Users\Iker Lerga\eclipse-workspace prueba\Market26\src\main\resources\products.temp' is opened by 36888@DESKTOP-DFS19DM
+
+[2026-04-12 03:31:46 #2 type.registry] 
+New type domain.User
+
+[2026-04-12 03:31:46 #3 type.registry] 
+New type domain.Seller
+
+[2026-04-12 03:31:46 #4 type] 
+Type domain.User is not enhanced.
+
+[2026-04-12 03:31:46 #5 type] 
+Type domain.Seller is not enhanced.
+
+[2026-04-12 03:31:46 #6 type.registry] 
+New type domain.Offer
+
+[2026-04-12 03:31:46 #7 type.registry] 
+New type domain.Sale
+
+[2026-04-12 03:31:46 #8 type] 
+Type domain.Offer is not enhanced.
+
+[2026-04-12 03:31:46 #9 type] 
+Type domain.Sale is not enhanced.
+
+[2026-04-12 03:31:46 #10 type.registry] 
+New type java.util.ArrayList<java.lang.Object>
+
+[2026-04-12 03:31:46 #11 type.registry] 
+New type java.util.ArrayList<domain.Sale>
+
+[2026-04-12 03:31:46 #12 type.registry] 
+New type java.util.ArrayList<domain.Offer>
+
+[2026-04-12 03:31:46 #13 type.registry] 
+New type java.util.ArrayList<java.lang.String>
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2026-04-12 03:33:10 #1 store] 
+Database 'C:\Users\Iker Lerga\eclipse-workspace prueba\Market26\src\main\resources\products.temp' is opened by 36508@DESKTOP-DFS19DM
+
+[2026-04-12 03:33:10 #2 type.registry] 
+New type domain.User
+
+[2026-04-12 03:33:10 #3 type.registry] 
+New type domain.Seller
+
+[2026-04-12 03:33:10 #4 type] 
+Type domain.User is not enhanced.
+
+[2026-04-12 03:33:10 #5 type] 
+Type domain.Seller is not enhanced.
+
+[2026-04-12 03:33:10 #6 type.registry] 
+New type domain.Offer
+
+[2026-04-12 03:33:10 #7 type.registry] 
+New type domain.Sale
+
+[2026-04-12 03:33:10 #8 type] 
+Type domain.Offer is not enhanced.
+
+[2026-04-12 03:33:10 #9 type] 
+Type domain.Sale is not enhanced.
+
+[2026-04-12 03:33:10 #10 type.registry] 
+New type java.util.ArrayList<java.lang.Object>
+
+[2026-04-12 03:33:10 #11 type.registry] 
+New type java.util.ArrayList<domain.Sale>
+
+[2026-04-12 03:33:10 #12 type.registry] 
+New type java.util.ArrayList<domain.Offer>
+
+[2026-04-12 03:33:10 #13 type.registry] 
+New type java.util.ArrayList<java.lang.String>
+

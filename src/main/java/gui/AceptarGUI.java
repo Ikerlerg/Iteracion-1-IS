@@ -18,9 +18,7 @@ import javax.swing.JLabel;
 import businessLogic.BLFacade;
 import domain.Offer;
 
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
+
 
 public class AceptarGUI extends JFrame {
 
@@ -33,7 +31,8 @@ public class AceptarGUI extends JFrame {
 	
 	private JButton jButtonAccept = new JButton(ResourceBundle.getBundle("Etiquetas").getString("MainGUI.aceptar"));
 	private JButton jButtonClose = new JButton(ResourceBundle.getBundle("Etiquetas").getString("MainGUI.Close"));
-	private JLabel jLabelMsg = new JLabel();
+	protected JLabel jLabelMsg = new JLabel();
+	private final JButton CarritoButton = new JButton(ResourceBundle.getBundle("Etiquetas").getString("AceptarGUI.carrito")); 
 
 	public AceptarGUI(MainGUI parent, String mail) {
 		this.parentFrame = parent;
@@ -44,7 +43,7 @@ public class AceptarGUI extends JFrame {
 		this.setTitle(ResourceBundle.getBundle("Etiquetas").getString("MainGUI.aceptar"));
 		this.setLocationRelativeTo(parentFrame); // Centra la ventana sobre el MainGUI
 
-		JLabel lblSelect = new JLabel("Selecciona una oferta disponible:");
+		JLabel lblSelect = new JLabel(ResourceBundle.getBundle("Etiquetas").getString("AceptarGUI.ofertas"));
 		lblSelect.setBounds(new Rectangle(30, 20, 250, 20));
 		this.getContentPane().add(lblSelect);
 
@@ -66,28 +65,12 @@ public class AceptarGUI extends JFrame {
 				
 				if (selectedOffer == null) {
 					jLabelMsg.setForeground(Color.RED);
-					jLabelMsg.setText("Por favor, selecciona una oferta.");
+					jLabelMsg.setText(ResourceBundle.getBundle("Etiquetas").getString("AceptarGUI.ofertas"));
 					return;
 				}
+				JFrame ventanaPago = new PagoGUI(AceptarGUI.this, selectedOffer, buyerMail);
+				ventanaPago.setVisible(true);
 
-				try {
-					BLFacade facade = MainGUI.getBusinessLogic();
-					
-					// Solo pasamos el ID, tal y como querías
-					boolean success = facade.acceptOffer(selectedOffer.getId());
-					
-					if (success) {
-						jLabelMsg.setForeground(Color.GREEN);
-						jLabelMsg.setText("¡Oferta aceptada! El estado ha cambiado.");
-						loadOffers(); // Refrescar la lista
-					} else {
-						jLabelMsg.setForeground(Color.RED);
-						jLabelMsg.setText("Error al aceptar la oferta.");
-					}
-				} catch (Exception ex) {
-					jLabelMsg.setForeground(Color.RED);
-					jLabelMsg.setText(ex.getMessage());
-				}
 			}
 		});
 
@@ -105,19 +88,31 @@ public class AceptarGUI extends JFrame {
 		this.getContentPane().add(jButtonAccept);
 		this.getContentPane().add(jButtonClose);
 		this.getContentPane().add(jLabelMsg);
+		CarritoButton.setBounds(366, 20, 84, 20);
+		
+		getContentPane().add(CarritoButton);
+		CarritoButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JFrame carrito = new CarritoGUI(AceptarGUI.this, buyerMail);
+				carrito.setVisible(true);
+			}
+		});
 	}
 
-	private void loadOffers() {
+	protected void loadOffers() {
 		try {
 			offerModel.removeAllElements();
 			BLFacade facade = MainGUI.getBusinessLogic();
 			List<Offer> offers = facade.getActiveOffers();
-			
+			int posibles=0;
 			for (Offer o : offers) {
+				if(!o.getPendientes().contains(buyerMail)) {//si el usuario no ha comprado la oferta
 				offerModel.addElement(o);
+				posibles++;
+				}
 			}
 			
-			if (offers.isEmpty()) {
+			if (offers.isEmpty()||posibles==0) {
 				jLabelMsg.setForeground(Color.BLUE);
 				jLabelMsg.setText("No hay ofertas activas en este momento.");
 			}

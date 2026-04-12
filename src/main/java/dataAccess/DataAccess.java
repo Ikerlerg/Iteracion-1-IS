@@ -316,6 +316,18 @@ public void open(){
 			TypedQuery<Offer> query = db.createQuery("SELECT o FROM Offer o WHERE o.estado = true", Offer.class);
 			return query.getResultList();
 		}
+		public List<Offer> getUserOffers(String mail) {
+			TypedQuery<Offer> query = db.createQuery("SELECT o FROM Offer o WHERE o.email_vendedor =:mail", Offer.class);
+			query.setParameter("mail", mail);
+			List<Offer> UserOffers = query.getResultList();
+			if(UserOffers!=null) {
+				
+				return UserOffers;
+			}
+			else {
+			return new ArrayList<Offer>();
+			}
+		}
 
 		public boolean acceptOffer(Long offerId) {
 			try {
@@ -351,6 +363,46 @@ public void open(){
 		    
 		    return query.getResultList();
 		}
+		public boolean proposeOffer(Long offerId, String buyerMail) {
+			try {
+				db.getTransaction().begin();
+				Offer oferta = db.find(Offer.class, offerId);
+				
+				if (oferta != null && oferta.isEstado()) {
+					oferta.addPendientes(buyerMail); // Solo cambiamos el estado
+					db.persist(oferta);
+					db.getTransaction().commit();
+					return true;
+				}
+				db.getTransaction().rollback();
+				return false;
+			} catch (Exception e) {
+				e.printStackTrace();
+				db.getTransaction().rollback();
+				return false;
+			}
+		}
+		public boolean cancelOffer(Long offerId, String buyerMail) {
+			try {
+				db.getTransaction().begin();
+				Offer oferta = db.find(Offer.class, offerId);
+				
+				if (oferta != null && oferta.isEstado()&&oferta.getPendientes().contains(buyerMail)) {
+					oferta.deletePendientes(buyerMail); // Solo cambiamos el estado
+					db.persist(oferta);
+					db.getTransaction().commit();
+					return true;
+				}
+				db.getTransaction().rollback();
+				return false;
+			} catch (Exception e) {
+				e.printStackTrace();
+				db.getTransaction().rollback();
+				return false;
+			}
+		}
+		
+		
 	public void close(){
 		db.close();
 		System.out.println("DataAcess closed");

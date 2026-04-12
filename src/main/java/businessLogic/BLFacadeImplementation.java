@@ -149,5 +149,26 @@ public class BLFacadeImplementation  implements BLFacade {
 		dbManager.close();
 		return res;
 	}
+    @WebMethod 
+    public boolean proposeOffer(Long offerId, String buyer){
+        dbManager.open();
+        boolean res = dbManager.proposeOffer(offerId, buyer);
+        dbManager.close();
+        return res;
+    }
+    @WebMethod 
+    public boolean cancelOffer(Long offerId, String buyerMail){
+        dbManager.open();
+        boolean res = dbManager.cancelOffer(offerId, buyerMail);
+        dbManager.close();
+        return res;
+    }
+    @WebMethod
+    public List<Offer> getUserOffers(String mail) {
+        dbManager.open();
+        List<Offer> res = dbManager.getUserOffers(mail);
+        dbManager.close();
+        return res;
+    }
 }
 

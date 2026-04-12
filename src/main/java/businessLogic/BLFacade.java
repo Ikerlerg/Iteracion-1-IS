@@ -69,7 +69,10 @@ public interface BLFacade  {
 	@WebMethod public int obtUser(String email);
 	@WebMethod public List<Offer> getActiveOffers();
 	@WebMethod public boolean acceptOffer(Long offerId);
+	@WebMethod public boolean proposeOffer(Long offerId, String buyer);
 	@WebMethod public List<Offer> getAcceptedOffers(String sellerEmail);
+	@WebMethod public boolean cancelOffer(Long offerId, String buyerMail);
+	@WebMethod public List<Offer> getUserOffers(String mail);
 
 	
 }
