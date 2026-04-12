@@ -437,6 +437,27 @@ public void open(){
 		        return false;
 		    }
 		}
+		//Meter reseña en la base de datos
+		public boolean publicarVal(Valoraciones val) {
+			try {
+				TypedQuery<Seller> query;
+				query = db.createQuery("SELECT s FROM Seller s WHERE s.email = :email", Seller.class);
+				query.setParameter("email", val.geteVendedor());
+				Seller vend = query.getSingleResult();
+				vend.addValoracion(val);
+				db.getTransaction().begin();
+				db.persist(vend);
+				db.getTransaction().commit();
+				return true;
+			}
+			catch(Exception e){
+				e.printStackTrace();
+				if (db.getTransaction().isActive()) {
+		            db.getTransaction().rollback();
+		        }
+				return false;
+			}
+		
 		
 		
 	public void close(){

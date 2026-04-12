@@ -30,6 +30,7 @@ public class Seller extends User {
 	private List<Sale> sales=new ArrayList<Sale>();
     @OneToMany(cascade = CascadeType.PERSIST)
     private List<Offer> offers = new ArrayList<>();
+    private List<Valoraciones> valoracion = new ArrayList<>();
 
     public Offer addOffer(double precio, String emailVendedor, boolean estado) {
         Offer nuevaOferta = new Offer(precio, emailVendedor, estado);
@@ -43,6 +44,10 @@ public class Seller extends User {
 	public Seller(String email, String password, String name, int tipo){
 		super(email, password, name, tipo);
 	}
+	 public Valoraciones addValoracion(Valoraciones val) {
+	    	this.valoracion.add(val);
+	    	return val;
+	    }
 	
 	public String toString(){
 		return (super.getEmail() +";"+ super.getName() + sales);

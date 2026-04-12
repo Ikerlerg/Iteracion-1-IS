@@ -177,5 +177,13 @@ public class BLFacadeImplementation  implements BLFacade {
         dbManager.close();
         return res;
     }
+    @WebMethod
+   	public boolean publicarValoracion(Valoraciones val1) {
+   		dbManager.open();
+   		boolean res = dbManager.publicarVal(val1);
+   		dbManager.close();
+   		return res;
+   	}
+}
 }
 
