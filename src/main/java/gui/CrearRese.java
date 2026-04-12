@@ -42,9 +42,8 @@ public class CrearRese extends JFrame {
 	private JButton aceptarButton = new JButton("Crear valoración");
 
 	private final JLabel avisoLabel = new JLabel("");
-	public CrearRese(JFrame MainGUI, String mailComp, String mailVend, long idProd) {
+	public CrearRese(JFrame MainGUI, String mailComp, String mailVend, long idPrd) {
 		
-		this.idProd=idProd;
 		this.buyerMail=mailComp;
 		this.sellerMail=mailVend;
 		getContentPane().setLayout(null);
@@ -53,23 +52,6 @@ public class CrearRese extends JFrame {
 		
 		OffersLabel.setBounds(68, 19, 283, 12);
 		getContentPane().add(OffersLabel);
-		
-		
-		aceptarButton.setBounds(149, 233, 127, 20);
-		getContentPane().add(aceptarButton);
-		aceptarButton.setEnabled(false);
-		aceptarButton.addActionListener(new ActionListener() {
-		    public void actionPerformed(ActionEvent e) {
-		        Offer ofertaSeleccionada = OfferList.getSelectedValue();
-		        if (ofertaSeleccionada != null) {
-		            String mailVendedor = ofertaSeleccionada.getEmail_vendedor();
-		            valoracionGUI valVentana = new valoracionGUI(null, buyerMail, mailVendedor, idProd);
-		            valVentana.setVisible(true);
-		            dispose(); 
-		        }
-		    }
-		});
-		
 		
 		OfferList.setBounds(68, 44, 283, 117);
 	
@@ -87,6 +69,23 @@ public class CrearRese extends JFrame {
 		        }
 		    }
 		});
+		
+		aceptarButton.setBounds(149, 233, 127, 20);
+		getContentPane().add(aceptarButton);
+		aceptarButton.setEnabled(false);
+		aceptarButton.addActionListener(new ActionListener() {
+		    public void actionPerformed(ActionEvent e) {
+		        Offer ofertaSeleccionada = OfferList.getSelectedValue();
+		        if (ofertaSeleccionada != null) {
+		            String mailVendedor = ofertaSeleccionada.getEmail_vendedor();
+		            idProd = ofertaSeleccionada.getId();
+		            valoracionGUI valVentana = new valoracionGUI(null, buyerMail, mailVendedor, idProd);
+		            valVentana.setVisible(true);
+		            dispose(); 
+		        }
+		    }
+		});
+		
 		
 		getContentPane().add(avisoLabel);
 		loadAceptSoli();
