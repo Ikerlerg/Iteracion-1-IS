@@ -14,6 +14,7 @@ import javax.swing.JLabel;
 
 import businessLogic.BLFacade;
 import domain.Offer;
+import domain.Solicitud;
 
 import javax.swing.JScrollPane;
 import javax.swing.JList;
@@ -126,7 +127,8 @@ public class CarritoGUI extends JFrame{
 			List<Offer> offers = facade.getActiveOffers();
 			
 			for (Offer o : offers) {
-				if(o.getPendientes().contains(buyerMail)) {
+				Solicitud solicitud=new Solicitud(buyerMail);
+				if(o.getPendientes().contains(solicitud)) {
 					modeloSolicitud.addElement(o);
 			
 				}

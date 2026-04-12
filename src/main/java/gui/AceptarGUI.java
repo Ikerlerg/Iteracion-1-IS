@@ -17,6 +17,7 @@ import javax.swing.JLabel;
 
 import businessLogic.BLFacade;
 import domain.Offer;
+import domain.Solicitud;
 
 
 
@@ -106,7 +107,8 @@ public class AceptarGUI extends JFrame {
 			List<Offer> offers = facade.getActiveOffers();
 			int posibles=0;
 			for (Offer o : offers) {
-				if(!o.getPendientes().contains(buyerMail)) {//si el usuario no ha comprado la oferta
+				Solicitud solicitud=new Solicitud(buyerMail);
+				if(!o.getPendientes().contains(solicitud)) {//si el usuario no ha comprado la oferta
 				offerModel.addElement(o);
 				posibles++;
 				}
