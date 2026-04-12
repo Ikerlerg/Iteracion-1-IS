@@ -184,6 +184,6 @@ public class BLFacadeImplementation  implements BLFacade {
    		dbManager.close();
    		return res;
    	}
-}
+
 }
 
