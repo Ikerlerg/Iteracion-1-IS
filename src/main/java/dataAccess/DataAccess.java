@@ -369,7 +369,8 @@ public void open(){
 				Offer oferta = db.find(Offer.class, offerId);
 				
 				if (oferta != null && oferta.isEstado()) {
-					oferta.addPendientes(buyerMail); // Solo cambiamos el estado
+					Solicitud solicitud= new Solicitud(buyerMail);
+					oferta.addPendientes(solicitud); // Solo cambiamos el estado
 					db.persist(oferta);
 					db.getTransaction().commit();
 					return true;
@@ -387,7 +388,7 @@ public void open(){
 				db.getTransaction().begin();
 				Offer oferta = db.find(Offer.class, offerId);
 				
-				if (oferta != null && oferta.isEstado()&&oferta.getPendientes().contains(buyerMail)) {
+				if (oferta != null && oferta.isEstado()&&oferta.getPendientes().contains(new Solicitud (buyerMail))) {
 					oferta.deletePendientes(buyerMail); // Solo cambiamos el estado
 					db.persist(oferta);
 					db.getTransaction().commit();
@@ -400,6 +401,41 @@ public void open(){
 				db.getTransaction().rollback();
 				return false;
 			}
+		}
+		public boolean terminarSolicitud(Long offerId, String buyerMail) {	
+		    try {
+		        db.getTransaction().begin();
+		        
+		        // 1. Buscamos la oferta  
+		        Offer ofertaDB = db.find(Offer.class, offerId);
+		        
+		        if (ofertaDB != null && ofertaDB.isEstado()) {
+		            
+		            for (Solicitud s : ofertaDB.getPendientes()) {
+		                
+		                // 3. Comparamos directamente los emails (Strings).
+		                if (s.getBuyerMail().equals(buyerMail)) {
+		                    s.setEstado(1);  // Aceptada
+		                } else {
+		                    s.setEstado(-1); // Rechazada
+		                }
+		            }
+		            
+		            // la oferta debe dejar de estar activa (estado = false).
+		            ofertaDB.setEstado(false);      
+		            db.persist(ofertaDB);
+		            db.getTransaction().commit();
+		            return true;
+		        }        
+		        // Si no se encuentra la oferta o ya estaba cerrada
+		        if (db.getTransaction().isActive()) db.getTransaction().rollback();
+		        return false;
+		        
+		    } catch(Exception ex) {
+		        ex.printStackTrace();
+		        if (db.getTransaction().isActive()) db.getTransaction().rollback();
+		        return false;
+		    }
 		}
 		
 		

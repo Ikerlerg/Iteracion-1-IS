@@ -17,7 +17,7 @@ public class Offer {
 	private String email_vendedor;
 	private boolean estado; //true = activa.
 	@ElementCollection(fetch = FetchType.EAGER)
-	private List<String> pendientes;
+	private List<Solicitud> pendientes= new ArrayList<>();;
 	
 	public Offer() {
 	}
@@ -26,7 +26,7 @@ public class Offer {
 		this.precio= precio;
 		this.email_vendedor= email;
 		this.estado= e;
-		this.pendientes = new ArrayList<String>();
+		
 	}
 	public double getPrecio() {
 		return precio;
@@ -44,10 +44,10 @@ public class Offer {
     public void setEstado(boolean estado) {
         this.estado = estado;
     }
-    public List<String> getPendientes(){
+    public List<Solicitud> getPendientes(){
     	return pendientes;
     }
-    public boolean addPendientes(String pendiente){
+    public boolean addPendientes(Solicitud pendiente){
     	if(!pendientes.contains(pendiente)) {
     		pendientes.add(pendiente);
     		return true;
@@ -55,8 +55,9 @@ public class Offer {
     	return false;
     }
     public boolean deletePendientes(String pendiente){
-    	if(pendientes.contains(pendiente)) {
-    		pendientes.remove(pendiente);
+    	Solicitud solicitud= new Solicitud(pendiente);
+    	if(pendientes.contains(solicitud)) {
+    		pendientes.remove(solicitud);
     		return true;
     	}
     	return false;

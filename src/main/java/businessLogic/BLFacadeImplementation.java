@@ -170,5 +170,12 @@ public class BLFacadeImplementation  implements BLFacade {
         dbManager.close();
         return res;
     }
+    @WebMethod
+    public boolean terminarSolicitud(Long offerId, String buyerMail) {
+        dbManager.open();
+        boolean res = dbManager.terminarSolicitud(offerId, buyerMail);
+        dbManager.close();
+        return res;
+    }
 }
 
