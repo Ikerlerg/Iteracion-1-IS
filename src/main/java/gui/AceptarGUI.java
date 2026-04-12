@@ -25,6 +25,8 @@ public class AceptarGUI extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private String buyerMail;
+	private String SellerMail;
+	private long prodId;
 	private JFrame parentFrame;
 	
 	private JComboBox<Offer> comboBoxOffers;
@@ -34,6 +36,7 @@ public class AceptarGUI extends JFrame {
 	private JButton jButtonClose = new JButton(ResourceBundle.getBundle("Etiquetas").getString("MainGUI.Close"));
 	protected JLabel jLabelMsg = new JLabel();
 	private final JButton CarritoButton = new JButton(ResourceBundle.getBundle("Etiquetas").getString("AceptarGUI.carrito")); 
+	private final JButton crearRese = new JButton(ResourceBundle.getBundle("Etiquetas").getString("MainGUI.rese")); //$NON-NLS-1$ //$NON-NLS-2$
 
 	public AceptarGUI(MainGUI parent, String mail) {
 		this.parentFrame = parent;
@@ -69,6 +72,8 @@ public class AceptarGUI extends JFrame {
 					jLabelMsg.setText(ResourceBundle.getBundle("Etiquetas").getString("AceptarGUI.ofertas"));
 					return;
 				}
+				SellerMail = selectedOffer.getEmail_vendedor();
+				prodId = selectedOffer.getId();
 				JFrame ventanaPago = new PagoGUI(AceptarGUI.this, selectedOffer, buyerMail);
 				ventanaPago.setVisible(true);
 
@@ -81,6 +86,15 @@ public class AceptarGUI extends JFrame {
 				dispose(); // Cierra esta ventana
 			}
 		});
+		
+		//Crear reseñas
+		crearRese.setBounds(290, 170, 165, 23);
+		crearRese.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JFrame ventanaRese = new CrearRese(AceptarGUI.this,buyerMail,SellerMail,prodId);
+				ventanaRese.setVisible(true);
+			}});
+		
 
 		jLabelMsg.setBounds(new Rectangle(30, 170, 400, 20));
 
@@ -92,6 +106,9 @@ public class AceptarGUI extends JFrame {
 		CarritoButton.setBounds(366, 20, 84, 20);
 		
 		getContentPane().add(CarritoButton);
+		
+		
+		getContentPane().add(crearRese);
 		CarritoButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				JFrame carrito = new CarritoGUI(AceptarGUI.this, buyerMail);

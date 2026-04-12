@@ -158,6 +158,7 @@ public class MainGUI extends JFrame {
 		bLogin.setText(ResourceBundle.getBundle("Etiquetas").getString("MainGUI.Login")); //
 		panel.add(bLogin);
 		
+
 		
 		bRegist.setHorizontalAlignment(SwingConstants.LEADING);
 		bRegist.setBounds(328, 30, 143, 21);
@@ -172,6 +173,7 @@ public class MainGUI extends JFrame {
 
 			}
 		});
+		
 		loged = new JLabel("Sin usuario"); 
 		loged.setBounds(0, 38, 92, 24);
 		panel.add(loged);
@@ -278,6 +280,14 @@ public class MainGUI extends JFrame {
 		close.setBounds(307, 22, 153, 20);
 		jContentPane.add(close);
 		close.setText(ResourceBundle.getBundle("Etiquetas").getString("MainGUI.close"));
+		
+	
+		
+	
+
+		
+		
+
 		close.setVisible(false);
 		close.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {

@@ -775,3 +775,115 @@ New type java.util.ArrayList<domain.Offer>
 [2026-04-12 21:43:53 #15 type.registry] 
 New type java.util.ArrayList<domain.Solicitud>
 
+------------------------------------------------------------------------------------------------------------------------
+
+[2026-04-12 22:42:04 #1 store] 
+Database 'C:\Users\everl\Documents\Estudios\Uni\2do Curso\2do Cuatrimestre\IS\Iteracion-1-IS\src\main\resources\products.temp' is opened by 4436@Ever
+
+[2026-04-12 22:42:04 #2 type.registry] 
+New type domain.User
+
+[2026-04-12 22:42:04 #3 type.registry] 
+New type domain.Seller
+
+[2026-04-12 22:42:04 #4 type] 
+Type domain.User is not enhanced.
+
+[2026-04-12 22:42:04 #5 type] 
+Type domain.Seller is not enhanced.
+
+[2026-04-12 22:42:04 #6 type.registry] 
+New type domain.Valoraciones
+
+[2026-04-12 22:42:04 #7 type.registry] 
+New type domain.Offer
+
+[2026-04-12 22:42:04 #8 type.registry] 
+New type domain.Sale
+
+[2026-04-12 22:42:04 #9 type] 
+Type domain.Valoraciones is not enhanced.
+
+[2026-04-12 22:42:04 #10 type] 
+Type domain.Offer is not enhanced.
+
+[2026-04-12 22:42:04 #11 type.registry] 
+New type domain.Solicitud
+
+[2026-04-12 22:42:04 #12 type] 
+Type domain.Sale is not enhanced.
+
+[2026-04-12 22:42:04 #13 type] 
+Type domain.Solicitud is not enhanced.
+
+[2026-04-12 22:42:04 #14 type.registry] 
+New type java.util.ArrayList<java.lang.Object>
+
+[2026-04-12 22:42:04 #15 type.registry] 
+New type java.util.ArrayList<domain.Sale>
+
+[2026-04-12 22:42:04 #16 type.registry] 
+New type java.util.ArrayList<domain.Offer>
+
+[2026-04-12 22:42:04 #17 type.registry] 
+New type java.util.ArrayList<domain.Valoraciones>
+
+[2026-04-12 22:42:04 #18 type.registry] 
+New type java.util.ArrayList<domain.Solicitud>
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2026-04-12 23:09:35 #1 store] 
+Database 'C:\Users\everl\Documents\Estudios\Uni\2do Curso\2do Cuatrimestre\IS\Iteracion-1-IS\src\main\resources\products.temp' is opened by 24132@Ever
+
+[2026-04-12 23:09:35 #2 type.registry] 
+New type domain.User
+
+[2026-04-12 23:09:35 #3 type.registry] 
+New type domain.Seller
+
+[2026-04-12 23:09:35 #4 type] 
+Type domain.User is not enhanced.
+
+[2026-04-12 23:09:35 #5 type] 
+Type domain.Seller is not enhanced.
+
+[2026-04-12 23:09:35 #6 type.registry] 
+New type domain.Valoraciones
+
+[2026-04-12 23:09:35 #7 type.registry] 
+New type domain.Offer
+
+[2026-04-12 23:09:35 #8 type.registry] 
+New type domain.Sale
+
+[2026-04-12 23:09:35 #9 type] 
+Type domain.Valoraciones is not enhanced.
+
+[2026-04-12 23:09:35 #10 type] 
+Type domain.Offer is not enhanced.
+
+[2026-04-12 23:09:35 #11 type.registry] 
+New type domain.Solicitud
+
+[2026-04-12 23:09:35 #12 type] 
+Type domain.Sale is not enhanced.
+
+[2026-04-12 23:09:35 #13 type] 
+Type domain.Solicitud is not enhanced.
+
+[2026-04-12 23:09:35 #14 type.registry] 
+New type java.util.ArrayList<java.lang.Object>
+
+[2026-04-12 23:09:35 #15 type.registry] 
+New type java.util.ArrayList<domain.Sale>
+
+[2026-04-12 23:09:35 #16 type.registry] 
+New type java.util.ArrayList<domain.Offer>
+
+[2026-04-12 23:09:35 #17 type.registry] 
+New type java.util.ArrayList<domain.Valoraciones>
+
+[2026-04-12 23:09:35 #18 type.registry] 
+New type java.util.ArrayList<domain.Solicitud>
+
