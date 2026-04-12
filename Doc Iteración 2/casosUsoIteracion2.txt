@@ -1,0 +1,26 @@
+CASOS DE USO - SEGUNDA ITERACIÓN 
+
+1. ACEPTAR PROPUESTA Y COBRO:
+
+CASO DE USO 0: Aceptar propuesta de compra
+Clase de dominio pricipal: Vendedor
+Descripción: El vendedor visualiza un listado con todas las propuestas realizadas por los distintos compradores para un producto específico. El vendedor selecciona la propuesta que le interesa y el sistema procesa la transacción y cobra automáticamente al comprador el precio acordado y el producto pasa a estado "Vendido".
+
+
+2. NUEVOS CASOS DE USO PROPUESTOS:
+
+CASO DE USO 1: Modo Admin
+Clase de dominio pricipal: Admin
+Descripción: Un modo administrador el cual solo se accede mediante cambios de variables en el codigo.
+
+CASO DE USO 2: Publicar una valoración de productos
+Clase de dominio pricipal: Comprador
+Descripción: Una vez realizada la compra, el usuario puede dejar una puntuación y un comentario valorando al vendedor y el producto.
+Nuevas clases de dominio implicadas:
+- Review (almacena la nota numérica, el texto, la fecha, quien lo compro y a quien se lo compro).
+
+CASO DE USO 3: Modo Invitado
+Clase de dominio pricipal: Guest
+Descripción: Un modo invitado para cuando no se registre o inicie sesion un usuario, entonces pueda acceder a las listas de los productos disponibles pero no tiene permisos para editar/crear y tampoco para comprar productos.
+Nuevas clases de dominio implicadas:
+- Guest ().
