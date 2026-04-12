@@ -458,6 +458,10 @@ public void open(){
 				return false;
 			}
 		}
+		public List<String> getAllSellers() {
+			TypedQuery<String> query = db.createQuery("SELECT o.email FROM Seller o", String.class);
+			return query.getResultList();
+		}
 		
 		
 	public void close(){

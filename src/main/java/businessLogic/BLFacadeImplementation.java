@@ -184,6 +184,13 @@ public class BLFacadeImplementation  implements BLFacade {
    		dbManager.close();
    		return res;
    	}
+	@WebMethod public List<String> getAllSellers(){
+		dbManager.open();
+		List<String> res = dbManager.getAllSellers();
+		dbManager.close();
+		return res;
+	
+	}
 
 }
 
