@@ -83,7 +83,10 @@ public class DataAccess  {
             Seller seller1 = new Seller("seller1@gmail.com","12345","Aitor Fernandez",1);
             Seller seller2 = new Seller("seller22@gmail.com","54321","Ane Gaztañaga",1);
             Seller seller3 = new Seller("seller3@gmail.com","12121","Test Seller",1);
+            User comp1 = new User("comprador1@gmail.com","12345","Comprador1",2);
+            User comp2 = new User("comprador2@gmail.com","12345","Comprador2",2);
 
+            
             // Create products
             Date today = UtilDate.trim(new Date());
 
@@ -115,6 +118,8 @@ public class DataAccess  {
             db.persist(seller1);
             db.persist(seller2);
             db.persist(seller3);
+            db.persist(comp1);
+            db.persist(comp2);
             db.persist(admin);
 
             db.getTransaction().commit();
