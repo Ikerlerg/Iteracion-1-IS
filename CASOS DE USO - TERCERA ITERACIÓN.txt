@@ -1,0 +1,19 @@
+CASOS DE USO - TERCERA ITERACIÓN 
+
+1. NUEVOS CASOS DE USO PROPUESTOS:
+
+CASO DE USO 1: Visualizar reseñas de vendedor
+Clase de dominio principal: Comprador
+Descripción: El comprador visualiza el perfil de un vendedor específico para consultar una lista con todas las valoraciones y comentarios (Reviews) que otros usuarios le han dejado previamente, ayudándole a decidir si realizar una compra u oferta.
+
+CASO DE USO 2: Modo Invitado
+Clase de dominio principal: Guest
+Descripción: Un usuario no registrado navega por el catálogo para acceder a las listas de los productos disponibles, pero la interfaz gráfica oculta o bloquea los botones de compra, realizar oferta y publicar valoración hasta que inicie sesión.
+
+CASO DE USO 3: Modificar un producto publicado
+Clase de dominio principal: Vendedor
+Descripción: El vendedor accede a sus artículos en venta, selecciona un producto que él mismo ha publicado previamente y modifica sus detalles (título, precio o descripción). El sistema actualiza los datos, siempre y cuando el producto no haya sido vendido todavía.
+
+CASO DE USO 4: Eliminar un producto publicado
+Clase de dominio principal: Vendedor
+Descripción: El vendedor selecciona un producto de su lista de artículos publicados y lo elimina permanentemente del sistema, retirándolo del catálogo general de la aplicación, con la condición de que el producto no haya sido vendido todavía.
