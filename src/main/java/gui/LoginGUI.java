@@ -1,6 +1,5 @@
 package gui;
 
-import javax.swing.JFrame;
 import businessLogic.BLFacade;
 import configuration.UtilDate;
 import domain.Sale;
@@ -8,6 +7,8 @@ import dataAccess.*;
 import domain.*;
 import businessLogic.*;
 import javax.swing.*;
+import javax.swing.Timer;
+
 import java.awt.*;
 import java.awt.event.*;
 import java.text.SimpleDateFormat;
@@ -49,8 +50,8 @@ public class LoginGUI extends JFrame{
 				String correo= mailField.getText();
 				String pswd= passwordField.getText();
 				BLFacade facade = MainGUI.getBusinessLogic(); 
-				//!correo.contains("@")||!correo.contains(".")||correo.indexOf(".")<correo.indexOf("@") + 2||correo.length()-correo.replace("@", "").length() != 1)
-			if(!correo.contains("@gmail.com")) {
+				String formatoMail = "^[\\w.-]+@[\\w.-]+\\.[a-zA-Z]{2,}$";
+				if(!!correo.matches(formatoMail)) {
 			        Errorlabel.setText(ResourceBundle.getBundle("Etiquetas").getString("LoginGUI.FormatoError"));
 			    }
 			   
@@ -71,7 +72,9 @@ public class LoginGUI extends JFrame{
 			        //ventanaPrincipal.close.setEnabled(true);
 			        Errorlabel.setText(ResourceBundle.getBundle("Etiquetas").getString("RegisterGUI.bienvenida")+ " " + facade.Login(correo, pswd).getName()); 
 			        //cerrar ventana 
-			        dispose();
+					Timer timer = new Timer(1000, evt -> dispose());
+					timer.setRepeats(false);
+					timer.start();
 			    }
 			
 			}

@@ -23,7 +23,7 @@ import java.awt.event.ActionEvent;
 
 public class MainGUI extends JFrame {
 	
-	private String sellerMail = "default";
+	private String sellerMail = "Sin usuario";
 	private static final long serialVersionUID = 1L;
 
 	private JPanel jContentPane = null;

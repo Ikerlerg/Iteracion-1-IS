@@ -1,6 +1,5 @@
 package gui;
 
-import javax.swing.JFrame;
 import businessLogic.BLFacade;
 import configuration.UtilDate;
 import domain.Sale;
@@ -8,6 +7,8 @@ import dataAccess.*;
 import domain.*;
 import businessLogic.*;
 import javax.swing.*;
+import javax.swing.Timer;
+
 import java.awt.*;
 import java.awt.event.*;
 import java.text.SimpleDateFormat;
@@ -76,7 +77,8 @@ public class RegisterGUI extends JFrame {
 				String psw= pswField.getText();
 				boolean vendedor=seller_f.isSelected();
 				BLFacade facade = MainGUI.getBusinessLogic();
-			  if(!correo.contains("@gmail.com")) {
+				String formatoMail = "^[\\w.-]+@[\\w.-]+\\.[a-zA-Z]{2,}$";
+			  if(!correo.matches(formatoMail)) {
 				  
 					errorLabel.setText(ResourceBundle.getBundle("Etiquetas").getString("RegisterGUI.errorLabel"));
 				  
@@ -101,7 +103,9 @@ public class RegisterGUI extends JFrame {
 					//ventanaPrincipal.jButtonQueryQueries.setEnabled(!vendedor);
 					ventanaPrincipal.setTitle(ResourceBundle.getBundle("Etiquetas").getString("MainGUI.MainTitle")+": " + correo);
 					errorLabel.setText(ResourceBundle.getBundle("Etiquetas").getString("RegisterGUI.bienvenida")+" "+ nombre);
-					//dispose();
+					Timer timer = new Timer(1000, evt -> dispose());
+					timer.setRepeats(false);
+					timer.start();
 				}
 			}
 			});
