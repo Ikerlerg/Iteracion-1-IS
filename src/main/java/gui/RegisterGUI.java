@@ -78,7 +78,7 @@ public class RegisterGUI extends JFrame {
 				boolean vendedor=seller_f.isSelected();
 				BLFacade facade = MainGUI.getBusinessLogic();
 				String formatoMail = "^[\\w.-]+@[\\w.-]+\\.[a-zA-Z]{2,}$";
-			  if(!correo.matches(formatoMail)) {
+			  if(!correo.trim().matches(formatoMail)) {
 				  
 					errorLabel.setText(ResourceBundle.getBundle("Etiquetas").getString("RegisterGUI.errorLabel"));
 				  

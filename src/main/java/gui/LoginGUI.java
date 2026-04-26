@@ -51,7 +51,7 @@ public class LoginGUI extends JFrame{
 				String pswd= passwordField.getText();
 				BLFacade facade = MainGUI.getBusinessLogic(); 
 				String formatoMail = "^[\\w.-]+@[\\w.-]+\\.[a-zA-Z]{2,}$";
-				if(!!correo.matches(formatoMail)) {
+				if(!correo.trim().matches(formatoMail)) {
 			        Errorlabel.setText(ResourceBundle.getBundle("Etiquetas").getString("LoginGUI.FormatoError"));
 			    }
 			   
