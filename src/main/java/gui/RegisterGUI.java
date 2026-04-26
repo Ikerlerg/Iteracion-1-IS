@@ -20,9 +20,10 @@ public class RegisterGUI extends JFrame {
 	private JTextField nombreField;
 	private JTextField pswField;
 	private final ButtonGroup buttonGroup = new ButtonGroup();
-	public RegisterGUI(MainGUI ventanaPrincipal) {
+	public RegisterGUI() {
 		this.setSize(370, 290);
 		getContentPane().setLayout(null);
+		MainGUI ventanaPrincipal = new MainGUI();
 		
 		JLabel correoLabel = new JLabel(ResourceBundle.getBundle("Etiquetas").getString("RegisterGUI.correoLabel"));
 		correoLabel.setBounds(47, 20, 164, 12);
@@ -98,11 +99,13 @@ public class RegisterGUI extends JFrame {
 					ventanaPrincipal.bLogin.setVisible(false);
 					ventanaPrincipal.bRegist.setEnabled(false);
 					ventanaPrincipal.bRegist.setVisible(false);
+					ventanaPrincipal.close.setVisible(true);
 					ventanaPrincipal.loged.setText(correo);
 					ventanaPrincipal.jButtonCreateQuery.setEnabled(vendedor);
 					//ventanaPrincipal.jButtonQueryQueries.setEnabled(!vendedor);
 					ventanaPrincipal.setTitle(ResourceBundle.getBundle("Etiquetas").getString("MainGUI.MainTitle")+": " + correo);
 					errorLabel.setText(ResourceBundle.getBundle("Etiquetas").getString("RegisterGUI.bienvenida")+" "+ nombre);
+					ventanaPrincipal.setVisible(true);
 					Timer timer = new Timer(1000, evt -> dispose());
 					timer.setRepeats(false);
 					timer.start();

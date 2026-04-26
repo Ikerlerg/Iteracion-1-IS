@@ -144,10 +144,11 @@ public class MainGUI extends JFrame {
 		jContentPane.add(jButtonCreateQuery);
 		jContentPane.add(jButtonQueryQueries);
 		jContentPane.add(panel);
+		
 		//Invocación de la ventana de Login
 		bLogin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				JFrame ventanaLogin = new LoginGUI(MainGUI.this);
+				JFrame ventanaLogin = new LoginGUI();
 				ventanaLogin.setVisible(true);
 				//System.out.println(mode);
 
@@ -157,6 +158,7 @@ public class MainGUI extends JFrame {
 		bLogin.setHorizontalAlignment(SwingConstants.LEADING);
 		bLogin.setText(ResourceBundle.getBundle("Etiquetas").getString("MainGUI.Login")); //
 		panel.add(bLogin);
+		bLogin.setVisible(false);
 		
 
 		
@@ -164,10 +166,11 @@ public class MainGUI extends JFrame {
 		bRegist.setBounds(328, 30, 143, 21);
 		bRegist.setText(ResourceBundle.getBundle("Etiquetas").getString("MainGUI.Register"));
 		panel.add(bRegist);
+		bRegist.setVisible(false);
 		//invocación de la ventana de Registro
 		bRegist.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				JFrame ventanaRegister = new RegisterGUI(MainGUI.this);
+				JFrame ventanaRegister = new RegisterGUI();
 				ventanaRegister.setVisible(true);
 				//System.out.println(mode);
 

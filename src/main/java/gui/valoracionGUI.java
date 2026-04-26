@@ -31,7 +31,7 @@ public class valoracionGUI extends JFrame {
 	private JTextField Descripcion;
 	private final ButtonGroup buttonGroup = new ButtonGroup();
 	
-	public valoracionGUI(CrearRese ventanaPadre, String mailComp, String mailVend, long idProd) {
+	public valoracionGUI(CrearReseGUI ventanaPadre, String mailComp, String mailVend, long idProd) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();

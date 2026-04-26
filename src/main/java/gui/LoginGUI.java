@@ -18,7 +18,8 @@ import java.util.List;
 public class LoginGUI extends JFrame{
 	private JPasswordField passwordField;
 	private JTextField mailField;
-	public LoginGUI(MainGUI ventanaPrincipal) {
+
+	public LoginGUI() {
 		getContentPane().setLayout(null);
 		this.setSize(455, 210);
 		passwordField = new JPasswordField();
@@ -60,6 +61,7 @@ public class LoginGUI extends JFrame{
 			        Errorlabel.setText(ResourceBundle.getBundle("Etiquetas").getString("LoginGUI.UsuarioError"));
 			    }
 			    else {
+			    	MainGUI ventanaPrincipal = new MainGUI();
 			        ventanaPrincipal.log=facade.Login(correo, pswd);
 			        ventanaPrincipal.bLogin.setEnabled(false);
 			        ventanaPrincipal.bLogin.setVisible(false);
@@ -71,6 +73,7 @@ public class LoginGUI extends JFrame{
 			        ventanaPrincipal.loged.setText(facade.Login(correo, pswd).getEmail());
 			        //ventanaPrincipal.close.setEnabled(true);
 			        Errorlabel.setText(ResourceBundle.getBundle("Etiquetas").getString("RegisterGUI.bienvenida")+ " " + facade.Login(correo, pswd).getName()); 
+			        ventanaPrincipal.setVisible(true);
 			        //cerrar ventana 
 					Timer timer = new Timer(1000, evt -> dispose());
 					timer.setRepeats(false);

@@ -28,7 +28,7 @@ import domain.Solicitud;
 import javax.swing.JTable;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
-public class CrearRese extends JFrame {
+public class CrearReseGUI extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
@@ -42,7 +42,7 @@ public class CrearRese extends JFrame {
 	private JButton aceptarButton = new JButton("Crear valoración");
 
 	private final JLabel avisoLabel = new JLabel("");
-	public CrearRese(JFrame MainGUI, String mailComp, String mailVend, long idPrd) {
+	public CrearReseGUI(JFrame MainGUI, String mailComp, String mailVend, long idPrd) {
 		
 		this.buyerMail=mailComp;
 		this.sellerMail=mailVend;
