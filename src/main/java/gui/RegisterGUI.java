@@ -98,7 +98,7 @@ public class RegisterGUI extends JFrame {
 					ventanaPrincipal.bRegist.setVisible(false);
 					ventanaPrincipal.loged.setText(correo);
 					ventanaPrincipal.jButtonCreateQuery.setEnabled(vendedor);
-					ventanaPrincipal.jButtonQueryQueries.setEnabled(!vendedor);
+					//ventanaPrincipal.jButtonQueryQueries.setEnabled(!vendedor);
 					ventanaPrincipal.setTitle(ResourceBundle.getBundle("Etiquetas").getString("MainGUI.MainTitle")+": " + correo);
 					errorLabel.setText(ResourceBundle.getBundle("Etiquetas").getString("RegisterGUI.bienvenida")+" "+ nombre);
 					//dispose();

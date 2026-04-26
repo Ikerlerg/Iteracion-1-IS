@@ -128,7 +128,7 @@ public class MainGUI extends JFrame {
 		
 		jButtonQueryQueries = new JButton();
 		jButtonQueryQueries.setBounds(0, 126, 481, 63);
-		jButtonQueryQueries.setEnabled(false);
+		jButtonQueryQueries.setEnabled(true);
 		jButtonQueryQueries.setText(ResourceBundle.getBundle("Etiquetas").getString("MainGUI.QuerySales"));
 		jButtonQueryQueries.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent e) {
@@ -198,13 +198,24 @@ public class MainGUI extends JFrame {
 		        
 		        // Este código se ejecuta AUTOMÁTICAMENTE solo cuando el texto cambia
 		        String nuevoTexto = loged.getText();
+		        if(nuevoTexto.equals("Sin usuario")) {
+		        	jButtonCreateQuery.setEnabled(false);
+					bLogin.setEnabled(true);
+					bLogin.setVisible(true);
+					bRegist.setEnabled(true);
+					bRegist.setVisible(true);
+					adminButton.setVisible(false);
+					aceptar_visuali.setVisible(false);
+					MainGUI.this.setTitle(ResourceBundle.getBundle("Etiquetas").getString("MainGUI.MainTitle"));
+
+		        }
 		        
-		        if (nuevoTexto != null &&nuevoTexto!="Sin Usuario"&& !nuevoTexto.isEmpty()) {
+		        else if (nuevoTexto != null && !nuevoTexto.isEmpty()) {
 		            try {
 		                // Buscamos al usuario en la base de datos
 		                appFacadeInterface = getBusinessLogic();
 		                mode = appFacadeInterface.obtUser(nuevoTexto);
-		                
+		                MainGUI.this.sellerMail=nuevoTexto;
 		                // Mostramos el botón según el modo
 		                if (mode == 1) {
 		                    aceptar_visuali.setText(ResourceBundle.getBundle("Etiquetas").getString("MainGUI.Visualizar"));
@@ -292,18 +303,7 @@ public class MainGUI extends JFrame {
 		close.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				close.setVisible(false);
-				loged.setText("Sin usuario");
-				jButtonCreateQuery.setEnabled(false);
-				jButtonQueryQueries.setEnabled(false);
-				bLogin.setEnabled(true);
-				bLogin.setVisible(true);
-				bRegist.setEnabled(true);
-				bRegist.setVisible(true);
-				adminButton.setVisible(false);
-				aceptar_visuali.setVisible(false);
-				MainGUI.this.setTitle(ResourceBundle.getBundle("Etiquetas").getString("MainGUI.MainTitle"));
-				
-				
+				loged.setText("Sin usuario");				
 			}});
 		
 		}
@@ -318,21 +318,24 @@ public class MainGUI extends JFrame {
 		bLogin.setText(ResourceBundle.getBundle("Etiquetas").getString("MainGUI.Login"));
 	    bRegist.setText(ResourceBundle.getBundle("Etiquetas").getString("MainGUI.Register"));
 	    
-		this.setTitle(ResourceBundle.getBundle("Etiquetas").getString("MainGUI.MainTitle")+ ": "+sellerMail);
+		
 		int tipo = appFacadeInterface.obtUser(loged.getText());
 		 if (tipo == 1) {
              aceptar_visuali.setText(ResourceBundle.getBundle("Etiquetas").getString("MainGUI.Visualizar"));
-          
+             this.setTitle(ResourceBundle.getBundle("Etiquetas").getString("MainGUI.MainTitle")+ ": "+sellerMail);
          } else if (tipo == 2) {
              aceptar_visuali.setText(ResourceBundle.getBundle("Etiquetas").getString("MainGUI.Aceptar"));
-            
+             this.setTitle(ResourceBundle.getBundle("Etiquetas").getString("MainGUI.MainTitle")+ ": "+sellerMail);
              
          } 
          else if(tipo==-1) {
              aceptar_visuali.setText(ResourceBundle.getBundle("Etiquetas").getString("MainGUI.Visualizar"));
            
              adminButton.setText(ResourceBundle.getBundle("Etiquetas").getString("MainGUI.Aceptar"));
-             
+             this.setTitle(ResourceBundle.getBundle("Etiquetas").getString("MainGUI.MainTitle")+ ": "+sellerMail);
+         }
+         else {
+        	 this.setTitle(ResourceBundle.getBundle("Etiquetas").getString("MainGUI.MainTitle"));
          }
 	   
 	    	
