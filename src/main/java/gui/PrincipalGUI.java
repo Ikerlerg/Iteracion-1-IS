@@ -25,46 +25,9 @@ public class PrincipalGUI extends JFrame {
     private JButton bRegistrar;
     private JComboBox<String> Idioma;
 
-<<<<<<< Updated upstream
 		
-		
-		//Abrir ventana de inicio
-		bLogin.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				LoginGUI ventanaLogin = new LoginGUI();
-				ventanaLogin.setVisible(true);
-				Timer timer = new Timer(1000, evt -> dispose());
-				//timer.setRepeats(false);
-				//timer.start();
-			}
-		});
-		
-		//invocación de la ventana de Registro
-		bRegistrar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				RegisterGUI ventanaRegister = new RegisterGUI();
-				ventanaRegister.setVisible(true); 
-				Timer timer = new Timer(1000, evt -> dispose());
-				//timer.setRepeats(false);
-				//timer.start();
-			}
-		});
-		//Modo Invitado
-		bGuest.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				MainGUI ventanaLogin = new MainGUI();
-				ventanaLogin.setVisible(true);
-				ventanaLogin.bLogin.setVisible(true);
-				ventanaLogin.bRegist.setVisible(true);
-				Timer timer = new Timer(1000, evt -> dispose());
-				timer.setRepeats(false);
-				timer.start();
-			}
-		});
-			
-	}
-}
-=======
+	
+
     public PrincipalGUI() {
         setTitle("Market");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -103,41 +66,39 @@ public class PrincipalGUI extends JFrame {
         // Cargamos los textos por primera vez
         paintAgain();
         
-        // Abrir ventana de inicio
-        bLogin.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                LoginGUI ventanaLogin = new LoginGUI();
-                ventanaLogin.setVisible(true);
-                Timer timer = new Timer(1000, evt -> dispose());
-                timer.setRepeats(false);
-                timer.start();
-            }
-        });
-        
-        // Invocación de la ventana de Registro
-        bRegistrar.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                RegisterGUI ventanaRegister = new RegisterGUI();
-                ventanaRegister.setVisible(true); 
-                Timer timer = new Timer(1000, evt -> dispose());
-                timer.setRepeats(false);
-                timer.start();
-            }
-        });
-        
-        // Modo Invitado
-        bGuest.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                MainGUI ventanaMain = new MainGUI();
-                ventanaMain.setVisible(true);
-                ventanaMain.bLogin.setVisible(true);
-                ventanaMain.bRegist.setVisible(true);
-                Timer timer = new Timer(1000, evt -> dispose());
-                timer.setRepeats(false);
-                timer.start();
-            }
-        });
-        
+      //Abrir ventana de inicio
+      		bLogin.addActionListener(new ActionListener() {
+      			public void actionPerformed(ActionEvent e) {
+      				LoginGUI ventanaLogin = new LoginGUI();
+      				ventanaLogin.setVisible(true);
+      				Timer timer = new Timer(1000, evt -> dispose());
+      				//timer.setRepeats(false);
+      				//timer.start();
+      			}
+      		});
+      		
+      		//invocación de la ventana de Registro
+      		bRegistrar.addActionListener(new ActionListener() {
+      			public void actionPerformed(ActionEvent e) {
+      				RegisterGUI ventanaRegister = new RegisterGUI();
+      				ventanaRegister.setVisible(true); 
+      				Timer timer = new Timer(1000, evt -> dispose());
+      				//timer.setRepeats(false);
+      				//timer.start();
+      			}
+      		});
+      		//Modo Invitado
+      		bGuest.addActionListener(new ActionListener() {
+      			public void actionPerformed(ActionEvent e) {
+      				MainGUI ventanaLogin = new MainGUI();
+      				ventanaLogin.setVisible(true);
+      				ventanaLogin.bLogin.setVisible(true);
+      				ventanaLogin.bRegist.setVisible(true);
+      				Timer timer = new Timer(1000, evt -> dispose());
+      				timer.setRepeats(false);
+      				timer.start();
+      			}
+      		});
         // Cambio de idioma
         Idioma.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -162,4 +123,4 @@ public class PrincipalGUI extends JFrame {
         Idioma.setToolTipText(bundle.getString("PrincipalGUI.Idioma"));
     }
 }
->>>>>>> Stashed changes
+
