@@ -39,8 +39,6 @@ public class PagoGUI extends JFrame {
             public void actionPerformed(ActionEvent e) {
             	try {
 				BLFacade facade = MainGUI.getBusinessLogic();//no se si usar aquí MainGUI dará problemas
-				
-				// Solo pasamos el ID, tal y como querías
 				boolean success = facade.proposeOffer(compra.getId(),buyerMail);
 				
 				if (success) {

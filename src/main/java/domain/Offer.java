@@ -2,11 +2,13 @@ package domain;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Offer {
@@ -17,14 +19,17 @@ public class Offer {
 	private String email_vendedor;
 	private boolean estado; //true = activa.
 	@ElementCollection(fetch = FetchType.EAGER)
-	private List<Solicitud> pendientes= new ArrayList<>();;
+	private List<Solicitud> pendientes= new ArrayList<>();
+	@ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+	private Sale orgSale;
 	
 	public Offer() {
 	}
 	
-	public Offer(double precio, String email,boolean e) {
+	public Offer(double precio, String email,Sale orgSale, boolean e) {
 		this.precio= precio;
 		this.email_vendedor= email;
+		this.orgSale=orgSale;
 		this.estado= e;
 		
 	}
@@ -40,6 +45,9 @@ public class Offer {
 	public Long getId() {
         return id;
     }
+	public Sale getSale() {
+		return orgSale;
+	}
 
     public void setEstado(boolean estado) {
         this.estado = estado;
@@ -66,7 +74,8 @@ public class Offer {
 
     @Override
     public String toString() {
-        return "Precio: " + precio + "€ | Vendedor: " + email_vendedor;
+    	
+        return "Producto: "+orgSale.getTitle();
     }
 	
 }

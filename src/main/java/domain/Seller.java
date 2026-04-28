@@ -32,8 +32,8 @@ public class Seller extends User {
     private List<Offer> offers = new ArrayList<>();
     private List<Valoraciones> valoracion = new ArrayList<>();
 
-    public Offer addOffer(double precio, String emailVendedor, boolean estado) {
-        Offer nuevaOferta = new Offer(precio, emailVendedor, estado);
+    public Offer addOffer(double precio, String emailVendedor,Sale sell ,boolean estado) {
+        Offer nuevaOferta = new Offer(precio, emailVendedor, sell , estado);
         this.offers.add(nuevaOferta);
         return nuevaOferta;
     }

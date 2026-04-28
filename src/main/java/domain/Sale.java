@@ -27,7 +27,7 @@ public class Sale implements Serializable {
 	private float price;
 	private Date pubDate;
 	private String fileName;
-	
+	@ManyToOne
 	private Seller seller;  
 	
 	public Sale(){

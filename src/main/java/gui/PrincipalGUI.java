@@ -71,8 +71,8 @@ public class PrincipalGUI extends JFrame {
 				LoginGUI ventanaLogin = new LoginGUI();
 				ventanaLogin.setVisible(true);
 				Timer timer = new Timer(1000, evt -> dispose());
-				timer.setRepeats(false);
-				timer.start();
+				//timer.setRepeats(false);
+				//timer.start();
 			}
 		});
 		
@@ -82,8 +82,8 @@ public class PrincipalGUI extends JFrame {
 				RegisterGUI ventanaRegister = new RegisterGUI();
 				ventanaRegister.setVisible(true); 
 				Timer timer = new Timer(1000, evt -> dispose());
-				timer.setRepeats(false);
-				timer.start();
+				//timer.setRepeats(false);
+				//timer.start();
 			}
 		});
 		//Modo Invitado
