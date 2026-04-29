@@ -94,15 +94,15 @@ public class RegisterGUI extends JFrame {
 					else {
 						facade.Registro(correo, psw, nombre, 2);
 					}
-					//MainGUI.mode = seller_f.isSelected();
-					ventanaPrincipal.bLogin.setEnabled(false);
+					MainGUI.logEmail = correo;
+					/*ventanaPrincipal.bLogin.setEnabled(false);
 					ventanaPrincipal.bLogin.setVisible(false);
 					ventanaPrincipal.bRegist.setEnabled(false);
-					ventanaPrincipal.bRegist.setVisible(false);
+					ventanaPrincipal.bRegist.setVisible(false);*/
 					ventanaPrincipal.close.setVisible(true);
-					ventanaPrincipal.loged.setText(correo);
+					ventanaPrincipal.loged.setText(nombre);
+					ventanaPrincipal.actualizarEstadoUsuario(correo);
 					ventanaPrincipal.jButtonCreateQuery.setEnabled(vendedor);
-					//ventanaPrincipal.jButtonQueryQueries.setEnabled(!vendedor);
 					ventanaPrincipal.setTitle(ResourceBundle.getBundle("Etiquetas").getString("MainGUI.MainTitle")+": " + correo);
 					errorLabel.setText(ResourceBundle.getBundle("Etiquetas").getString("RegisterGUI.bienvenida")+" "+ nombre);
 					ventanaPrincipal.setVisible(true);

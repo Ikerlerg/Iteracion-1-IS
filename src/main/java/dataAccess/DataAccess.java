@@ -305,16 +305,12 @@ public void open(){
 		 
 	 }
 	public int obtUser(String email) {
-	    // 1. Buscamos al usuario en la base de datos (solo lectura, no hace falta transaction)
 	    User usuario = db.find(User.class, email);
 	    
-	    // 2. Comprobamos si el usuario EXISTE antes de hacerle preguntas
 	    if (usuario != null) {
 	        return usuario.getTipo();	        	        
 	    } 
 	    else {
-	        // 3. Si el usuario no existe (es null), devolvemos 0
-	        // Así tu MainGUI sabrá que es un usuario inválido y mantendrá el botón oculto
 	        return 0; 
 	    }
 	}

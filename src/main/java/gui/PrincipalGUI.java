@@ -71,7 +71,7 @@ public class PrincipalGUI extends JFrame {
       			public void actionPerformed(ActionEvent e) {
       				LoginGUI ventanaLogin = new LoginGUI();
       				ventanaLogin.setVisible(true);
-      				Timer timer = new Timer(1000, evt -> dispose());
+      				//Timer timer = new Timer(1000, evt -> dispose());
       				//timer.setRepeats(false);
       				//timer.start();
       			}
@@ -82,7 +82,7 @@ public class PrincipalGUI extends JFrame {
       			public void actionPerformed(ActionEvent e) {
       				RegisterGUI ventanaRegister = new RegisterGUI();
       				ventanaRegister.setVisible(true); 
-      				Timer timer = new Timer(1000, evt -> dispose());
+      				//Timer timer = new Timer(1000, evt -> dispose());
       				//timer.setRepeats(false);
       				//timer.start();
       			}
@@ -90,7 +90,8 @@ public class PrincipalGUI extends JFrame {
       		//Modo Invitado
       		bGuest.addActionListener(new ActionListener() {
       			public void actionPerformed(ActionEvent e) {
-      				MainGUI ventanaLogin = new MainGUI();
+      				MainGUI ventanaLogin = new MainGUI("Sin usuario");
+      				ventanaLogin.actualizarEstadoUsuario("Sin usuario");
       				ventanaLogin.setVisible(true);
       				ventanaLogin.bLogin.setVisible(true);
       				ventanaLogin.bRegist.setVisible(true);

@@ -48,6 +48,7 @@ public class LoginGUI extends JFrame{
 		getContentPane().add(login);
 		login.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				User us = new User();
 				String correo= mailField.getText();
 				String pswd= passwordField.getText();
 				BLFacade facade = MainGUI.getBusinessLogic(); 
@@ -61,16 +62,19 @@ public class LoginGUI extends JFrame{
 			        Errorlabel.setText(ResourceBundle.getBundle("Etiquetas").getString("LoginGUI.UsuarioError"));
 			    }
 			    else {
+			    	us = facade.Login(correo, pswd);
+			    	MainGUI.logEmail = correo;
 			    	MainGUI ventanaPrincipal = new MainGUI();
-			        ventanaPrincipal.log=facade.Login(correo, pswd);
-			        ventanaPrincipal.bLogin.setEnabled(false);
+			    	ventanaPrincipal.actualizarEstadoUsuario(correo);
+			    	//ventanaPrincipal.log=facade.Login(correo, pswd);
+			        /*ventanaPrincipal.bLogin.setEnabled(false);
 			        ventanaPrincipal.bLogin.setVisible(false);
 			        ventanaPrincipal.bRegist.setEnabled(false);
-			        ventanaPrincipal.bRegist.setVisible(false);
+			        ventanaPrincipal.bRegist.setVisible(false);*/
 			        ventanaPrincipal.jButtonCreateQuery.setEnabled(facade.Login(correo, pswd).getTipo()==1||facade.Login(correo, pswd).getTipo()==-1);//activar si el usuario es vendedor o admin
 			        //ventanaPrincipal.jButtonQueryQueries.setEnabled(facade.Login(correo, pswd).getTipo()==2||facade.Login(correo, pswd).getTipo()==-1);//activar si el usuario es comprador o admin
-			        ventanaPrincipal.setTitle(ResourceBundle.getBundle("Etiquetas").getString("MainGUI.MainTitle")+": " + correo);
-			        ventanaPrincipal.loged.setText(facade.Login(correo, pswd).getEmail());
+			        ventanaPrincipal.setTitle(ResourceBundle.getBundle("Etiquetas").getString("MainGUI.MainTitle")+": " + us.getName());
+			        ventanaPrincipal.loged.setText(us.getName());
 			        //ventanaPrincipal.close.setEnabled(true);
 			        Errorlabel.setText(ResourceBundle.getBundle("Etiquetas").getString("RegisterGUI.bienvenida")+ " " + facade.Login(correo, pswd).getName()); 
 			        ventanaPrincipal.setVisible(true);

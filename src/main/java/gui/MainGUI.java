@@ -40,25 +40,22 @@ public class MainGUI extends JFrame {
 		appFacadeInterface=facade;
 	}
 	protected JLabel jLabelSelectOption;
-	private JRadioButton rdbtnNewRadioButton;
-	private JRadioButton rdbtnNewRadioButton_1;
-	private JRadioButton rdbtnNewRadioButton_2;
+	//private JRadioButton rdbtnNewRadioButton;
+	//private JRadioButton rdbtnNewRadioButton_1;
+	//private JRadioButton rdbtnNewRadioButton_2;
 	private JPanel panel;
-	private final ButtonGroup buttonGroup = new ButtonGroup();
+	//private final ButtonGroup buttonGroup = new ButtonGroup();
 	protected final JButton bLogin = new JButton(); 
 	protected final JButton bRegist = new JButton();
 	protected JButton close = new JButton(); 
 	
-	protected User log=null;
+	public static String logEmail = "Sin usuario";
 	protected JLabel loged;
 	protected JButton adminButton = new JButton();
 	protected JButton aceptar_visuali = new JButton(""); 
 	//variable para controlar si soy vendedor o comprador
 	 //(0=nada,1=vendedor,2=comprador)
 	private int mode = 0;
-	/**
-	 * This is the default constructor
-	 */
 
 	public MainGUI() {
 		this("");
@@ -66,11 +63,8 @@ public class MainGUI extends JFrame {
 
 	public MainGUI(String mail) {
 		super();
-
-		
 		
 		this.sellerMail=mail;
-		
 		this.setSize(495, 290);
 		jLabelSelectOption = new JLabel(ResourceBundle.getBundle("Etiquetas").getString("MainGUI.SelectOption"));
 		jLabelSelectOption.setBounds(0, 0, 481, 63);
@@ -78,7 +72,7 @@ public class MainGUI extends JFrame {
 		jLabelSelectOption.setForeground(Color.BLACK);
 		jLabelSelectOption.setHorizontalAlignment(SwingConstants.CENTER);
 		
-		rdbtnNewRadioButton = new JRadioButton("English");
+		/*rdbtnNewRadioButton = new JRadioButton("English");
 		rdbtnNewRadioButton.setBounds(188, 5, 78, 21);
 		rdbtnNewRadioButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -105,14 +99,14 @@ public class MainGUI extends JFrame {
 				paintAgain();
 			}
 		});
-		buttonGroup.add(rdbtnNewRadioButton_2);
+		buttonGroup.add(rdbtnNewRadioButton_2);*/
 	
 		panel = new JPanel();
 		panel.setBounds(0, 189, 481, 63);
 		panel.setLayout(null);
-		panel.add(rdbtnNewRadioButton_1);
-		panel.add(rdbtnNewRadioButton_2);
-		panel.add(rdbtnNewRadioButton);
+		//panel.add(rdbtnNewRadioButton_1);
+		//panel.add(rdbtnNewRadioButton_2);
+		//panel.add(rdbtnNewRadioButton);
 		
 		jButtonCreateQuery = new JButton();
 		jButtonCreateQuery.setBounds(0, 63, 481, 63);
@@ -120,9 +114,8 @@ public class MainGUI extends JFrame {
 		jButtonCreateQuery.setText(ResourceBundle.getBundle("Etiquetas").getString("MainGUI.CreateSale"));
 		jButtonCreateQuery.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent e) {
-				JFrame a = new CreateSaleGUI(loged.getText());
+				JFrame a = new CreateSaleGUI(MainGUI.logEmail);
 				a.setVisible(true);
-				
 			}
 		});
 		
@@ -133,7 +126,6 @@ public class MainGUI extends JFrame {
 		jButtonQueryQueries.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent e) {
 				JFrame a = new QuerySalesGUI();
-
 				a.setVisible(true);
 			}
 		});
@@ -145,136 +137,76 @@ public class MainGUI extends JFrame {
 		jContentPane.add(jButtonQueryQueries);
 		jContentPane.add(panel);
 		
-		//Invocación de la ventana de Login
 		bLogin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				JFrame ventanaLogin = new LoginGUI();
 				ventanaLogin.setVisible(true);
-				//System.out.println(mode);
-
 			}
 		});
 		bLogin.setBounds(328, 5, 143, 21);
 		bLogin.setHorizontalAlignment(SwingConstants.LEADING);
-		bLogin.setText(ResourceBundle.getBundle("Etiquetas").getString("MainGUI.Login")); //
+		bLogin.setText(ResourceBundle.getBundle("Etiquetas").getString("MainGUI.Login")); 
 		panel.add(bLogin);
 		bLogin.setVisible(false);
-		
-
 		
 		bRegist.setHorizontalAlignment(SwingConstants.LEADING);
 		bRegist.setBounds(328, 30, 143, 21);
 		bRegist.setText(ResourceBundle.getBundle("Etiquetas").getString("MainGUI.Register"));
 		panel.add(bRegist);
 		bRegist.setVisible(false);
-		//invocación de la ventana de Registro
 		bRegist.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				JFrame ventanaRegister = new RegisterGUI();
 				ventanaRegister.setVisible(true);
-				//System.out.println(mode);
-
 			}
 		});
-		
-		loged = new JLabel("Sin usuario"); 
-		loged.setBounds(0, 38, 92, 24);
-		panel.add(loged);
-		
-		
-		
 		
 		aceptar_visuali.setBounds(276, 33, 186, 22);
 		panel.add(aceptar_visuali);
 		
-		
 		adminButton.setBounds(276, 5, 186, 20);
 		panel.add(adminButton);
+		
+
+		String[] idi = {"es","eus","en"};
+		JComboBox IdiomaBox = new JComboBox<>(idi);
+		IdiomaBox.setBounds(10, 11, 64, 22);
+		panel.add(IdiomaBox);
+		
+		// Cambio de idioma
+        IdiomaBox.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                if(IdiomaBox.getSelectedIndex() == 0) {
+                    Locale.setDefault(new Locale("es"));
+                } else if(IdiomaBox.getSelectedIndex() == 1) {
+                    Locale.setDefault(new Locale("eus"));
+                } else if(IdiomaBox.getSelectedIndex() == 2) {
+                    Locale.setDefault(new Locale("en"));
+                }
+                paintAgain(); 
+            }
+        });
 		adminButton.setVisible(false);
 		
-		
-		
 		aceptar_visuali.setVisible(false);
-		//Cambiar de modo, una vez se cambia ofrecemos la opción correspondiente
-		loged.addPropertyChangeListener("text", new java.beans.PropertyChangeListener() {
-		    public void propertyChange(java.beans.PropertyChangeEvent evt) {
-		        
-		        // Este código se ejecuta AUTOMÁTICAMENTE solo cuando el texto cambia
-		        String nuevoTexto = loged.getText();
-		        if(nuevoTexto.equals("Sin usuario")) {
-		        	jButtonCreateQuery.setEnabled(false);
-					bLogin.setEnabled(true);
-					bLogin.setVisible(true);
-					bRegist.setEnabled(true);
-					bRegist.setVisible(true);
-					adminButton.setVisible(false);
-					aceptar_visuali.setVisible(false);
-					MainGUI.this.setTitle(ResourceBundle.getBundle("Etiquetas").getString("MainGUI.MainTitle"));
-
-		        }
-		        
-		        else if (nuevoTexto != null && !nuevoTexto.isEmpty()) {
-		            try {
-		                // Buscamos al usuario en la base de datos
-		                appFacadeInterface = getBusinessLogic();
-		                mode = appFacadeInterface.obtUser(nuevoTexto);
-		                MainGUI.this.sellerMail=nuevoTexto;
-		                // Mostramos el botón según el modo
-		                if (mode == 1) {
-		                    aceptar_visuali.setText(ResourceBundle.getBundle("Etiquetas").getString("MainGUI.Visualizar"));
-		                    aceptar_visuali.setVisible(true);
-		                    close.setVisible(true);
-		                } else if (mode == 2) {
-		                    aceptar_visuali.setText(ResourceBundle.getBundle("Etiquetas").getString("MainGUI.Aceptar"));
-		                    aceptar_visuali.setVisible(true);
-		                    close.setVisible(true);
-		                    
-		                } 
-		                else if(mode==-1) {
-		                    aceptar_visuali.setText(ResourceBundle.getBundle("Etiquetas").getString("MainGUI.Visualizar"));
-		                    aceptar_visuali.setVisible(true);
-		                    adminButton.setText(ResourceBundle.getBundle("Etiquetas").getString("MainGUI.Aceptar"));
-		                    adminButton.setVisible(true);
-		                    close.setVisible(true);
-		                }
-		                else {
-		                    aceptar_visuali.setVisible(false);
-		                }
-		                
-		                // Actualizamos la pantalla
-		                panel.revalidate();
-		                panel.repaint();
-		                
-		            } catch (Exception ex) {
-		                ex.printStackTrace();
-		            }
-		        }
-		    }
-		});
-		//Llamada a la interfaz de visualizar y aceptar
+		
 		aceptar_visuali.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (mode==2) {
-					JFrame ventanaAceptar= new AceptarGUI(MainGUI.this, loged.getText().toString());
+					JFrame ventanaAceptar= new AceptarGUI(MainGUI.this, MainGUI.logEmail);
 					ventanaAceptar.setVisible(true);
 				}else if(mode==1||mode==-1) {
-					JFrame ventanaVisualizar= new VisualizarGUI(MainGUI.this, loged.getText().toString());
+					JFrame ventanaVisualizar= new VisualizarGUI(MainGUI.this, MainGUI.logEmail);
 					ventanaVisualizar.setVisible(true);
 				}
-				
-				//System.out.println(mode);
-
 			}
 		});
 		adminButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (mode==-1) {
-					JFrame ventanaAceptar= new AceptarGUI(MainGUI.this, loged.getText().toString());
+					JFrame ventanaAceptar= new AceptarGUI(MainGUI.this, MainGUI.logEmail);
 					ventanaAceptar.setVisible(true);
 				}
-				
-				//System.out.println(mode);
-
 			}
 		});
 		setContentPane(jContentPane);
@@ -286,63 +218,84 @@ public class MainGUI extends JFrame {
 				System.exit(1);
 			}
 		});
-	
-		
-		
-		
 		
 		close.setBounds(307, 22, 153, 20);
 		jContentPane.add(close);
 		close.setText(ResourceBundle.getBundle("Etiquetas").getString("MainGUI.close"));
 		
-	
-		
-	
 
-		
-		
-
+		loged = new JLabel("Sin usuario");
+		loged.setBounds(10, 0, 122, 24);
+		jContentPane.add(loged);
 		close.setVisible(false);
+		
 		close.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				close.setVisible(false);
-				loged.setText("Sin usuario");				
-			}});
+				actualizarEstadoUsuario("Sin usuario");				
+			}
+		});
 		
+		
+		//Llamada al paint para que se carguen por primera vez todo los botones.
+		paintAgain();
+		
+	}
+	
+	// Metodo para gestionar los estados 
+	public void actualizarEstadoUsuario(String email) {
+		
+		if(email.equals("Sin usuario")) {
+			jButtonCreateQuery.setEnabled(false);
+			bLogin.setEnabled(true);
+			bLogin.setVisible(true);
+			bRegist.setEnabled(true);
+			bRegist.setVisible(true);
+			adminButton.setVisible(false);
+			aceptar_visuali.setVisible(false);
+			close.setVisible(false);
+			this.setTitle(ResourceBundle.getBundle("Etiquetas").getString("MainGUI.MainTitle"));
 		}
-	
+		else {
+			try {
+				appFacadeInterface = getBusinessLogic();
+				mode = appFacadeInterface.obtUser(email);
+				this.sellerMail=email;
+				
+				bLogin.setVisible(false);
+				bRegist.setVisible(false);
+				close.setVisible(true);
 
+				if (mode == 1) {
+					aceptar_visuali.setText(ResourceBundle.getBundle("Etiquetas").getString("MainGUI.Visualizar"));
+					aceptar_visuali.setVisible(true);
+				} else if (mode == 2) {
+					aceptar_visuali.setText(ResourceBundle.getBundle("Etiquetas").getString("MainGUI.Aceptar"));
+					aceptar_visuali.setVisible(true);
+				} 
+				else if(mode==-1) {
+					aceptar_visuali.setText(ResourceBundle.getBundle("Etiquetas").getString("MainGUI.Visualizar"));
+					aceptar_visuali.setVisible(true);
+					adminButton.setText(ResourceBundle.getBundle("Etiquetas").getString("MainGUI.Aceptar"));
+					adminButton.setVisible(true);
+				}
+				
+				this.setTitle(ResourceBundle.getBundle("Etiquetas").getString("MainGUI.MainTitle")+ ": "+sellerMail);
+				panel.revalidate();
+				panel.repaint();
+				
+			} catch (Exception ex) {
+				ex.printStackTrace();
+			}
+		}
+	}
 
-	
 	private void paintAgain() {
 		jLabelSelectOption.setText(ResourceBundle.getBundle("Etiquetas").getString("MainGUI.SelectOption"));
 		jButtonQueryQueries.setText(ResourceBundle.getBundle("Etiquetas").getString("MainGUI.QuerySales"));
 		jButtonCreateQuery.setText(ResourceBundle.getBundle("Etiquetas").getString("MainGUI.CreateSale"));
 		bLogin.setText(ResourceBundle.getBundle("Etiquetas").getString("MainGUI.Login"));
 	    bRegist.setText(ResourceBundle.getBundle("Etiquetas").getString("MainGUI.Register"));
-	    
-		
-		int tipo = appFacadeInterface.obtUser(loged.getText());
-		 if (tipo == 1) {
-             aceptar_visuali.setText(ResourceBundle.getBundle("Etiquetas").getString("MainGUI.Visualizar"));
-             this.setTitle(ResourceBundle.getBundle("Etiquetas").getString("MainGUI.MainTitle")+ ": "+sellerMail);
-         } else if (tipo == 2) {
-             aceptar_visuali.setText(ResourceBundle.getBundle("Etiquetas").getString("MainGUI.Aceptar"));
-             this.setTitle(ResourceBundle.getBundle("Etiquetas").getString("MainGUI.MainTitle")+ ": "+sellerMail);
-             
-         } 
-         else if(tipo==-1) {
-             aceptar_visuali.setText(ResourceBundle.getBundle("Etiquetas").getString("MainGUI.Visualizar"));
-           
-             adminButton.setText(ResourceBundle.getBundle("Etiquetas").getString("MainGUI.Aceptar"));
-             this.setTitle(ResourceBundle.getBundle("Etiquetas").getString("MainGUI.MainTitle")+ ": "+sellerMail);
-         }
-         else {
-        	 this.setTitle(ResourceBundle.getBundle("Etiquetas").getString("MainGUI.MainTitle"));
-         }
-	   
-	    	
+	    close.setText(ResourceBundle.getBundle("Etiquetas").getString("MainGUI.close"));
 	    
 	}
-} // @jve:decl-index=0:visual-constraint="0,0"
-
+}
