@@ -28,166 +28,164 @@ import gui.MainGUI;
 /**
  * It implements the data access to the objectDb database
  */
-public class DataAccess  {
-	private  EntityManager  db;
-	private  EntityManagerFactory emf;
-    private static final int baseSize = 160;
-    
-	private static final String basePath="src/main/resources/images/";
+public class DataAccess {
+	private EntityManager db;
+	private EntityManagerFactory emf;
+	private static final int baseSize = 160;
+
+	private static final String basePath = "src/main/resources/images/";
 	private static final String dbServerDir = "src/main/resources/db/";
 
+	ConfigXML c = ConfigXML.getInstance();
 
-	ConfigXML c=ConfigXML.getInstance();
-
-     public DataAccess()  {
+	public DataAccess() {
 		if (c.isDatabaseInitialized()) {
-			String fileName=c.getDbFilename();
+			String fileName = c.getDbFilename();
 
-			if (!c.isDatabaseLocal()) fileName=dbServerDir+fileName;
-			
-			File fileToDelete= new File(fileName);
-			if(fileToDelete.delete()){
-				File fileToDeleteTemp= new File(fileName+"$");
+			if (!c.isDatabaseLocal())
+				fileName = dbServerDir + fileName;
+
+			File fileToDelete = new File(fileName);
+			if (fileToDelete.delete()) {
+				File fileToDeleteTemp = new File(fileName + "$");
 				fileToDeleteTemp.delete();
 				System.out.println("File deleted");
-			 } else {
-				 System.out.println("Operation failed");
-				}
+			} else {
+				System.out.println("Operation failed");
+			}
 		}
 		open();
-		if  (c.isDatabaseInitialized()) 
+		if (c.isDatabaseInitialized())
 			initializeDB();
-		System.out.println("DataAccess created => isDatabaseLocal: "+c.isDatabaseLocal()+" isDatabaseInitialized: "+c.isDatabaseInitialized());
+		System.out.println("DataAccess created => isDatabaseLocal: " + c.isDatabaseLocal() + " isDatabaseInitialized: "
+				+ c.isDatabaseInitialized());
 
 		close();
 
 	}
-     
-    public DataAccess(EntityManager db) {
-    	this.db=db;
-    }
 
-	
-	
+	public DataAccess(EntityManager db) {
+		this.db = db;
+	}
+
 	/**
-	 * This method  initializes the database with some products and sellers.
-	 * This method is invoked by the business logic (constructor of BLFacadeImplementation) when the option "initialize" is declared in the tag dataBaseOpenMode of resources/config.xml file
-	 */	
-    public void initializeDB(){
-		
-        try { 
-            db.getTransaction().begin();
+	 * This method initializes the database with some products and sellers. This
+	 * method is invoked by the business logic (constructor of
+	 * BLFacadeImplementation) when the option "initialize" is declared in the tag
+	 * dataBaseOpenMode of resources/config.xml file
+	 */
+	public void initializeDB() {
 
-            // Create sellers y admin
-            Seller admin = new Seller("admin@gmail.com", "admin", "admin", -1);
-            Seller seller1 = new Seller("seller1@gmail.com","12345","Aitor Fernandez",1);
-            Seller seller2 = new Seller("seller22@gmail.com","54321","Ane Gaztañaga",1);
-            Seller seller3 = new Seller("seller3@gmail.com","12121","Test Seller",1);
-            User comp1 = new User("comprador1@gmail.com","12345","Comprador1",2);
-            User comp2 = new User("comprador2@gmail.com","12345","Comprador2",2);
+		try {
+			db.getTransaction().begin();
 
-            
-            // Create products
-            Date today = UtilDate.trim(new Date());
-      
+			// Create sellers y admin
+			Seller admin = new Seller("admin@gmail.com", "admin", "admin", -1);
+			Seller seller1 = new Seller("seller1@gmail.com", "12345", "Aitor Fernandez", 1);
+			Seller seller2 = new Seller("seller22@gmail.com", "54321", "Ane Gaztañaga", 1);
+			Seller seller3 = new Seller("seller3@gmail.com", "12121", "Test Seller", 1);
+			User comp1 = new User("comprador1@gmail.com", "12345", "Comprador1", 2);
+			User comp2 = new User("comprador2@gmail.com", "12345", "Comprador2", 2);
 
-            seller1.addSale("futbol baloia", "oso polita, gutxi erabilita", 2, 10,  today, null);
-            seller1.addSale("salomon mendiko botak", "44 zenbakia, 3 ateraldi",2, 20,  today, null);
-            seller1.addSale("samsung 42\" telebista", "berria, erabili gabe", 2, 175,  today, null);
+			// Create products
+			Date today = UtilDate.trim(new Date());
 
-            seller2.addSale("imac 27", "7 urte, dena ondo dabil", 1, 200,today, null);
-            seller2.addSale("iphone 17", "oso gutxi erabilita", 2, 400, today, null);
-            seller2.addSale("orbea mendiko bizikleta", "29\" 10 urte, mantenua behar du", 3,225, today, null);
-            seller2.addSale("polar kilor erlojua", "Vantage M, ondo dago", 3, 30, today, null);
+			seller1.addSale("futbol baloia", "oso polita, gutxi erabilita", 2, 10, today, null);
+			seller1.addSale("salomon mendiko botak", "44 zenbakia, 3 ateraldi", 2, 20, today, null);
+			seller1.addSale("samsung 42\" telebista", "berria, erabili gabe", 2, 175, today, null);
 
-            seller3.addSale("sukaldeko mahaia", "1.8*0.8, 4 aulkiekin. Prezio finkoa", 3,45, today, null);
-            
-            // Create offers para seller 1
-            seller1.addOffer(10.0, "seller1@gmail.com",new Sale("futbol baloia", "oso polita, gutxi erabilita", 2, 10,  today, null, seller1), true);
-            seller1.addOffer(20.0, "seller1@gmail.com",new Sale("salomon mendiko botak", "44 zenbakia, 3 ateraldi",2, 20,  today, null, seller1), true);
-            seller1.addOffer(175.0, "seller1@gmail.com",new Sale("samsung 42\" telebista", "berria, erabili gabe", 2, 175,  today, null, seller1), true);
+			seller2.addSale("imac 27", "7 urte, dena ondo dabil", 1, 200, today, null);
+			seller2.addSale("iphone 17", "oso gutxi erabilita", 2, 400, today, null);
+			seller2.addSale("orbea mendiko bizikleta", "29\" 10 urte, mantenua behar du", 3, 225, today, null);
+			seller2.addSale("polar kilor erlojua", "Vantage M, ondo dago", 3, 30, today, null);
 
-            // Create offers para seller 2
-            seller2.addOffer(200.0, "seller22@gmail.com",new Sale("imac 27", "7 urte, dena ondo dabil", 1, 200,today, null, seller2), true);
-            seller2.addOffer(400.0, "seller22@gmail.com",new Sale("iphone 17", "oso gutxi erabilita", 2, 400, today, null,seller2 ), true);
-            seller2.addOffer(225.0, "seller22@gmail.com",new Sale("orbea mendiko bizikleta", "29\" 10 urte, mantenua behar du", 3,225, today, null, seller2), true);
-            seller2.addOffer(30.0, "seller22@gmail.com",new Sale("polar kilor erlojua", "Vantage M, ondo dago", 3, 30, today, null, seller2), true);
+			seller3.addSale("sukaldeko mahaia", "1.8*0.8, 4 aulkiekin. Prezio finkoa", 3, 45, today, null);
 
-            // Create offers para seller 3
-            seller3.addOffer(45.0, "seller3@gmail.com",new Sale("sukaldeko mahaia", "1.8*0.8, 4 aulkiekin. Prezio finkoa", 3,45, today, null, seller3), true);
+			// Create offers para seller 1
+			seller1.addOffer(10.0, "seller1@gmail.com", true);
+			seller1.addOffer(20.0, "seller1@gmail.com", true);
+			seller1.addOffer(175.0, "seller1@gmail.com", true);
 
-            db.persist(seller1);
-            db.persist(seller2);
-            db.persist(seller3);
-            db.persist(comp1);
-            db.persist(comp2);
-            db.persist(admin);
+			// Create offers para seller 2
+			seller2.addOffer(200.0, "seller22@gmail.com", true);
+			seller2.addOffer(400.0, "seller22@gmail.com", true);
+			seller2.addOffer(225.0, "seller22@gmail.com", true);
+			seller2.addOffer(30.0, "seller22@gmail.com", true);
 
-            db.getTransaction().commit();
-            System.out.println("Db initialized");
-        }
-        catch (Exception e){
-            e.printStackTrace();
-            if(db.getTransaction().isActive()) {
-                db.getTransaction().rollback();
-            }
-        }
-    }
-	
-	
-	
+			// Create offers para seller 3
+			seller3.addOffer(45.0, "seller3@gmail.com", true);
+
+			db.persist(seller1);
+			db.persist(seller2);
+			db.persist(seller3);
+			db.persist(comp1);
+			db.persist(comp2);
+			db.persist(admin);
+
+			db.getTransaction().commit();
+			System.out.println("Db initialized");
+		} catch (Exception e) {
+			e.printStackTrace();
+			if (db.getTransaction().isActive()) {
+				db.getTransaction().rollback();
+			}
+		}
+	}
+
 	/**
 	 * This method creates/adds a product to a seller
 	 * 
-	 * @param title of the product
-	 * @param description of the product
-	 * @param status 
-	 * @param selling price
-	 * @param category of a product
+	 * @param title           of the product
+	 * @param description     of the product
+	 * @param status
+	 * @param selling         price
+	 * @param category        of a product
 	 * @param publicationDate
 	 * @return Product
- 	 * @throws SaleAlreadyExistException if the same product already exists for the seller
+	 * @throws SaleAlreadyExistException if the same product already exists for the
+	 *                                   seller
 	 */
-	public Sale createSale(String title, String description, int status, float price,  Date pubDate, String sellerEmail, File file) throws  FileNotUploadedException, MustBeLaterThanTodayException, SaleAlreadyExistException {
-		
+	public Sale createSale(String title, String description, int status, float price, Date pubDate, String sellerEmail,
+			File file) throws FileNotUploadedException, MustBeLaterThanTodayException, SaleAlreadyExistException {
 
-		System.out.println(">> DataAccess: createProduct=> title= "+title+" seller="+sellerEmail);
+		System.out.println(">> DataAccess: createProduct=> title= " + title + " seller=" + sellerEmail);
 		try {
-		
 
-			if(pubDate.before(UtilDate.trim(new Date()))) {
-				throw new MustBeLaterThanTodayException(ResourceBundle.getBundle("Etiquetas").getString("DataAccess.ErrorSaleMustBeLaterThanToday"));
+			if (pubDate.before(UtilDate.trim(new Date()))) {
+				throw new MustBeLaterThanTodayException(
+						ResourceBundle.getBundle("Etiquetas").getString("DataAccess.ErrorSaleMustBeLaterThanToday"));
 			}
-			if (file==null)
-				throw new FileNotUploadedException(ResourceBundle.getBundle("Etiquetas").getString("DataAccess.ErrorFileNotUploadedException"));
+			if (file == null)
+				throw new FileNotUploadedException(
+						ResourceBundle.getBundle("Etiquetas").getString("DataAccess.ErrorFileNotUploadedException"));
 
 			db.getTransaction().begin();
-			
+
 			Seller seller = db.find(Seller.class, sellerEmail);
 			if (seller.doesSaleExist(title)) {
 				db.getTransaction().commit();
-				throw new SaleAlreadyExistException(ResourceBundle.getBundle("Etiquetas").getString("DataAccess.SaleAlreadyExist"));
+				throw new SaleAlreadyExistException(
+						ResourceBundle.getBundle("Etiquetas").getString("DataAccess.SaleAlreadyExist"));
 			}
 
 			Sale sale = seller.addSale(title, description, status, price, pubDate, file);
-			//next instruction can be obviated
-		    seller.addOffer((double) price, sellerEmail, sale,true);
+			// next instruction can be obviated
+			seller.addOffer((double) price, sellerEmail, true);
 
-			db.persist(seller); 
+			db.persist(seller);
 			db.getTransaction().commit();
-			 System.out.println("sale stored "+sale+ " "+seller);
+			System.out.println("sale stored " + sale + " " + seller);
 
 			return sale;
 		} catch (NullPointerException e) {
-			   e.printStackTrace();
+			e.printStackTrace();
 			// TODO Auto-generated catch block
 			db.getTransaction().commit();
 			return null;
 		}
-		
-		
+
 	}
-	
+
 	/**
 	 * This method retrieves all the products that contain a desc text in a title
 	 * 
@@ -195,281 +193,354 @@ public class DataAccess  {
 	 * @return collection of products that contain desc in a title
 	 */
 	public List<Sale> getSales(String desc) {
-		System.out.println(">> DataAccess: getProducts=> from= "+desc);
+		System.out.println(">> DataAccess: getProducts=> from= " + desc);
 
-		List<Sale> res = new ArrayList<Sale>();	
-		TypedQuery<Sale> query = db.createQuery("SELECT s FROM Sale s WHERE s.title LIKE ?1",Sale.class);   
-		query.setParameter(1, "%"+desc+"%");
-		
+		List<Sale> res = new ArrayList<Sale>();
+		TypedQuery<Sale> query = db.createQuery("SELECT s FROM Sale s WHERE s.title LIKE ?1", Sale.class);
+		query.setParameter(1, "%" + desc + "%");
+
 		List<Sale> sales = query.getResultList();
-	 	 for (Sale sale:sales){
-		   res.add(sale);
-		  }
-	 	return res;
+		for (Sale sale : sales) {
+			res.add(sale);
+		}
+		return res;
 	}
-	
+
 	/**
-	 * This method retrieves the products that contain a desc text in a title and the publicationDate today or before
+	 * This method retrieves the products that contain a desc text in a title and
+	 * the publicationDate today or before
 	 * 
 	 * @param desc the text to search
 	 * @return collection of products that contain desc in a title
 	 */
 	public List<Sale> getPublishedSales(String desc, Date pubDate) {
-		System.out.println(">> DataAccess: getProducts=> from= "+desc);
+		System.out.println(">> DataAccess: getProducts=> from= " + desc);
 
-		List<Sale> res = new ArrayList<Sale>();	
-		TypedQuery<Sale> query = db.createQuery("SELECT s FROM Sale s WHERE s.title LIKE ?1 AND s.pubDate <=?2",Sale.class);   
-		query.setParameter(1, "%"+desc+"%");
-		query.setParameter(2,pubDate);
-		
+		List<Sale> res = new ArrayList<Sale>();
+		TypedQuery<Sale> query = db.createQuery("SELECT s FROM Sale s WHERE s.title LIKE ?1 AND s.pubDate <=?2",
+				Sale.class);
+		query.setParameter(1, "%" + desc + "%");
+		query.setParameter(2, pubDate);
+
 		List<Sale> sales = query.getResultList();
-	 	 for (Sale sale:sales){
-		   res.add(sale);
-		  }
-	 	return res;
+		for (Sale sale : sales) {
+			res.add(sale);
+		}
+		return res;
+	}
+	
+	public List<Valoraciones> getReseñasPublicadas(String mail, String busq) {
+		System.out.println(">> DataAccess: getReseñas=> from= " + busq);
+
+		List<Valoraciones> res = new ArrayList<Valoraciones>();
+		TypedQuery<Valoraciones> query = db.createQuery("SELECT v FROM Valoraciones v WHERE v.idProd LIKE ?1 AND v.eComprador LIKE ?2",
+				Valoraciones.class);
+		query.setParameter(1, "%" + busq + "%");
+		query.setParameter(2, mail);
+		
+		List<Valoraciones> reseñas = query.getResultList();
+		for (Valoraciones r : reseñas) {
+			res.add(r);
+		}
+		return res;
+		
 	}
 
-public void open(){
-		
-		String fileName=c.getDbFilename();
+	public void open() {
+
+		String fileName = c.getDbFilename();
 		if (c.isDatabaseLocal()) {
-			emf = Persistence.createEntityManagerFactory("objectdb:"+fileName);
+			emf = Persistence.createEntityManagerFactory("objectdb:" + fileName);
 			db = emf.createEntityManager();
 		} else {
 			Map<String, String> properties = new HashMap<String, String>();
-			  properties.put("javax.persistence.jdbc.user", c.getUser());
-			  properties.put("javax.persistence.jdbc.password", c.getPassword());
+			properties.put("javax.persistence.jdbc.user", c.getUser());
+			properties.put("javax.persistence.jdbc.password", c.getPassword());
 
-			  emf = Persistence.createEntityManagerFactory("objectdb://"+c.getDatabaseNode()+":"+c.getDatabasePort()+"/"+fileName, properties);
-			  db = emf.createEntityManager();
-    	   }
-		System.out.println("DataAccess opened => isDatabaseLocal: "+c.isDatabaseLocal());
+			emf = Persistence.createEntityManagerFactory(
+					"objectdb://" + c.getDatabaseNode() + ":" + c.getDatabasePort() + "/" + fileName, properties);
+			db = emf.createEntityManager();
+		}
+		System.out.println("DataAccess opened => isDatabaseLocal: " + c.isDatabaseLocal());
 
-		
 	}
 
 	public BufferedImage getFile(String fileName) {
-		File file=new File(basePath+fileName);
-		BufferedImage targetImg=null;
+		File file = new File(basePath + fileName);
+		BufferedImage targetImg = null;
 		try {
-             targetImg = rescale(ImageIO.read(file));
-        } catch (IOException ex) {
-            //Logger.getLogger(MainAppFrame.class.getName()).log(Level.SEVERE, null, ex);
-        }
+			targetImg = rescale(ImageIO.read(file));
+		} catch (IOException ex) {
+			// Logger.getLogger(MainAppFrame.class.getName()).log(Level.SEVERE, null, ex);
+		}
 		return targetImg;
 
 	}
-	
-	public BufferedImage rescale(BufferedImage originalImage)
-    {
-		System.out.println("rescale "+originalImage);
-        BufferedImage resizedImage = new BufferedImage(baseSize, baseSize, BufferedImage.TYPE_INT_RGB);
-        Graphics2D g = resizedImage.createGraphics();
-        g.drawImage(originalImage, 0, 0, baseSize, baseSize, null);
-        g.dispose();
-        return resizedImage;
-    }
-	//Hacer Login 
-	 public User Login(String email, String password) {
-		 
-		 
-		 User intentoLog= db.find(User.class, email);
-		 //System.out.println(intentoLog.toString());
-		 if(intentoLog==null || !intentoLog.getPassword().equals(password)) {
-			 return null;
-		 }
-		 else {
-			 //System.out.println(intentoLog.toString());
-			 return intentoLog;
-		 } 
-	 }
-	 //Registro
-	public boolean Registro(String email, String password, String name, int tipo) {
-		 db.getTransaction().begin();
-		 if(db.find(User.class, email) == null) {
-			 User registrar;
-		        if (tipo == 1) {
-		            registrar = new Seller(email, password, name, tipo);
-		        } else {
-		            registrar = new User(email, password, name, tipo);
-		        }
-		        
-		        db.persist(registrar);
-		        db.getTransaction().commit();
-		        return true;
-		 }
-		 else {
-			 db.getTransaction().rollback();
-			 return false;
-		 }
-		 
-	 }
-	public int obtUser(String email) {
-	    User usuario = db.find(User.class, email);
-	    
-	    if (usuario != null) {
-	        return usuario.getTipo();	        	        
-	    } 
-	    else {
-	        return 0; 
-	    }
+
+	public BufferedImage rescale(BufferedImage originalImage) {
+		System.out.println("rescale " + originalImage);
+		BufferedImage resizedImage = new BufferedImage(baseSize, baseSize, BufferedImage.TYPE_INT_RGB);
+		Graphics2D g = resizedImage.createGraphics();
+		g.drawImage(originalImage, 0, 0, baseSize, baseSize, null);
+		g.dispose();
+		return resizedImage;
 	}
-		public List<Offer> getActiveOffers() {
-			TypedQuery<Offer> query = db.createQuery("SELECT o FROM Offer o WHERE o.estado = true", Offer.class);
-			return query.getResultList();
+
+	// Hacer Login
+	public User Login(String email, String password) {
+
+		User intentoLog = db.find(User.class, email);
+		// System.out.println(intentoLog.toString());
+		if (intentoLog == null || !intentoLog.getPassword().equals(password)) {
+			return null;
+		} else {
+			// System.out.println(intentoLog.toString());
+			return intentoLog;
 		}
-		public List<Offer> getUserOffers(String mail) {
-			TypedQuery<Offer> query = db.createQuery("SELECT o FROM Offer o WHERE o.email_vendedor =:mail", Offer.class);
-			query.setParameter("mail", mail);
-			List<Offer> UserOffers = query.getResultList();
-			if(UserOffers!=null) {
-				
-				return UserOffers;
+	}
+
+	// Registro
+	public boolean Registro(String email, String password, String name, int tipo) {
+		db.getTransaction().begin();
+		if (db.find(User.class, email) == null) {
+			User registrar;
+			if (tipo == 1) {
+				registrar = new Seller(email, password, name, tipo);
+			} else {
+				registrar = new User(email, password, name, tipo);
 			}
-			else {
-			return new ArrayList<Offer>();
-			}
+
+			db.persist(registrar);
+			db.getTransaction().commit();
+			return true;
+		} else {
+			db.getTransaction().rollback();
+			return false;
 		}
 
-		public boolean acceptOffer(Long offerId) {
-			try {
-				db.getTransaction().begin();
-				Offer oferta = db.find(Offer.class, offerId);
-				
-				if (oferta != null && oferta.isEstado()) {
-					oferta.setEstado(false); // Solo cambiamos el estado
-					db.persist(oferta);
-					db.getTransaction().commit();
-					return true;
-				}
-				db.getTransaction().rollback();
-				return false;
-			} catch (Exception e) {
-				e.printStackTrace();
+	}
+
+	public int obtUser(String email) {
+		// 1. Buscamos al usuario en la base de datos (solo lectura, no hace falta
+		// transaction)
+		User usuario = db.find(User.class, email);
+
+		// 2. Comprobamos si el usuario EXISTE antes de hacerle preguntas
+		if (usuario != null) {
+			return usuario.getTipo();
+		} else {
+			// 3. Si el usuario no existe (es null), devolvemos 0
+			// Así tu MainGUI sabrá que es un usuario inválido y mantendrá el botón oculto
+			return 0;
+		}
+	}
+
+	public boolean buscarContraseña(String email, String pwsd) {
+		try {
+			db.getTransaction().begin();
+			User u = db.find(User.class, email);
+			if (u != null) {
+				u.setPassword(pwsd);
+				db.getTransaction().commit();
+				return true;
+			} else {
 				db.getTransaction().rollback();
 				return false;
 			}
-		}
-		public List<Offer> getAcceptedOffers(String email) {
-		    System.out.println(">> DataAccess: getAcceptedOffers => user=" + email);
-		    User u = db.find(User.class, email);
-		    int tipo = (u != null) ? u.getTipo() : 0;
-		    TypedQuery<Offer> query;
-		    if (tipo == -1) {
-		        query = db.createQuery("SELECT o FROM Offer o WHERE o.estado = false", Offer.class);
-		    } 
-		    else {
-		        query = db.createQuery("SELECT o FROM Offer o WHERE o.estado = false AND o.email_vendedor = :email", Offer.class);
-		        query.setParameter("email", email);
-		    }
-		    
-		    return query.getResultList();
-		}
-		public boolean proposeOffer(Long offerId, String buyerMail) {
-			try {
-				db.getTransaction().begin();
-				Offer oferta = db.find(Offer.class, offerId);
-				
-				if (oferta != null && oferta.isEstado()) {
-					Solicitud solicitud= new Solicitud(buyerMail);
-					oferta.addPendientes(solicitud); // Solo cambiamos el estado
-					db.persist(oferta);
-					db.getTransaction().commit();
-					return true;
-				}
+		} catch (Exception e) {
+			if (db.getTransaction().isActive()) {
 				db.getTransaction().rollback();
-				return false;
-			} catch (Exception e) {
-				e.printStackTrace();
+			}
+			e.printStackTrace();
+			return false;
+		}
+	}
+	
+	public boolean eliminarCuenta(String email) {
+		try {
+			db.getTransaction().begin();
+			User u = db.find(User.class, email);
+			if (u != null) {
+				db.remove(u);
+				db.getTransaction().commit();
+				return true;
+			} else {
 				db.getTransaction().rollback();
 				return false;
 			}
-		}
-		public boolean cancelOffer(Long offerId, String buyerMail) {
-			try {
-				db.getTransaction().begin();
-				Offer oferta = db.find(Offer.class, offerId);
-				
-				if (oferta != null && oferta.isEstado()&&oferta.getPendientes().contains(new Solicitud (buyerMail))) {
-					oferta.deletePendientes(buyerMail); // Solo cambiamos el estado
-					db.persist(oferta);
-					db.getTransaction().commit();
-					return true;
-				}
+		} catch (Exception e) {
+			if (db.getTransaction().isActive()) {
 				db.getTransaction().rollback();
-				return false;
-			} catch (Exception e) {
-				e.printStackTrace();
-				db.getTransaction().rollback();
-				return false;
 			}
+			e.printStackTrace();
+			return false;
 		}
-		public boolean terminarSolicitud(Long offerId, String buyerMail) {	
-		    try {
-		        db.getTransaction().begin();
-		        
-		        // 1. Buscamos la oferta  
-		        Offer ofertaDB = db.find(Offer.class, offerId);
-		        
-		        if (ofertaDB != null && ofertaDB.isEstado()) {
-		            
-		            for (Solicitud s : ofertaDB.getPendientes()) {
-		                
-		                // 3. Comparamos directamente los emails (Strings).
-		                if (s.getBuyerMail().equals(buyerMail)) {
-		                    s.setEstado(1);  // Aceptada
-		                } else {
-		                    s.setEstado(-1); // Rechazada
-		                }
-		            }
-		            
-		            // la oferta debe dejar de estar activa (estado = false).
-		            ofertaDB.setEstado(false);      
-		            db.persist(ofertaDB);
-		            db.getTransaction().commit();
-		            return true;
-		        }        
-		        // Si no se encuentra la oferta o ya estaba cerrada
-		        if (db.getTransaction().isActive()) db.getTransaction().rollback();
-		        return false;
-		        
-		    } catch(Exception ex) {
-		        ex.printStackTrace();
-		        if (db.getTransaction().isActive()) db.getTransaction().rollback();
-		        return false;
-		    }
+	}
+
+	public List<Offer> getActiveOffers() {
+		TypedQuery<Offer> query = db.createQuery("SELECT o FROM Offer o WHERE o.estado = true", Offer.class);
+		return query.getResultList();
+	}
+
+	public List<Offer> getUserOffers(String mail) {
+		TypedQuery<Offer> query = db.createQuery("SELECT o FROM Offer o WHERE o.email_vendedor =:mail", Offer.class);
+		query.setParameter("mail", mail);
+		List<Offer> UserOffers = query.getResultList();
+
+		if (UserOffers != null) {
+			return UserOffers;
+		} else {
+			return new ArrayList<Offer>();
 		}
-		//Meter reseña en la base de datos
-		public boolean publicarVal(Valoraciones val) {
-			try {
-				TypedQuery<Seller> query;
-				query = db.createQuery("SELECT s FROM Seller s WHERE s.email = :email", Seller.class);
-				query.setParameter("email", val.geteVendedor());
-				Seller vend = query.getSingleResult();
-				vend.addValoracion(val);
-				db.getTransaction().begin();
-				db.persist(vend);
+	}
+
+	public boolean acceptOffer(Long offerId) {
+		try {
+			db.getTransaction().begin();
+			Offer oferta = db.find(Offer.class, offerId);
+
+			if (oferta != null && oferta.isEstado()) {
+				oferta.setEstado(false); // Solo cambiamos el estado
+				db.persist(oferta);
 				db.getTransaction().commit();
 				return true;
 			}
-			catch(Exception e){
-				e.printStackTrace();
-				if (db.getTransaction().isActive()) {
-		            db.getTransaction().rollback();
-		        }
-				return false;
+			db.getTransaction().rollback();
+			return false;
+		} catch (Exception e) {
+			e.printStackTrace();
+			db.getTransaction().rollback();
+			return false;
+		}
+	}
+
+	public List<Offer> getAcceptedOffers(String email) {
+		System.out.println(">> DataAccess: getAcceptedOffers => user=" + email);
+		User u = db.find(User.class, email);
+		int tipo = (u != null) ? u.getTipo() : 0;
+		TypedQuery<Offer> query;
+
+		if (tipo == -1) {
+			query = db.createQuery("SELECT o FROM Offer o WHERE o.estado = false", Offer.class);
+		} else {
+			query = db.createQuery("SELECT o FROM Offer o WHERE o.estado = false AND o.email_vendedor = :email",
+					Offer.class);
+			query.setParameter("email", email);
+		}
+		return query.getResultList();
+	}
+
+	public boolean proposeOffer(Long offerId, String buyerMail) {
+		try {
+			db.getTransaction().begin();
+			Offer oferta = db.find(Offer.class, offerId);
+
+			if (oferta != null && oferta.isEstado()) {
+				Solicitud solicitud = new Solicitud(buyerMail);
+				oferta.addPendientes(solicitud); // Solo cambiamos el estado
+				db.persist(oferta);
+				db.getTransaction().commit();
+				return true;
 			}
+			db.getTransaction().rollback();
+			return false;
+		} catch (Exception e) {
+			e.printStackTrace();
+			db.getTransaction().rollback();
+			return false;
 		}
-		public List<String> getAllSellers() {
-			TypedQuery<String> query = db.createQuery("SELECT o.email FROM Seller o", String.class);
-			return query.getResultList();
+	}
+
+	public boolean cancelOffer(Long offerId, String buyerMail) {
+		try {
+			db.getTransaction().begin();
+			Offer oferta = db.find(Offer.class, offerId);
+
+			if (oferta != null && oferta.isEstado() && oferta.getPendientes().contains(new Solicitud(buyerMail))) {
+				oferta.deletePendientes(buyerMail); // Solo cambiamos el estado
+				db.persist(oferta);
+				db.getTransaction().commit();
+				return true;
+			}
+			db.getTransaction().rollback();
+			return false;
+		} catch (Exception e) {
+			e.printStackTrace();
+			db.getTransaction().rollback();
+			return false;
 		}
-		
-		
-	public void close(){
+	}
+
+	public boolean terminarSolicitud(Long offerId, String buyerMail) {
+		try {
+			db.getTransaction().begin();
+
+			// 1. Buscamos la oferta
+			Offer ofertaDB = db.find(Offer.class, offerId);
+
+			if (ofertaDB != null && ofertaDB.isEstado()) {
+
+				for (Solicitud s : ofertaDB.getPendientes()) {
+
+					// 3. Comparamos directamente los emails (Strings).
+					if (s.getBuyerMail().equals(buyerMail)) {
+						s.setEstado(1); // Aceptada
+					} else {
+						s.setEstado(-1); // Rechazada
+					}
+				}
+
+				// la oferta debe dejar de estar activa (estado = false).
+				ofertaDB.setEstado(false);
+				db.persist(ofertaDB);
+				db.getTransaction().commit();
+				return true;
+			}
+			// Si no se encuentra la oferta o ya estaba cerrada
+			if (db.getTransaction().isActive())
+				db.getTransaction().rollback();
+			return false;
+
+		} catch (Exception ex) {
+			ex.printStackTrace();
+			if (db.getTransaction().isActive())
+				db.getTransaction().rollback();
+			return false;
+		}
+	}
+
+	// Meter reseña en la base de datos
+	public boolean publicarVal(Valoraciones val) {
+		try {
+			db.getTransaction().begin();
+			
+			TypedQuery<Seller> query;
+			query = db.createQuery("SELECT s FROM Seller s WHERE s.email = :email", Seller.class);
+			query.setParameter("email", val.geteVendedor());
+			Seller vend = query.getSingleResult();
+			
+			db.persist(val);
+			vend.addValoracion(val);
+			
+			db.getTransaction().commit();
+			return true;
+		} catch (Exception e) {
+			e.printStackTrace();
+			if (db.getTransaction().isActive()) {
+				db.getTransaction().rollback();
+			}
+			return false;
+		}
+	}
+
+	public List<String> getAllSellers() {
+		TypedQuery<String> query = db.createQuery("SELECT o.email FROM Seller o", String.class);
+		return query.getResultList();
+	}
+
+	public void close() {
 		db.close();
 		System.out.println("DataAcess closed");
 	}
-	
-	
+
 }

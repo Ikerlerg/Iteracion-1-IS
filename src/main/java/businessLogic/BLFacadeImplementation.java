@@ -128,6 +128,23 @@ public class BLFacadeImplementation  implements BLFacade {
          dbManager.close(); 
          return u;
     }
+    
+    @WebMethod 
+    public boolean eliminarCuenta(String email) {
+    	 dbManager.open(); 
+         boolean u = dbManager.eliminarCuenta(email); 
+         dbManager.close(); 
+         return u;
+    }
+    
+    @WebMethod 
+    public boolean buscarContraseña(String email, String pwsd) {
+    	 dbManager.open(); 
+         boolean u = dbManager.buscarContraseña(email, pwsd); 
+         dbManager.close(); 
+         return u;
+    }
+    
     @WebMethod
     public List<Offer> getActiveOffers() {
 		dbManager.open();
@@ -149,6 +166,15 @@ public class BLFacadeImplementation  implements BLFacade {
 		dbManager.close();
 		return res;
 	}
+    
+    @WebMethod
+    public List<Valoraciones> getReseñasPublicadas(String email, String busq) {
+		dbManager.open();
+		List<Valoraciones> res = dbManager.getReseñasPublicadas(email, busq);
+		dbManager.close();
+		return res;
+	}
+    
     @WebMethod 
     public boolean proposeOffer(Long offerId, String buyer){
         dbManager.open();

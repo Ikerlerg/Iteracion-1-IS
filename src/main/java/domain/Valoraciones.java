@@ -37,6 +37,10 @@ public class Valoraciones {
 	public String getValoracion() {
 		return valoracion;
 	}
+	public String getDescripcion() {
+		return descripcion;
+	}
+	
 	@Override
 	public String toString() {
 		return "Valoraciones [id de la reseña=" + idRes + ", id del producto=" + idProd + ", email del vendedor=" + eVendedor + ", email del comprador="
