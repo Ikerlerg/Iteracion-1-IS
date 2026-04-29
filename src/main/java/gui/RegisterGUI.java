@@ -20,10 +20,12 @@ public class RegisterGUI extends JFrame {
 	private JTextField nombreField;
 	private JTextField pswField;
 	private final ButtonGroup buttonGroup = new ButtonGroup();
-	public RegisterGUI() {
+	public RegisterGUI(PrincipalGUI padre) {
+		padre.setVisible(false);
+		
 		this.setSize(370, 290);
 		getContentPane().setLayout(null);
-		MainGUI ventanaPrincipal = new MainGUI();
+
 		
 		JLabel correoLabel = new JLabel(ResourceBundle.getBundle("Etiquetas").getString("RegisterGUI.correoLabel"));
 		correoLabel.setBounds(47, 20, 164, 12);
@@ -94,7 +96,8 @@ public class RegisterGUI extends JFrame {
 					else {
 						facade.Registro(correo, psw, nombre, 2);
 					}
-					MainGUI.logEmail = correo;
+					//MainGUI.logEmail = correo;
+					MainGUI ventanaPrincipal = new MainGUI(correo,padre);
 					/*ventanaPrincipal.bLogin.setEnabled(false);
 					ventanaPrincipal.bLogin.setVisible(false);
 					ventanaPrincipal.bRegist.setEnabled(false);
@@ -106,12 +109,24 @@ public class RegisterGUI extends JFrame {
 					ventanaPrincipal.setTitle(ResourceBundle.getBundle("Etiquetas").getString("MainGUI.MainTitle")+": " + correo);
 					errorLabel.setText(ResourceBundle.getBundle("Etiquetas").getString("RegisterGUI.bienvenida")+" "+ nombre);
 					ventanaPrincipal.setVisible(true);
-					Timer timer = new Timer(1000, evt -> dispose());
+					Timer timer = new Timer(500, evt -> RegisterGUI.this.setVisible(false));
 					timer.setRepeats(false);
 					timer.start();
 				}
 			}
 			});
+		
+		//Extra que evita problemas al cerrar
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		this.addWindowListener(new java.awt.event.WindowAdapter() {
+		    @Override
+		    public void windowClosed(java.awt.event.WindowEvent windowEvent) {
+		        // Al cerrarse esta ventana, hacemos que la principal vuelva a ser visible
+		        if (padre != null) {
+		            padre.setVisible(true);
+		        }
+		    }
+		});
 
 	
 	}

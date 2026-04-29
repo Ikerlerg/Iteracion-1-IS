@@ -49,21 +49,22 @@ public class MainGUI extends JFrame {
 	protected final JButton bRegist = new JButton();
 	protected JButton close = new JButton(); 
 	
-	public static String logEmail = "Sin usuario";
+	//public static String logEmail = "Sin usuario";
 	protected JLabel loged;
 	protected JButton adminButton = new JButton();
 	protected JButton aceptar_visuali = new JButton(""); 
 	//variable para controlar si soy vendedor o comprador
 	 //(0=nada,1=vendedor,2=comprador)
 	private int mode = 0;
-
+	
 	public MainGUI() {
-		this("");
 	}
 
-	public MainGUI(String mail) {
+	public MainGUI(String mail, PrincipalGUI ventPadre) {
 		super();
 		
+		ventPadre.setVisible(false);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.sellerMail=mail;
 		this.setSize(495, 290);
 		jLabelSelectOption = new JLabel(ResourceBundle.getBundle("Etiquetas").getString("MainGUI.SelectOption"));
@@ -114,7 +115,7 @@ public class MainGUI extends JFrame {
 		jButtonCreateQuery.setText(ResourceBundle.getBundle("Etiquetas").getString("MainGUI.CreateSale"));
 		jButtonCreateQuery.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent e) {
-				JFrame a = new CreateSaleGUI(MainGUI.logEmail);
+				JFrame a = new CreateSaleGUI(sellerMail);
 				a.setVisible(true);
 			}
 		});
@@ -137,17 +138,20 @@ public class MainGUI extends JFrame {
 		jContentPane.add(jButtonQueryQueries);
 		jContentPane.add(panel);
 		
-		bLogin.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				JFrame ventanaLogin = new LoginGUI();
-				ventanaLogin.setVisible(true);
-			}
-		});
+	
 		bLogin.setBounds(328, 5, 143, 21);
 		bLogin.setHorizontalAlignment(SwingConstants.LEADING);
 		bLogin.setText(ResourceBundle.getBundle("Etiquetas").getString("MainGUI.Login")); 
 		panel.add(bLogin);
 		bLogin.setVisible(false);
+		bLogin.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JFrame ventanaLogin = new LoginGUI(ventPadre);
+				ventanaLogin.setVisible(true);
+				MainGUI.this.setVisible(false);
+			}
+		});
+		
 		
 		bRegist.setHorizontalAlignment(SwingConstants.LEADING);
 		bRegist.setBounds(328, 30, 143, 21);
@@ -156,8 +160,9 @@ public class MainGUI extends JFrame {
 		bRegist.setVisible(false);
 		bRegist.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				JFrame ventanaRegister = new RegisterGUI();
+				JFrame ventanaRegister = new RegisterGUI(ventPadre);
 				ventanaRegister.setVisible(true);
+				MainGUI.this.setVisible(false);
 			}
 		});
 		
@@ -172,6 +177,18 @@ public class MainGUI extends JFrame {
 		JComboBox IdiomaBox = new JComboBox<>(idi);
 		IdiomaBox.setBounds(10, 11, 64, 22);
 		panel.add(IdiomaBox);
+		
+		//Sincro de Idiomas
+		String idiomaActual = Locale.getDefault().getLanguage();
+		if (idiomaActual.equals("eus")) {
+			IdiomaBox.setSelectedIndex(1);
+		} else if (idiomaActual.equals("en")) {
+			IdiomaBox.setSelectedIndex(2);
+		} else {
+			IdiomaBox.setSelectedIndex(0);
+		}
+		
+		
 		
 		// Cambio de idioma
         IdiomaBox.addActionListener(new ActionListener() {
@@ -193,10 +210,10 @@ public class MainGUI extends JFrame {
 		aceptar_visuali.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (mode==2) {
-					JFrame ventanaAceptar= new AceptarGUI(MainGUI.this, MainGUI.logEmail);
+					JFrame ventanaAceptar= new AceptarGUI(MainGUI.this, sellerMail);
 					ventanaAceptar.setVisible(true);
 				}else if(mode==1||mode==-1) {
-					JFrame ventanaVisualizar= new VisualizarGUI(MainGUI.this, MainGUI.logEmail);
+					JFrame ventanaVisualizar= new VisualizarGUI(MainGUI.this, sellerMail);
 					ventanaVisualizar.setVisible(true);
 				}
 			}
@@ -204,7 +221,7 @@ public class MainGUI extends JFrame {
 		adminButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (mode==-1) {
-					JFrame ventanaAceptar= new AceptarGUI(MainGUI.this, MainGUI.logEmail);
+					JFrame ventanaAceptar= new AceptarGUI(MainGUI.this, sellerMail);
 					ventanaAceptar.setVisible(true);
 				}
 			}
@@ -212,12 +229,13 @@ public class MainGUI extends JFrame {
 		setContentPane(jContentPane);
 		setTitle(ResourceBundle.getBundle("Etiquetas").getString("MainGUI.MainTitle"));
 		
-		addWindowListener(new WindowAdapter() {
+		//Metodo para cerrar todo el sistema si se cierra la ventana Main
+		/*addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent e) {
 				System.exit(1);
 			}
-		});
+		});*/
 		
 		close.setBounds(307, 22, 153, 20);
 		jContentPane.add(close);
@@ -231,7 +249,11 @@ public class MainGUI extends JFrame {
 		
 		close.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				actualizarEstadoUsuario("Sin usuario");				
+				//actualizarEstadoUsuario("Sin usuario");
+				ventPadre.setVisible(true);
+  				Timer timer = new Timer(200, evt -> dispose());
+  				timer.setRepeats(false);
+  				timer.start();		
 			}
 		});
 		
@@ -287,6 +309,8 @@ public class MainGUI extends JFrame {
 				ex.printStackTrace();
 			}
 		}
+		
+	
 	}
 
 	private void paintAgain() {
@@ -298,4 +322,6 @@ public class MainGUI extends JFrame {
 	    close.setText(ResourceBundle.getBundle("Etiquetas").getString("MainGUI.close"));
 	    
 	}
+	
+	
 }

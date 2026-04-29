@@ -19,7 +19,9 @@ public class LoginGUI extends JFrame{
 	private JPasswordField passwordField;
 	private JTextField mailField;
 
-	public LoginGUI() {
+	public LoginGUI(PrincipalGUI padre) {
+		padre.setVisible(false);
+		
 		getContentPane().setLayout(null);
 		this.setSize(455, 210);
 		passwordField = new JPasswordField();
@@ -63,8 +65,8 @@ public class LoginGUI extends JFrame{
 			    }
 			    else {
 			    	us = facade.Login(correo, pswd);
-			    	MainGUI.logEmail = correo;
-			    	MainGUI ventanaPrincipal = new MainGUI();
+					MainGUI ventanaPrincipal = new MainGUI(correo,padre);
+			    	//MainGUI.logEmail = correo;
 			    	ventanaPrincipal.actualizarEstadoUsuario(correo);
 			    	//ventanaPrincipal.log=facade.Login(correo, pswd);
 			        /*ventanaPrincipal.bLogin.setEnabled(false);
@@ -79,13 +81,25 @@ public class LoginGUI extends JFrame{
 			        Errorlabel.setText(ResourceBundle.getBundle("Etiquetas").getString("RegisterGUI.bienvenida")+ " " + facade.Login(correo, pswd).getName()); 
 			        ventanaPrincipal.setVisible(true);
 			        //cerrar ventana 
-					Timer timer = new Timer(1000, evt -> dispose());
+					Timer timer = new Timer(500, evt -> LoginGUI.this.setVisible(false));
 					timer.setRepeats(false);
 					timer.start();
 			    }
 			
 			}
 			
+		});
+		
+		//Extra que evita problemas al cerrar
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		this.addWindowListener(new java.awt.event.WindowAdapter() {
+		    @Override
+		    public void windowClosed(java.awt.event.WindowEvent windowEvent) {
+		        // Al cerrarse esta ventana, hacemos que la principal vuelva a ser visible
+		        if (padre != null) {
+		            padre.setVisible(true);
+		        }
+		    }
 		});
 		
 

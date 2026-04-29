@@ -98,7 +98,7 @@ public class AceptarGUI extends JFrame {
 				dispose(); // Cierra esta ventana
 			}
 		});
-		crearRese.setBounds(285, 283, 165, 23);
+		crearRese.setBounds(309, 211, 165, 23);
 		crearRese.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				JFrame ventanaRese = new CrearReseGUI(AceptarGUI.this,buyerMail,SellerMail,prodId);

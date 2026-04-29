@@ -69,35 +69,26 @@ public class PrincipalGUI extends JFrame {
       //Abrir ventana de inicio
       		bLogin.addActionListener(new ActionListener() {
       			public void actionPerformed(ActionEvent e) {
-      				LoginGUI ventanaLogin = new LoginGUI();
+      				LoginGUI ventanaLogin = new LoginGUI(PrincipalGUI.this);
       				ventanaLogin.setVisible(true);
-      				//Timer timer = new Timer(1000, evt -> dispose());
-      				//timer.setRepeats(false);
-      				//timer.start();
       			}
       		});
       		
       		//invocación de la ventana de Registro
       		bRegistrar.addActionListener(new ActionListener() {
       			public void actionPerformed(ActionEvent e) {
-      				RegisterGUI ventanaRegister = new RegisterGUI();
+      				RegisterGUI ventanaRegister = new RegisterGUI(PrincipalGUI.this);
       				ventanaRegister.setVisible(true); 
-      				//Timer timer = new Timer(1000, evt -> dispose());
-      				//timer.setRepeats(false);
-      				//timer.start();
       			}
       		});
       		//Modo Invitado
       		bGuest.addActionListener(new ActionListener() {
       			public void actionPerformed(ActionEvent e) {
-      				MainGUI ventanaLogin = new MainGUI("Sin usuario");
+      				MainGUI ventanaLogin = new MainGUI("Sin usuario", PrincipalGUI.this);
       				ventanaLogin.actualizarEstadoUsuario("Sin usuario");
       				ventanaLogin.setVisible(true);
       				ventanaLogin.bLogin.setVisible(true);
       				ventanaLogin.bRegist.setVisible(true);
-      				Timer timer = new Timer(1000, evt -> dispose());
-      				timer.setRepeats(false);
-      				timer.start();
       			}
       		});
         // Cambio de idioma
@@ -113,6 +104,8 @@ public class PrincipalGUI extends JFrame {
                 paintAgain(); 
             }
         });
+        
+
     }
 
     public void paintAgain() {
