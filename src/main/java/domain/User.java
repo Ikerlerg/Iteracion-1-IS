@@ -46,4 +46,8 @@ public class User implements Serializable {
     public int getTipo() { 
     	return tipo; 
     	}
+    
+    public void setPassword(String password) { 
+    	this.password = password; 
+    	}
 }

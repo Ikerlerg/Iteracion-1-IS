@@ -102,18 +102,18 @@ public class DataAccess {
 			seller3.addSale("sukaldeko mahaia", "1.8*0.8, 4 aulkiekin. Prezio finkoa", 3, 45, today, null);
 
 			// Create offers para seller 1
-			seller1.addOffer(10.0, "seller1@gmail.com", true);
-			seller1.addOffer(20.0, "seller1@gmail.com", true);
-			seller1.addOffer(175.0, "seller1@gmail.com", true);
+			seller1.addOffer(10.0, "seller1@gmail.com", null, true);
+			seller1.addOffer(20.0, "seller1@gmail.com", null, true);
+			seller1.addOffer(175.0, "seller1@gmail.com", null, true);
 
 			// Create offers para seller 2
-			seller2.addOffer(200.0, "seller22@gmail.com", true);
-			seller2.addOffer(400.0, "seller22@gmail.com", true);
-			seller2.addOffer(225.0, "seller22@gmail.com", true);
-			seller2.addOffer(30.0, "seller22@gmail.com", true);
+			seller2.addOffer(200.0, "seller22@gmail.com", null, true);
+			seller2.addOffer(400.0, "seller22@gmail.com", null, true);
+			seller2.addOffer(225.0, "seller22@gmail.com", null, true);
+			seller2.addOffer(30.0, "seller22@gmail.com", null, true);
 
 			// Create offers para seller 3
-			seller3.addOffer(45.0, "seller3@gmail.com", true);
+			seller3.addOffer(45.0, "seller3@gmail.com", null, true);
 
 			db.persist(seller1);
 			db.persist(seller2);
@@ -170,7 +170,7 @@ public class DataAccess {
 
 			Sale sale = seller.addSale(title, description, status, price, pubDate, file);
 			// next instruction can be obviated
-			seller.addOffer((double) price, sellerEmail, true);
+			seller.addOffer((double) price, sellerEmail, sale, true);
 
 			db.persist(seller);
 			db.getTransaction().commit();
