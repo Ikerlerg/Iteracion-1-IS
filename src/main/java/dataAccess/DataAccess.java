@@ -74,63 +74,67 @@ public class DataAccess {
 	 * BLFacadeImplementation) when the option "initialize" is declared in the tag
 	 * dataBaseOpenMode of resources/config.xml file
 	 */
-	public void initializeDB() {
+    public void initializeDB(){
+		
+        try { 
+            db.getTransaction().begin();
 
-		try {
-			db.getTransaction().begin();
+            // Create sellers y admin
+            Seller admin = new Seller("admin@gmail.com", "admin", "admin", -1);
+            Seller seller1 = new Seller("seller1@gmail.com","12345","Aitor Fernandez",1);
+            Seller seller2 = new Seller("seller22@gmail.com","54321","Ane Gaztañaga",1);
+            Seller seller3 = new Seller("seller3@gmail.com","12121","Test Seller",1);
+            User comp1 = new User("comprador1@gmail.com","12345","Comprador1",2);
+            User comp2 = new User("comprador2@gmail.com","12345","Comprador2",2);
 
-			// Create sellers y admin
-			Seller admin = new Seller("admin@gmail.com", "admin", "admin", -1);
-			Seller seller1 = new Seller("seller1@gmail.com", "12345", "Aitor Fernandez", 1);
-			Seller seller2 = new Seller("seller22@gmail.com", "54321", "Ane Gaztañaga", 1);
-			Seller seller3 = new Seller("seller3@gmail.com", "12121", "Test Seller", 1);
-			User comp1 = new User("comprador1@gmail.com", "12345", "Comprador1", 2);
-			User comp2 = new User("comprador2@gmail.com", "12345", "Comprador2", 2);
+            
+            // Create products
+            Date today = UtilDate.trim(new Date());
+      
 
-			// Create products
-			Date today = UtilDate.trim(new Date());
+            seller1.addSale("futbol baloia", "oso polita, gutxi erabilita", 2, 10,  today, null);
+            seller1.addSale("salomon mendiko botak", "44 zenbakia, 3 ateraldi",2, 20,  today, null);
+            seller1.addSale("samsung 42\" telebista", "berria, erabili gabe", 2, 175,  today, null);
 
-			seller1.addSale("futbol baloia", "oso polita, gutxi erabilita", 2, 10, today, null);
-			seller1.addSale("salomon mendiko botak", "44 zenbakia, 3 ateraldi", 2, 20, today, null);
-			seller1.addSale("samsung 42\" telebista", "berria, erabili gabe", 2, 175, today, null);
+            seller2.addSale("imac 27", "7 urte, dena ondo dabil", 1, 200,today, null);
+            seller2.addSale("iphone 17", "oso gutxi erabilita", 2, 400, today, null);
+            seller2.addSale("orbea mendiko bizikleta", "29\" 10 urte, mantenua behar du", 3,225, today, null);
+            seller2.addSale("polar kilor erlojua", "Vantage M, ondo dago", 3, 30, today, null);
 
-			seller2.addSale("imac 27", "7 urte, dena ondo dabil", 1, 200, today, null);
-			seller2.addSale("iphone 17", "oso gutxi erabilita", 2, 400, today, null);
-			seller2.addSale("orbea mendiko bizikleta", "29\" 10 urte, mantenua behar du", 3, 225, today, null);
-			seller2.addSale("polar kilor erlojua", "Vantage M, ondo dago", 3, 30, today, null);
+            seller3.addSale("sukaldeko mahaia", "1.8*0.8, 4 aulkiekin. Prezio finkoa", 3,45, today, null);
+            
+            // Create offers para seller 1
+            seller1.addOffer(10.0, "seller1@gmail.com",new Sale("futbol baloia", "oso polita, gutxi erabilita", 2, 10,  today, null, seller1), true);
+            seller1.addOffer(20.0, "seller1@gmail.com",new Sale("salomon mendiko botak", "44 zenbakia, 3 ateraldi",2, 20,  today, null, seller1), true);
+            seller1.addOffer(175.0, "seller1@gmail.com",new Sale("samsung 42\" telebista", "berria, erabili gabe", 2, 175,  today, null, seller1), true);
 
-			seller3.addSale("sukaldeko mahaia", "1.8*0.8, 4 aulkiekin. Prezio finkoa", 3, 45, today, null);
+            // Create offers para seller 2
+            seller2.addOffer(200.0, "seller22@gmail.com",new Sale("imac 27", "7 urte, dena ondo dabil", 1, 200,today, null, seller2), true);
+            seller2.addOffer(400.0, "seller22@gmail.com",new Sale("iphone 17", "oso gutxi erabilita", 2, 400, today, null,seller2 ), true);
+            seller2.addOffer(225.0, "seller22@gmail.com",new Sale("orbea mendiko bizikleta", "29\" 10 urte, mantenua behar du", 3,225, today, null, seller2), true);
+            seller2.addOffer(30.0, "seller22@gmail.com",new Sale("polar kilor erlojua", "Vantage M, ondo dago", 3, 30, today, null, seller2), true);
 
-			// Create offers para seller 1
-			seller1.addOffer(10.0, "seller1@gmail.com", null, true);
-			seller1.addOffer(20.0, "seller1@gmail.com", null, true);
-			seller1.addOffer(175.0, "seller1@gmail.com", null, true);
+            // Create offers para seller 3
+            seller3.addOffer(45.0, "seller3@gmail.com",new Sale("sukaldeko mahaia", "1.8*0.8, 4 aulkiekin. Prezio finkoa", 3,45, today, null, seller3), true);
 
-			// Create offers para seller 2
-			seller2.addOffer(200.0, "seller22@gmail.com", null, true);
-			seller2.addOffer(400.0, "seller22@gmail.com", null, true);
-			seller2.addOffer(225.0, "seller22@gmail.com", null, true);
-			seller2.addOffer(30.0, "seller22@gmail.com", null, true);
+            db.persist(seller1);
+            db.persist(seller2);
+            db.persist(seller3);
+            db.persist(comp1);
+            db.persist(comp2);
+            db.persist(admin);
 
-			// Create offers para seller 3
-			seller3.addOffer(45.0, "seller3@gmail.com", null, true);
-
-			db.persist(seller1);
-			db.persist(seller2);
-			db.persist(seller3);
-			db.persist(comp1);
-			db.persist(comp2);
-			db.persist(admin);
-
-			db.getTransaction().commit();
-			System.out.println("Db initialized");
-		} catch (Exception e) {
-			e.printStackTrace();
-			if (db.getTransaction().isActive()) {
-				db.getTransaction().rollback();
-			}
-		}
-	}
+            db.getTransaction().commit();
+            System.out.println("Db initialized");
+        }
+        catch (Exception e){
+            e.printStackTrace();
+            if(db.getTransaction().isActive()) {
+                db.getTransaction().rollback();
+            }
+        }
+    }
+	
 
 	/**
 	 * This method creates/adds a product to a seller
