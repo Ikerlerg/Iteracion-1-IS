@@ -217,6 +217,12 @@ public class BLFacadeImplementation  implements BLFacade {
 		return res;
 	
 	}
+	@WebMethod public List<Offer> getReseValid(String buyerMail){
+		dbManager.open();
+		List<Offer> res = dbManager.getReseValid(buyerMail);
+		dbManager.close();
+		return res;
+	}
 
 }
 

@@ -91,7 +91,7 @@ public class VisualizarGUI extends JFrame {
 		
 	}
 
-	private void loadAcceptedOffers() {
+	protected void loadAcceptedOffers() {
 		try {
 			listModel.removeAllElements();
 			BLFacade facade = MainGUI.getBusinessLogic();

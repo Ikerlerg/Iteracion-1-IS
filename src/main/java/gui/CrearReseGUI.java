@@ -99,23 +99,11 @@ public class CrearReseGUI extends JFrame {
 		try {
 			modeloOffer.removeAllElements();
 			BLFacade facade = MainGUI.getBusinessLogic();
-			List<String> sellers = facade.getAllSellers();
-			for(int i=0; i<sellers.size();i++) {
-			List<Offer> offers = facade.getUserOffers(sellers.get(i));
-			for (Offer o : offers) {
-				if(!o.isEstado()) {//si la oferta ha sido aceptada
-					for(int j=0; j<o.getPendientes().size(); i++) {//busca en la lista de pendientes 
-						if(o.getPendientes().get(j).getBuyerMail().equals(buyerMail)&&o.getPendientes().get(j).getEstado()==1) {//comprueba que el comprador esté en la lista y que esté su oferta aceptada(1)
-							modeloOffer.addElement(o);
-							break;
-						}
-					}
-				}
+			List<Offer> offers = facade.getReseValid(this.buyerMail);
+			if (!offers.isEmpty()) {
+				modeloOffer.addAll(offers);
 			}
-			}
-			
-			if (modeloOffer.isEmpty()) {
-
+			else {
 				//mensaje de que no hay ofertas publicas
 			}
 

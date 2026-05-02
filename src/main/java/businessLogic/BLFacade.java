@@ -79,5 +79,6 @@ public interface BLFacade  {
 	@WebMethod public boolean terminarSolicitud(Long offerId, String buyerMail);
 	@WebMethod public boolean publicarValoracion(Valoraciones val1);
 	@WebMethod public List<String> getAllSellers();
+	@WebMethod public List<Offer> getReseValid(String buyerMail);
 	
 }

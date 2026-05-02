@@ -541,7 +541,12 @@ public class DataAccess {
 		TypedQuery<String> query = db.createQuery("SELECT o.email FROM Seller o", String.class);
 		return query.getResultList();
 	}
-
+	
+	public List<Offer> getReseValid(String buyerMail) {
+		TypedQuery<Offer> query = db.createQuery("SELECT DISTINCT o FROM Offer o JOIN o.pendientes p WHERE o.estado = false AND p.buyerMail = :buyerMail AND p.estado = 1", Offer.class);
+		query.setParameter("buyerMail", buyerMail);
+		return query.getResultList();
+	}
 	public void close() {
 		db.close();
 		System.out.println("DataAcess closed");

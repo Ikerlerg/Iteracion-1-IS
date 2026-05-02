@@ -85,6 +85,7 @@ public class SolicitudesGUI extends JFrame {
 		
 					facade.terminarSolicitud(seleccionID, solicitud);
 					loadUserOffers();
+					parent.loadAcceptedOffers();
 					actionBox.removeAllItems();
 					aceptarButton.setEnabled(false);
 					OfferList.setSelectedIndex(-1);
