@@ -1,0 +1,958 @@
+------------------------------------------------------------------------------------------------------------------------
+
+[2026-05-03 18:10:38 #1 store] 
+Database 'C:\Users\Iker Lerga\eclipse-workspace prueba\Iteración 3\src\main\resources\products.temp' is opened by 12460@DESKTOP-DFS19DM
+
+[2026-05-03 18:10:39 #2 type.registry] 
+New type domain.User
+
+[2026-05-03 18:10:39 #3 type.registry] 
+New type domain.Seller
+
+[2026-05-03 18:10:39 #4 type] 
+Type domain.User is not enhanced.
+
+[2026-05-03 18:10:39 #5 type] 
+Type domain.Seller is not enhanced.
+
+[2026-05-03 18:10:39 #6 type.registry] 
+New type domain.Valoraciones
+
+[2026-05-03 18:10:39 #7 type.registry] 
+New type domain.Offer
+
+[2026-05-03 18:10:39 #8 type.registry] 
+New type domain.Sale
+
+[2026-05-03 18:10:39 #9 type] 
+Type domain.Valoraciones is not enhanced.
+
+[2026-05-03 18:10:39 #10 type] 
+Type domain.Offer is not enhanced.
+
+[2026-05-03 18:10:39 #11 type.registry] 
+New type domain.Solicitud
+
+[2026-05-03 18:10:39 #12 type] 
+Type domain.Sale is not enhanced.
+
+[2026-05-03 18:10:39 #13 type] 
+Type domain.Solicitud is not enhanced.
+
+[2026-05-03 18:10:39 #14 type.registry] 
+New type java.util.ArrayList<java.lang.Object>
+
+[2026-05-03 18:10:39 #15 type.registry] 
+New type java.util.ArrayList<domain.Sale>
+
+[2026-05-03 18:10:39 #16 type.registry] 
+New type java.util.ArrayList<domain.Offer>
+
+[2026-05-03 18:10:39 #17 type.registry] 
+New type java.util.ArrayList<domain.Valoraciones>
+
+[2026-05-03 18:10:39 #18 type.registry] 
+New type java.util.ArrayList<domain.Solicitud>
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2026-05-03 18:13:31 #1 store] 
+Database 'C:\Users\Iker Lerga\eclipse-workspace prueba\Iteración 3\src\main\resources\products.temp' is opened by 22756@DESKTOP-DFS19DM
+
+[2026-05-03 18:13:32 #2 type.registry] 
+New type domain.User
+
+[2026-05-03 18:13:32 #3 type.registry] 
+New type domain.Seller
+
+[2026-05-03 18:13:32 #4 type] 
+Type domain.User is not enhanced.
+
+[2026-05-03 18:13:32 #5 type] 
+Type domain.Seller is not enhanced.
+
+[2026-05-03 18:13:32 #6 type.registry] 
+New type domain.Valoraciones
+
+[2026-05-03 18:13:32 #7 type.registry] 
+New type domain.Offer
+
+[2026-05-03 18:13:32 #8 type.registry] 
+New type domain.Sale
+
+[2026-05-03 18:13:32 #9 type] 
+Type domain.Valoraciones is not enhanced.
+
+[2026-05-03 18:13:32 #10 type] 
+Type domain.Offer is not enhanced.
+
+[2026-05-03 18:13:32 #11 type.registry] 
+New type domain.Solicitud
+
+[2026-05-03 18:13:32 #12 type] 
+Type domain.Sale is not enhanced.
+
+[2026-05-03 18:13:32 #13 type] 
+Type domain.Solicitud is not enhanced.
+
+[2026-05-03 18:13:32 #14 type.registry] 
+New type java.util.ArrayList<java.lang.Object>
+
+[2026-05-03 18:13:32 #15 type.registry] 
+New type java.util.ArrayList<domain.Sale>
+
+[2026-05-03 18:13:32 #16 type.registry] 
+New type java.util.ArrayList<domain.Offer>
+
+[2026-05-03 18:13:32 #17 type.registry] 
+New type java.util.ArrayList<domain.Valoraciones>
+
+[2026-05-03 18:13:32 #18 type.registry] 
+New type java.util.ArrayList<domain.Solicitud>
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2026-05-03 18:18:24 #1 store] 
+Database 'C:\Users\Iker Lerga\eclipse-workspace prueba\Iteración 3\src\main\resources\products.temp' is opened by 16196@DESKTOP-DFS19DM
+
+[2026-05-03 18:18:24 #2 type.registry] 
+New type domain.User
+
+[2026-05-03 18:18:24 #3 type.registry] 
+New type domain.Seller
+
+[2026-05-03 18:18:24 #4 type] 
+Type domain.User is not enhanced.
+
+[2026-05-03 18:18:25 #5 type] 
+Type domain.Seller is not enhanced.
+
+[2026-05-03 18:18:25 #6 type.registry] 
+New type domain.Valoraciones
+
+[2026-05-03 18:18:25 #7 type.registry] 
+New type domain.Offer
+
+[2026-05-03 18:18:25 #8 type.registry] 
+New type domain.Sale
+
+[2026-05-03 18:18:25 #9 type] 
+Type domain.Valoraciones is not enhanced.
+
+[2026-05-03 18:18:25 #10 type] 
+Type domain.Offer is not enhanced.
+
+[2026-05-03 18:18:25 #11 type.registry] 
+New type domain.Solicitud
+
+[2026-05-03 18:18:25 #12 type] 
+Type domain.Sale is not enhanced.
+
+[2026-05-03 18:18:25 #13 type] 
+Type domain.Solicitud is not enhanced.
+
+[2026-05-03 18:18:25 #14 type.registry] 
+New type java.util.ArrayList<java.lang.Object>
+
+[2026-05-03 18:18:25 #15 type.registry] 
+New type java.util.ArrayList<domain.Sale>
+
+[2026-05-03 18:18:25 #16 type.registry] 
+New type java.util.ArrayList<domain.Offer>
+
+[2026-05-03 18:18:25 #17 type.registry] 
+New type java.util.ArrayList<domain.Valoraciones>
+
+[2026-05-03 18:18:25 #18 type.registry] 
+New type java.util.ArrayList<domain.Solicitud>
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2026-05-03 20:10:31 #1 store] 
+Database 'C:\Users\Iker Lerga\eclipse-workspace prueba\Iteración 3\src\main\resources\products.temp' is opened by 13244@DESKTOP-DFS19DM
+
+[2026-05-03 20:10:31 #2 type.registry] 
+New type domain.User
+
+[2026-05-03 20:10:31 #3 type.registry] 
+New type domain.Seller
+
+[2026-05-03 20:10:31 #4 type] 
+Type domain.User is not enhanced.
+
+[2026-05-03 20:10:31 #5 type] 
+Type domain.Seller is not enhanced.
+
+[2026-05-03 20:10:31 #6 type.registry] 
+New type domain.Valoraciones
+
+[2026-05-03 20:10:31 #7 type.registry] 
+New type domain.Offer
+
+[2026-05-03 20:10:31 #8 type.registry] 
+New type domain.Sale
+
+[2026-05-03 20:10:31 #9 type] 
+Type domain.Valoraciones is not enhanced.
+
+[2026-05-03 20:10:31 #10 type] 
+Type domain.Offer is not enhanced.
+
+[2026-05-03 20:10:31 #11 type.registry] 
+New type domain.Solicitud
+
+[2026-05-03 20:10:31 #12 type] 
+Type domain.Sale is not enhanced.
+
+[2026-05-03 20:10:31 #13 type] 
+Type domain.Solicitud is not enhanced.
+
+[2026-05-03 20:10:32 #14 type.registry] 
+New type java.util.ArrayList<java.lang.Object>
+
+[2026-05-03 20:10:32 #15 type.registry] 
+New type java.util.ArrayList<domain.Sale>
+
+[2026-05-03 20:10:32 #16 type.registry] 
+New type java.util.ArrayList<domain.Offer>
+
+[2026-05-03 20:10:32 #17 type.registry] 
+New type java.util.ArrayList<domain.Valoraciones>
+
+[2026-05-03 20:10:32 #18 type.registry] 
+New type java.util.ArrayList<domain.Solicitud>
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2026-05-03 20:15:38 #1 store] 
+Database 'C:\Users\Iker Lerga\eclipse-workspace prueba\Iteración 3\src\main\resources\products.temp' is opened by 28804@DESKTOP-DFS19DM
+
+[2026-05-03 20:15:39 #2 type.registry] 
+New type domain.User
+
+[2026-05-03 20:15:39 #3 type.registry] 
+New type domain.Seller
+
+[2026-05-03 20:15:39 #4 type] 
+Type domain.User is not enhanced.
+
+[2026-05-03 20:15:39 #5 type] 
+Type domain.Seller is not enhanced.
+
+[2026-05-03 20:15:39 #6 type.registry] 
+New type domain.Valoraciones
+
+[2026-05-03 20:15:39 #7 type.registry] 
+New type domain.Offer
+
+[2026-05-03 20:15:39 #8 type.registry] 
+New type domain.Sale
+
+[2026-05-03 20:15:39 #9 type] 
+Type domain.Valoraciones is not enhanced.
+
+[2026-05-03 20:15:39 #10 type] 
+Type domain.Offer is not enhanced.
+
+[2026-05-03 20:15:39 #11 type.registry] 
+New type domain.Solicitud
+
+[2026-05-03 20:15:39 #12 type] 
+Type domain.Sale is not enhanced.
+
+[2026-05-03 20:15:39 #13 type] 
+Type domain.Solicitud is not enhanced.
+
+[2026-05-03 20:15:39 #14 type.registry] 
+New type java.util.ArrayList<java.lang.Object>
+
+[2026-05-03 20:15:39 #15 type.registry] 
+New type java.util.ArrayList<domain.Sale>
+
+[2026-05-03 20:15:39 #16 type.registry] 
+New type java.util.ArrayList<domain.Offer>
+
+[2026-05-03 20:15:39 #17 type.registry] 
+New type java.util.ArrayList<domain.Valoraciones>
+
+[2026-05-03 20:15:39 #18 type.registry] 
+New type java.util.ArrayList<domain.Solicitud>
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2026-05-03 20:44:15 #1 store] 
+Database 'C:\Users\Iker Lerga\eclipse-workspace prueba\Iteración 3\src\main\resources\products.temp' is opened by 14388@DESKTOP-DFS19DM
+
+[2026-05-03 20:44:15 #2 type.registry] 
+New type domain.User
+
+[2026-05-03 20:44:15 #3 type.registry] 
+New type domain.Seller
+
+[2026-05-03 20:44:15 #4 type] 
+Type domain.User is not enhanced.
+
+[2026-05-03 20:44:15 #5 type] 
+Type domain.Seller is not enhanced.
+
+[2026-05-03 20:44:15 #6 type.registry] 
+New type domain.Valoraciones
+
+[2026-05-03 20:44:15 #7 type.registry] 
+New type domain.Offer
+
+[2026-05-03 20:44:15 #8 type.registry] 
+New type domain.Sale
+
+[2026-05-03 20:44:15 #9 type] 
+Type domain.Valoraciones is not enhanced.
+
+[2026-05-03 20:44:15 #10 type] 
+Type domain.Offer is not enhanced.
+
+[2026-05-03 20:44:15 #11 type.registry] 
+New type domain.Solicitud
+
+[2026-05-03 20:44:15 #12 type] 
+Type domain.Sale is not enhanced.
+
+[2026-05-03 20:44:15 #13 type] 
+Type domain.Solicitud is not enhanced.
+
+[2026-05-03 20:44:15 #14 type.registry] 
+New type java.util.ArrayList<java.lang.Object>
+
+[2026-05-03 20:44:15 #15 type.registry] 
+New type java.util.ArrayList<domain.Sale>
+
+[2026-05-03 20:44:15 #16 type.registry] 
+New type java.util.ArrayList<domain.Offer>
+
+[2026-05-03 20:44:15 #17 type.registry] 
+New type java.util.ArrayList<domain.Valoraciones>
+
+[2026-05-03 20:44:15 #18 type.registry] 
+New type java.util.ArrayList<domain.Solicitud>
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2026-05-03 21:05:10 #1 store] 
+Database 'C:\Users\Iker Lerga\eclipse-workspace prueba\Iteración 3\src\main\resources\products.temp' is opened by 15928@DESKTOP-DFS19DM
+
+[2026-05-03 21:05:10 #2 type.registry] 
+New type domain.User
+
+[2026-05-03 21:05:10 #3 type.registry] 
+New type domain.Seller
+
+[2026-05-03 21:05:10 #4 type] 
+Type domain.User is not enhanced.
+
+[2026-05-03 21:05:10 #5 type] 
+Type domain.Seller is not enhanced.
+
+[2026-05-03 21:05:10 #6 type.registry] 
+New type domain.Valoraciones
+
+[2026-05-03 21:05:10 #7 type.registry] 
+New type domain.Offer
+
+[2026-05-03 21:05:10 #8 type.registry] 
+New type domain.Sale
+
+[2026-05-03 21:05:10 #9 type] 
+Type domain.Valoraciones is not enhanced.
+
+[2026-05-03 21:05:10 #10 type] 
+Type domain.Offer is not enhanced.
+
+[2026-05-03 21:05:10 #11 type.registry] 
+New type domain.Solicitud
+
+[2026-05-03 21:05:10 #12 type] 
+Type domain.Sale is not enhanced.
+
+[2026-05-03 21:05:10 #13 type] 
+Type domain.Solicitud is not enhanced.
+
+[2026-05-03 21:05:10 #14 type.registry] 
+New type java.util.ArrayList<java.lang.Object>
+
+[2026-05-03 21:05:11 #15 type.registry] 
+New type java.util.ArrayList<domain.Sale>
+
+[2026-05-03 21:05:11 #16 type.registry] 
+New type java.util.ArrayList<domain.Offer>
+
+[2026-05-03 21:05:11 #17 type.registry] 
+New type java.util.ArrayList<domain.Valoraciones>
+
+[2026-05-03 21:05:11 #18 type.registry] 
+New type java.util.ArrayList<domain.Solicitud>
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2026-05-03 21:06:32 #1 store] 
+Database 'C:\Users\Iker Lerga\eclipse-workspace prueba\Iteración 3\src\main\resources\products.temp' is opened by 16644@DESKTOP-DFS19DM
+
+[2026-05-03 21:06:32 #2 type.registry] 
+New type domain.User
+
+[2026-05-03 21:06:32 #3 type.registry] 
+New type domain.Seller
+
+[2026-05-03 21:06:32 #4 type] 
+Type domain.User is not enhanced.
+
+[2026-05-03 21:06:32 #5 type] 
+Type domain.Seller is not enhanced.
+
+[2026-05-03 21:06:32 #6 type.registry] 
+New type domain.Valoraciones
+
+[2026-05-03 21:06:32 #7 type.registry] 
+New type domain.Offer
+
+[2026-05-03 21:06:32 #8 type.registry] 
+New type domain.Sale
+
+[2026-05-03 21:06:32 #9 type] 
+Type domain.Valoraciones is not enhanced.
+
+[2026-05-03 21:06:32 #10 type] 
+Type domain.Offer is not enhanced.
+
+[2026-05-03 21:06:32 #11 type.registry] 
+New type domain.Solicitud
+
+[2026-05-03 21:06:32 #12 type] 
+Type domain.Sale is not enhanced.
+
+[2026-05-03 21:06:32 #13 type] 
+Type domain.Solicitud is not enhanced.
+
+[2026-05-03 21:06:32 #14 type.registry] 
+New type java.util.ArrayList<java.lang.Object>
+
+[2026-05-03 21:06:32 #15 type.registry] 
+New type java.util.ArrayList<domain.Sale>
+
+[2026-05-03 21:06:32 #16 type.registry] 
+New type java.util.ArrayList<domain.Offer>
+
+[2026-05-03 21:06:32 #17 type.registry] 
+New type java.util.ArrayList<domain.Valoraciones>
+
+[2026-05-03 21:06:32 #18 type.registry] 
+New type java.util.ArrayList<domain.Solicitud>
+
+[2026-05-03 21:07:28 #19 type.registry] 
+New type domain.Reportes
+
+[2026-05-03 21:07:28 #20 type] 
+Type domain.Reportes is not enhanced.
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2026-05-03 21:11:20 #1 store] 
+Database 'C:\Users\Iker Lerga\eclipse-workspace prueba\Iteración 3\src\main\resources\products.temp' is opened by 7532@DESKTOP-DFS19DM
+
+[2026-05-03 21:11:20 #2 type.registry] 
+New type domain.User
+
+[2026-05-03 21:11:20 #3 type.registry] 
+New type domain.Seller
+
+[2026-05-03 21:11:20 #4 type] 
+Type domain.User is not enhanced.
+
+[2026-05-03 21:11:20 #5 type] 
+Type domain.Seller is not enhanced.
+
+[2026-05-03 21:11:20 #6 type.registry] 
+New type domain.Valoraciones
+
+[2026-05-03 21:11:20 #7 type.registry] 
+New type domain.Offer
+
+[2026-05-03 21:11:20 #8 type.registry] 
+New type domain.Sale
+
+[2026-05-03 21:11:20 #9 type] 
+Type domain.Valoraciones is not enhanced.
+
+[2026-05-03 21:11:20 #10 type] 
+Type domain.Offer is not enhanced.
+
+[2026-05-03 21:11:20 #11 type.registry] 
+New type domain.Solicitud
+
+[2026-05-03 21:11:20 #12 type] 
+Type domain.Sale is not enhanced.
+
+[2026-05-03 21:11:20 #13 type] 
+Type domain.Solicitud is not enhanced.
+
+[2026-05-03 21:11:20 #14 type.registry] 
+New type java.util.ArrayList<java.lang.Object>
+
+[2026-05-03 21:11:20 #15 type.registry] 
+New type java.util.ArrayList<domain.Sale>
+
+[2026-05-03 21:11:20 #16 type.registry] 
+New type java.util.ArrayList<domain.Offer>
+
+[2026-05-03 21:11:20 #17 type.registry] 
+New type java.util.ArrayList<domain.Valoraciones>
+
+[2026-05-03 21:11:20 #18 type.registry] 
+New type java.util.ArrayList<domain.Solicitud>
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2026-05-03 22:04:07 #1 store] 
+Database 'C:\Users\Iker Lerga\eclipse-workspace prueba\Iteración 3\src\main\resources\products.temp' is opened by 17112@DESKTOP-DFS19DM
+
+[2026-05-03 22:04:07 #2 type.registry] 
+New type domain.User
+
+[2026-05-03 22:04:07 #3 type.registry] 
+New type domain.Seller
+
+[2026-05-03 22:04:07 #4 type] 
+Type domain.User is not enhanced.
+
+[2026-05-03 22:04:07 #5 type] 
+Type domain.Seller is not enhanced.
+
+[2026-05-03 22:04:07 #6 type.registry] 
+New type domain.Valoraciones
+
+[2026-05-03 22:04:07 #7 type.registry] 
+New type domain.Offer
+
+[2026-05-03 22:04:07 #8 type.registry] 
+New type domain.Sale
+
+[2026-05-03 22:04:07 #9 type] 
+Type domain.Valoraciones is not enhanced.
+
+[2026-05-03 22:04:07 #10 type] 
+Type domain.Offer is not enhanced.
+
+[2026-05-03 22:04:07 #11 type.registry] 
+New type domain.Solicitud
+
+[2026-05-03 22:04:07 #12 type] 
+Type domain.Sale is not enhanced.
+
+[2026-05-03 22:04:07 #13 type] 
+Type domain.Solicitud is not enhanced.
+
+[2026-05-03 22:04:07 #14 type.registry] 
+New type java.util.ArrayList<java.lang.Object>
+
+[2026-05-03 22:04:07 #15 type.registry] 
+New type java.util.ArrayList<domain.Sale>
+
+[2026-05-03 22:04:07 #16 type.registry] 
+New type java.util.ArrayList<domain.Offer>
+
+[2026-05-03 22:04:07 #17 type.registry] 
+New type java.util.ArrayList<domain.Valoraciones>
+
+[2026-05-03 22:04:07 #18 type.registry] 
+New type java.util.ArrayList<domain.Solicitud>
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2026-05-03 22:19:06 #1 store] 
+Database 'C:\Users\Iker Lerga\eclipse-workspace prueba\Iteración 3\src\main\resources\products.temp' is opened by 4436@DESKTOP-DFS19DM
+
+[2026-05-03 22:19:06 #2 type.registry] 
+New type domain.User
+
+[2026-05-03 22:19:06 #3 type.registry] 
+New type domain.Seller
+
+[2026-05-03 22:19:06 #4 type] 
+Type domain.User is not enhanced.
+
+[2026-05-03 22:19:06 #5 type] 
+Type domain.Seller is not enhanced.
+
+[2026-05-03 22:19:06 #6 type.registry] 
+New type domain.Valoraciones
+
+[2026-05-03 22:19:06 #7 type.registry] 
+New type domain.Offer
+
+[2026-05-03 22:19:06 #8 type.registry] 
+New type domain.Sale
+
+[2026-05-03 22:19:06 #9 type] 
+Type domain.Valoraciones is not enhanced.
+
+[2026-05-03 22:19:06 #10 type] 
+Type domain.Offer is not enhanced.
+
+[2026-05-03 22:19:06 #11 type.registry] 
+New type domain.Solicitud
+
+[2026-05-03 22:19:06 #12 type] 
+Type domain.Sale is not enhanced.
+
+[2026-05-03 22:19:06 #13 type] 
+Type domain.Solicitud is not enhanced.
+
+[2026-05-03 22:19:06 #14 type.registry] 
+New type java.util.ArrayList<java.lang.Object>
+
+[2026-05-03 22:19:06 #15 type.registry] 
+New type java.util.ArrayList<domain.Sale>
+
+[2026-05-03 22:19:06 #16 type.registry] 
+New type java.util.ArrayList<domain.Offer>
+
+[2026-05-03 22:19:06 #17 type.registry] 
+New type java.util.ArrayList<domain.Valoraciones>
+
+[2026-05-03 22:19:06 #18 type.registry] 
+New type java.util.ArrayList<domain.Solicitud>
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2026-05-03 22:39:30 #1 store] 
+Database 'C:\Users\Iker Lerga\eclipse-workspace prueba\Iteración 3\src\main\resources\products.temp' is opened by 3512@DESKTOP-DFS19DM
+
+[2026-05-03 22:39:30 #2 type.registry] 
+New type domain.User
+
+[2026-05-03 22:39:30 #3 type.registry] 
+New type domain.Seller
+
+[2026-05-03 22:39:30 #4 type] 
+Type domain.User is not enhanced.
+
+[2026-05-03 22:39:30 #5 type] 
+Type domain.Seller is not enhanced.
+
+[2026-05-03 22:39:30 #6 type.registry] 
+New type domain.Valoraciones
+
+[2026-05-03 22:39:30 #7 type.registry] 
+New type domain.Offer
+
+[2026-05-03 22:39:30 #8 type.registry] 
+New type domain.Sale
+
+[2026-05-03 22:39:30 #9 type] 
+Type domain.Valoraciones is not enhanced.
+
+[2026-05-03 22:39:30 #10 type] 
+Type domain.Offer is not enhanced.
+
+[2026-05-03 22:39:30 #11 type.registry] 
+New type domain.Solicitud
+
+[2026-05-03 22:39:30 #12 type] 
+Type domain.Sale is not enhanced.
+
+[2026-05-03 22:39:30 #13 type] 
+Type domain.Solicitud is not enhanced.
+
+[2026-05-03 22:39:30 #14 type.registry] 
+New type java.util.ArrayList<java.lang.Object>
+
+[2026-05-03 22:39:30 #15 type.registry] 
+New type java.util.ArrayList<domain.Sale>
+
+[2026-05-03 22:39:30 #16 type.registry] 
+New type java.util.ArrayList<domain.Offer>
+
+[2026-05-03 22:39:30 #17 type.registry] 
+New type java.util.ArrayList<domain.Valoraciones>
+
+[2026-05-03 22:39:30 #18 type.registry] 
+New type java.util.ArrayList<domain.Solicitud>
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2026-05-03 22:43:56 #1 store] 
+Database 'C:\Users\Iker Lerga\eclipse-workspace prueba\Iteración 3\src\main\resources\products.temp' is opened by 22788@DESKTOP-DFS19DM
+
+[2026-05-03 22:43:56 #2 type.registry] 
+New type domain.User
+
+[2026-05-03 22:43:56 #3 type.registry] 
+New type domain.Seller
+
+[2026-05-03 22:43:56 #4 type] 
+Type domain.User is not enhanced.
+
+[2026-05-03 22:43:56 #5 type] 
+Type domain.Seller is not enhanced.
+
+[2026-05-03 22:43:56 #6 type.registry] 
+New type domain.Valoraciones
+
+[2026-05-03 22:43:56 #7 type.registry] 
+New type domain.Offer
+
+[2026-05-03 22:43:57 #8 type.registry] 
+New type domain.Sale
+
+[2026-05-03 22:43:57 #9 type] 
+Type domain.Valoraciones is not enhanced.
+
+[2026-05-03 22:43:57 #10 type] 
+Type domain.Offer is not enhanced.
+
+[2026-05-03 22:43:57 #11 type.registry] 
+New type domain.Solicitud
+
+[2026-05-03 22:43:57 #12 type] 
+Type domain.Sale is not enhanced.
+
+[2026-05-03 22:43:57 #13 type] 
+Type domain.Solicitud is not enhanced.
+
+[2026-05-03 22:43:57 #14 type.registry] 
+New type java.util.ArrayList<java.lang.Object>
+
+[2026-05-03 22:43:57 #15 type.registry] 
+New type java.util.ArrayList<domain.Sale>
+
+[2026-05-03 22:43:57 #16 type.registry] 
+New type java.util.ArrayList<domain.Offer>
+
+[2026-05-03 22:43:57 #17 type.registry] 
+New type java.util.ArrayList<domain.Valoraciones>
+
+[2026-05-03 22:43:57 #18 type.registry] 
+New type java.util.ArrayList<domain.Solicitud>
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2026-05-03 22:50:07 #1 store] 
+Database 'C:\Users\Iker Lerga\eclipse-workspace prueba\Iteración 3\src\main\resources\products.temp' is opened by 15960@DESKTOP-DFS19DM
+
+[2026-05-03 22:50:08 #2 type.registry] 
+New type domain.User
+
+[2026-05-03 22:50:08 #3 type.registry] 
+New type domain.Seller
+
+[2026-05-03 22:50:08 #4 type] 
+Type domain.User is not enhanced.
+
+[2026-05-03 22:50:08 #5 type] 
+Type domain.Seller is not enhanced.
+
+[2026-05-03 22:50:08 #6 type.registry] 
+New type domain.Valoraciones
+
+[2026-05-03 22:50:08 #7 type.registry] 
+New type domain.Offer
+
+[2026-05-03 22:50:08 #8 type.registry] 
+New type domain.Sale
+
+[2026-05-03 22:50:08 #9 type] 
+Type domain.Valoraciones is not enhanced.
+
+[2026-05-03 22:50:08 #10 type] 
+Type domain.Offer is not enhanced.
+
+[2026-05-03 22:50:08 #11 type.registry] 
+New type domain.Solicitud
+
+[2026-05-03 22:50:08 #12 type] 
+Type domain.Sale is not enhanced.
+
+[2026-05-03 22:50:08 #13 type] 
+Type domain.Solicitud is not enhanced.
+
+[2026-05-03 22:50:08 #14 type.registry] 
+New type java.util.ArrayList<java.lang.Object>
+
+[2026-05-03 22:50:08 #15 type.registry] 
+New type java.util.ArrayList<domain.Sale>
+
+[2026-05-03 22:50:08 #16 type.registry] 
+New type java.util.ArrayList<domain.Offer>
+
+[2026-05-03 22:50:08 #17 type.registry] 
+New type java.util.ArrayList<domain.Valoraciones>
+
+[2026-05-03 22:50:08 #18 type.registry] 
+New type java.util.ArrayList<domain.Solicitud>
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2026-05-03 22:55:45 #1 store] 
+Database 'C:\Users\Iker Lerga\eclipse-workspace prueba\Iteración 3\src\main\resources\products.temp' is opened by 9196@DESKTOP-DFS19DM
+
+[2026-05-03 22:55:45 #2 type.registry] 
+New type domain.User
+
+[2026-05-03 22:55:45 #3 type.registry] 
+New type domain.Seller
+
+[2026-05-03 22:55:45 #4 type] 
+Type domain.User is not enhanced.
+
+[2026-05-03 22:55:45 #5 type] 
+Type domain.Seller is not enhanced.
+
+[2026-05-03 22:55:45 #6 type.registry] 
+New type domain.Valoraciones
+
+[2026-05-03 22:55:45 #7 type.registry] 
+New type domain.Offer
+
+[2026-05-03 22:55:45 #8 type.registry] 
+New type domain.Sale
+
+[2026-05-03 22:55:45 #9 type] 
+Type domain.Valoraciones is not enhanced.
+
+[2026-05-03 22:55:45 #10 type] 
+Type domain.Offer is not enhanced.
+
+[2026-05-03 22:55:45 #11 type.registry] 
+New type domain.Solicitud
+
+[2026-05-03 22:55:45 #12 type] 
+Type domain.Sale is not enhanced.
+
+[2026-05-03 22:55:45 #13 type] 
+Type domain.Solicitud is not enhanced.
+
+[2026-05-03 22:55:45 #14 type.registry] 
+New type java.util.ArrayList<java.lang.Object>
+
+[2026-05-03 22:55:45 #15 type.registry] 
+New type java.util.ArrayList<domain.Sale>
+
+[2026-05-03 22:55:45 #16 type.registry] 
+New type java.util.ArrayList<domain.Offer>
+
+[2026-05-03 22:55:45 #17 type.registry] 
+New type java.util.ArrayList<domain.Valoraciones>
+
+[2026-05-03 22:55:45 #18 type.registry] 
+New type java.util.ArrayList<domain.Solicitud>
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2026-05-03 23:57:06 #1 store] 
+Database 'C:\Users\Iker Lerga\eclipse-workspace prueba\Iteración 3\src\main\resources\products.temp' is opened by 2044@DESKTOP-DFS19DM
+
+[2026-05-03 23:57:06 #2 type.registry] 
+New type domain.User
+
+[2026-05-03 23:57:06 #3 type.registry] 
+New type domain.Seller
+
+[2026-05-03 23:57:06 #4 type] 
+Type domain.User is not enhanced.
+
+[2026-05-03 23:57:06 #5 type] 
+Type domain.Seller is not enhanced.
+
+[2026-05-03 23:57:06 #6 type.registry] 
+New type domain.Valoraciones
+
+[2026-05-03 23:57:06 #7 type.registry] 
+New type domain.Offer
+
+[2026-05-03 23:57:06 #8 type.registry] 
+New type domain.Sale
+
+[2026-05-03 23:57:06 #9 type] 
+Type domain.Valoraciones is not enhanced.
+
+[2026-05-03 23:57:06 #10 type] 
+Type domain.Offer is not enhanced.
+
+[2026-05-03 23:57:06 #11 type.registry] 
+New type domain.Solicitud
+
+[2026-05-03 23:57:06 #12 type] 
+Type domain.Sale is not enhanced.
+
+[2026-05-03 23:57:06 #13 type] 
+Type domain.Solicitud is not enhanced.
+
+[2026-05-03 23:57:06 #14 type.registry] 
+New type java.util.ArrayList<java.lang.Object>
+
+[2026-05-03 23:57:06 #15 type.registry] 
+New type java.util.ArrayList<domain.Sale>
+
+[2026-05-03 23:57:06 #16 type.registry] 
+New type java.util.ArrayList<domain.Offer>
+
+[2026-05-03 23:57:06 #17 type.registry] 
+New type java.util.ArrayList<domain.Valoraciones>
+
+[2026-05-03 23:57:06 #18 type.registry] 
+New type java.util.ArrayList<domain.Solicitud>
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2026-05-03 23:57:42 #1 store] 
+Database 'C:\Users\Iker Lerga\eclipse-workspace prueba\Iteración 3\src\main\resources\products.temp' is opened by 3608@DESKTOP-DFS19DM
+
+[2026-05-03 23:57:43 #2 type.registry] 
+New type domain.User
+
+[2026-05-03 23:57:43 #3 type.registry] 
+New type domain.Seller
+
+[2026-05-03 23:57:43 #4 type] 
+Type domain.User is not enhanced.
+
+[2026-05-03 23:57:43 #5 type] 
+Type domain.Seller is not enhanced.
+
+[2026-05-03 23:57:43 #6 type.registry] 
+New type domain.Valoraciones
+
+[2026-05-03 23:57:43 #7 type.registry] 
+New type domain.Offer
+
+[2026-05-03 23:57:43 #8 type.registry] 
+New type domain.Sale
+
+[2026-05-03 23:57:43 #9 type] 
+Type domain.Valoraciones is not enhanced.
+
+[2026-05-03 23:57:43 #10 type] 
+Type domain.Offer is not enhanced.
+
+[2026-05-03 23:57:43 #11 type.registry] 
+New type domain.Solicitud
+
+[2026-05-03 23:57:43 #12 type] 
+Type domain.Sale is not enhanced.
+
+[2026-05-03 23:57:43 #13 type] 
+Type domain.Solicitud is not enhanced.
+
+[2026-05-03 23:57:43 #14 type.registry] 
+New type java.util.ArrayList<java.lang.Object>
+
+[2026-05-03 23:57:43 #15 type.registry] 
+New type java.util.ArrayList<domain.Sale>
+
+[2026-05-03 23:57:43 #16 type.registry] 
+New type java.util.ArrayList<domain.Offer>
+
+[2026-05-03 23:57:43 #17 type.registry] 
+New type java.util.ArrayList<domain.Valoraciones>
+
+[2026-05-03 23:57:43 #18 type.registry] 
+New type java.util.ArrayList<domain.Solicitud>
+
