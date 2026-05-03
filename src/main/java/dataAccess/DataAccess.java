@@ -113,9 +113,10 @@ public class DataAccess {
 			seller2.addOffer(225.0, "seller22@gmail.com", s6, true);
 			seller2.addOffer(30.0, "seller22@gmail.com", s7, true);
 
-			// Offers para seller 3
-			seller3.addOffer(45.0, "seller3@gmail.com", s8, true);
+			// Create offers para seller 3
+			seller3.addOffer(45.0, "seller3@gmail.com",s8,true);
 
+			
 			db.persist(seller1);
 			db.persist(seller2);
 			db.persist(seller3);
@@ -545,6 +546,27 @@ public class DataAccess {
 		        return false;
 		    }
 	}
+	
+	//Este método devuelve true si no hay reseñas asociadas a un email de vendedor, email comprador e id de producto dados como paramétros. En caso contrario, devuelve false.
+	public boolean hayRese(String eVend, String eComp, float idP) {
+	    try {
+	        TypedQuery<Long> query = db.createQuery(
+	            "SELECT COUNT(v) FROM Valoraciones v WHERE v.eVendedor = :email AND v.eComprador = :emailcom AND v.idProd = :idProd", 
+	            Long.class
+	        );
+	        
+	        query.setParameter("email", eVend);
+	        query.setParameter("emailcom", eComp);
+	        query.setParameter("idProd", idP);
+	        Long numResenas = query.getSingleResult();
+	        return numResenas == 0;
+	        
+	    } catch(Exception e) {
+	        e.printStackTrace();
+	        return false;
+	    }
+	}
+	
 
 	public List<String> getAllSellers() {
 		TypedQuery<String> query = db.createQuery("SELECT o.email FROM Seller o", String.class);
