@@ -244,13 +244,15 @@ public class DataAccess {
 	                Valoraciones.class);
 	        query.setParameter("mail", mail);
 	        query.setParameter("busq", "%" + busq + "%");
-		} else {
+		} else if (tipo == 1) {
 			query = db.createQuery(
 	                "SELECT v FROM Valoraciones v, User u " +
 	                "WHERE v.eComprador = :mail AND v.eVendedor = u.email AND u.name LIKE :busq",
 	                Valoraciones.class);
 	        query.setParameter("mail", mail);
 	        query.setParameter("busq", "%" + busq + "%");
+		} else {
+			query = db.createQuery("SELECT v FROM Valoraciones v", Valoraciones.class);
 		}
 		List<Valoraciones> reseñas = query.getResultList();
 		for (Valoraciones r : reseñas) {

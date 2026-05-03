@@ -54,8 +54,8 @@ public class UsuarioGUI extends JFrame {
 		BLFacade facade = MainGUI.getBusinessLogic();
 		User usuario = facade.devolverUser(userMail);
 		
-		JLabel jLabelCorreo = new JLabel(ResourceBundle.getBundle("Etiquetas").getString("UsuarioGUI.correo") + usuario.getEmail());
-		jLabelCorreo.setBounds(137, 60, 109, 16);
+		JLabel jLabelCorreo = new JLabel(ResourceBundle.getBundle("Etiquetas").getString("UsuarioGUI.correo")+" " + usuario.getEmail());
+		jLabelCorreo.setBounds(137, 60, 417, 16);
 		getContentPane().add(jLabelCorreo);
 		
 		JButton btnCambiarPassword = new JButton(ResourceBundle.getBundle("Etiquetas").getString("UsuarioGUI.cambiar"));
@@ -118,9 +118,9 @@ public class UsuarioGUI extends JFrame {
 		
 		getContentPane().add(btnNewButton_2);
 		*/
-		JLabel jLabelNombre = new JLabel(ResourceBundle.getBundle("Etiquetas").getString("UsuarioGUI.nombre") + usuario.getName());
+		JLabel jLabelNombre = new JLabel(ResourceBundle.getBundle("Etiquetas").getString("UsuarioGUI.nombre") +" " + usuario.getName());
 		jLabelNombre.setBounds(new Rectangle(6, 24, 92, 20));
-		jLabelNombre.setBounds(137, 26, 197, 20);
+		jLabelNombre.setBounds(137, 26, 417, 20);
 		getContentPane().add(jLabelNombre);
 		
 		btnReseñas.addActionListener(new ActionListener() {
@@ -167,6 +167,8 @@ public class UsuarioGUI extends JFrame {
                 		
                 		panel_1.revalidate();
                 		panel_1.repaint();
+                		
+                		mGUI.actualizarFotoPerfil();
 		                //encodeFileToBase64Binary(targetFile);
 		            } catch (IOException ex) {
 		                //Logger.getLogger(MainAppFrame.class.getName()).log(Level.SEVERE, null, ex);
@@ -216,8 +218,15 @@ public class UsuarioGUI extends JFrame {
 		btnFoto.setBounds(26, 123, 86, 29);
 		getContentPane().add(btnFoto);
 		
-		JLabel jLabelTipo = new JLabel(ResourceBundle.getBundle("Etiquetas").getString("UsuarioGUI.tipo")+ usuario.getTipo());
-		jLabelTipo.setBounds(137, 96, 109, 16);
+		String tipoTexto = null;
+		if(usuario.getTipo() == 2) {
+			tipoTexto = ResourceBundle.getBundle("Etiquetas").getString("UsuarioGUI.vendedor");
+		} else if (usuario.getTipo() == 1) {
+			tipoTexto = ResourceBundle.getBundle("Etiquetas").getString("UsuarioGUI.comprador");
+		} else {tipoTexto = ResourceBundle.getBundle("Etiquetas").getString("UsuarioGUI.admin");}
+		
+		JLabel jLabelTipo = new JLabel(ResourceBundle.getBundle("Etiquetas").getString("UsuarioGUI.tipo")+" "+ tipoTexto);
+		jLabelTipo.setBounds(137, 96, 417, 16);
 		getContentPane().add(jLabelTipo);
 		
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);

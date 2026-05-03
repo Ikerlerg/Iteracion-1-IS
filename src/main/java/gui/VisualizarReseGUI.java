@@ -121,6 +121,16 @@ public class VisualizarReseGUI extends JFrame {
 							row.add(val);
 							tableModelReseñas.addRow(row);
 						}
+					} else {
+						for (Valoraciones val : valoraciones) {
+							Vector<Object> row = new Vector<Object>();
+							row.add(val.geteComprador());
+							row.add(val.getProductoResena().getSale().getTitle());
+							row.add(val.getValoracion());
+							row.add(val.getDescripcion());
+							row.add(val);
+							tableModelReseñas.addRow(row);
+						}
 					}
 
 				} catch (Exception e1) {

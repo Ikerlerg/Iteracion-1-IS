@@ -411,4 +411,28 @@ public class MainGUI extends JFrame {
 	        return null;
 	    }
 	}
+	
+	public void actualizarFotoPerfil() {
+	    try {
+	        BLFacade pFacade = getBusinessLogic();
+	        String fotoGuardadaBase64 = pFacade.obtenerImagen(this.sellerMail); 
+	        panel_1.removeAll();
+
+	        if (fotoGuardadaBase64 != null && !fotoGuardadaBase64.isEmpty()) {
+	            ImageIcon icon = decodeBase64ToImageIcon(fotoGuardadaBase64);
+	            panel_1.add(new JLabel(icon));
+	        } else {
+	            ImageIcon im = new ImageIcon("userDefault.png");
+	            Image escalada = im.getImage().getScaledInstance(86, 86, Image.SCALE_SMOOTH);
+	            ImageIcon iconDefault = new ImageIcon(escalada);
+	            panel_1.add(new JLabel(iconDefault));
+	        }
+
+	        panel_1.revalidate();
+	        panel_1.repaint();
+	        
+	    } catch (Exception ex) {
+	        ex.printStackTrace();
+	    }
+	}
 }
