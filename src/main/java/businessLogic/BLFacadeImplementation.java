@@ -130,6 +130,14 @@ public class BLFacadeImplementation  implements BLFacade {
     }
     
     @WebMethod 
+    public User devolverUser(String mail) {
+    	 dbManager.open(); 
+         User u = dbManager.devolverUser(mail); 
+         dbManager.close(); 
+         return u;
+    }
+    
+    @WebMethod 
     public boolean eliminarCuenta(String email) {
     	 dbManager.open(); 
          boolean u = dbManager.eliminarCuenta(email); 

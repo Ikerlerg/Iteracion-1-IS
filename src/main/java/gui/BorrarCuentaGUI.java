@@ -47,8 +47,8 @@ public class BorrarCuentaGUI extends JFrame{
 				BLFacade facade = MainGUI.getBusinessLogic();
 				
 				mGUI.close.setVisible(false);
-				mGUI.loged.setText("Sin usuario");
-				
+				mGUI.actualizarEstadoUsuario("Sin usuario");
+				//.loged.setText("Sin usuario");
 				if(uGUI != null) {
 					uGUI.dispose();
 				}

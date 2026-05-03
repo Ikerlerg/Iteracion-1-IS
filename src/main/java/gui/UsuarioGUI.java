@@ -21,6 +21,7 @@ import java.beans.PropertyChangeListener;
 
 import businessLogic.BLFacade;
 import configuration.UtilDate;
+import domain.User;
 
 
 public class UsuarioGUI extends JFrame {
@@ -36,22 +37,24 @@ public class UsuarioGUI extends JFrame {
 	private static final String basePath="src/main/resources/images/";
 	private static final long serialVersionUID = 1L;
 
-	private String userMail;
-	
-	private JLabel jLabelCorreo = new JLabel(ResourceBundle.getBundle("Etiquetas").getString("UsuarioGUI.correo")); 
+	private String userMail;  
 	
 	private final JButton btnReseñas = new JButton(ResourceBundle.getBundle("Etiquetas").getString("UsuarioGUI.reseñas"));
 	private final JButton btnBorrar = new JButton(ResourceBundle.getBundle("Etiquetas").getString("UsuarioGUI.borrar"));
 	private final JButton btnFoto = new JButton(ResourceBundle.getBundle("Etiquetas").getString("UsuarioGUI.foto"));
 
 	public UsuarioGUI(String mail, MainGUI mGUI) {
-
+		mGUI.setVisible(false);
 		thisFrame=this;
 		this.userMail=mail;
 		this.getContentPane().setLayout(null);
 		this.setSize(new Dimension(604, 370));
 		this.setTitle(ResourceBundle.getBundle("Etiquetas").getString("UsuarioGUI.titulo")+": "+this.userMail);
-
+		
+		BLFacade facade = MainGUI.getBusinessLogic();
+		User usuario = facade.devolverUser(userMail);
+		
+		JLabel jLabelCorreo = new JLabel(ResourceBundle.getBundle("Etiquetas").getString("UsuarioGUI.correo") + usuario.getEmail());
 		jLabelCorreo.setBounds(137, 60, 109, 16);
 		getContentPane().add(jLabelCorreo);
 		
@@ -90,7 +93,7 @@ public class UsuarioGUI extends JFrame {
 		
 		getContentPane().add(btnNewButton_2);
 		*/
-		JLabel jLabelNombre = new JLabel(ResourceBundle.getBundle("Etiquetas").getString("UsuarioGUI.nombre"));
+		JLabel jLabelNombre = new JLabel(ResourceBundle.getBundle("Etiquetas").getString("UsuarioGUI.nombre") + usuario.getName());
 		jLabelNombre.setBounds(new Rectangle(6, 24, 92, 20));
 		jLabelNombre.setBounds(137, 26, 197, 20);
 		getContentPane().add(jLabelNombre);
@@ -147,10 +150,20 @@ public class UsuarioGUI extends JFrame {
 		btnFoto.setBounds(26, 123, 86, 29);
 		getContentPane().add(btnFoto);
 		
-		JLabel jLabelTipo = new JLabel((String) null);
+		JLabel jLabelTipo = new JLabel(ResourceBundle.getBundle("Etiquetas").getString("UsuarioGUI.tipo")+ usuario.getTipo());
 		jLabelTipo.setBounds(137, 96, 109, 16);
 		getContentPane().add(jLabelTipo);
 		
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		this.addWindowListener(new java.awt.event.WindowAdapter() {
+		    @Override
+		    public void windowClosed(java.awt.event.WindowEvent windowEvent) {
+		        // Al cerrarse esta ventana, hacemos que la principal vuelva a ser visible
+		        if (mGUI != null) {
+		            mGUI.setVisible(true);
+		        }
+		    }
+		});
 	}	 
 
 	public BufferedImage rescale(BufferedImage originalImage)
@@ -181,4 +194,6 @@ public class UsuarioGUI extends JFrame {
 
         return encodedfile;
     }
+	
+	
 }

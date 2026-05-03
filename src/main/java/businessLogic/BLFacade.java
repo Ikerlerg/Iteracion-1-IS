@@ -67,6 +67,7 @@ public interface BLFacade  {
 		
 	@WebMethod public Image downloadImage(String imageName);
 	@WebMethod public int obtUser(String email);
+	@WebMethod public User devolverUser(String email);
 	@WebMethod public boolean buscarContraseña(String email, String pwsd);
 	@WebMethod public boolean eliminarCuenta(String email);
 	@WebMethod public List<Offer> getActiveOffers();

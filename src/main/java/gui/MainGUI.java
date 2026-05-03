@@ -18,6 +18,9 @@ import java.util.Locale;
 import java.util.ResourceBundle;
 import domain.*;
 import java.awt.event.ActionListener;
+import java.awt.Cursor;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.awt.event.ActionEvent;
 
 
@@ -244,6 +247,16 @@ public class MainGUI extends JFrame {
 
 		loged = new JLabel("Sin usuario");
 		loged.setBounds(10, 0, 122, 24);
+		loged.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		loged.addMouseListener(new MouseAdapter() {
+		    public void mouseClicked(MouseEvent e) {
+		        if (!sellerMail.equals("Sin usuario") && !sellerMail.equals("admin@gmail.com")) {
+		        	JFrame a = new UsuarioGUI(sellerMail, MainGUI.this);
+					a.setVisible(true);
+		        }
+		    }
+		});
+		
 		jContentPane.add(loged);
 		close.setVisible(false);
 		
@@ -276,6 +289,8 @@ public class MainGUI extends JFrame {
 			aceptar_visuali.setVisible(false);
 			close.setVisible(false);
 			this.setTitle(ResourceBundle.getBundle("Etiquetas").getString("MainGUI.MainTitle"));
+			loged.setText("Sin usuario");
+			this.sellerMail = "Sin usuario";
 		}
 		else {
 			try {
