@@ -98,7 +98,7 @@ public class valoracionGUI extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				String desc = Descripcion.getText();
 				BLFacade bl = MainGUI.getBusinessLogic();
-				if((buttonGroup.getSelection() != null) && !(bl.hayRese(mailVend,mailComp,prodRese.getId()))) {
+				if((buttonGroup.getSelection() != null) && (bl.hayRese(mailVend,mailComp,prodRese.getId()))) {
 					String val = buttonGroup.getSelection().getActionCommand();
 					Valoraciones valora = new Valoraciones(null,mailVend,mailComp,val,desc);
 					bl.publicarValoracion(valora);
@@ -108,7 +108,7 @@ public class valoracionGUI extends JFrame {
 					timer.start();
 				}
 				else{
-					textoConf.setText("Eyy, no has seleccionado tu puntuación");
+					textoConf.setText("Error: has hecho algo mal");
 				}
 			}
 		});

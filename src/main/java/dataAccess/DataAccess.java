@@ -551,7 +551,7 @@ public class DataAccess {
 	public boolean hayRese(String eVend, String eComp, float idP) {
 	    try {
 	        TypedQuery<Long> query = db.createQuery(
-	            "SELECT COUNT(v) FROM Valoraciones v WHERE v.eVendedor = :email AND v.eComprador = :emailcom AND v.idProd = :idProd", 
+	            "SELECT COUNT(v) FROM Valoraciones v WHERE v.eVendedor = :email AND v.eComprador = :emailcom AND v.productoResena.id = :idProd", 
 	            Long.class
 	        );
 	        

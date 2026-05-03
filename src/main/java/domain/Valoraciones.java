@@ -21,6 +21,7 @@ public class Valoraciones {
 		
 	}
 	public Valoraciones(Offer productoResena, String eVendedor, String eComprador,  String val, String desc) {
+		
 		this.productoResena = productoResena;
 		this.eVendedor = eVendedor;
 		this.eComprador = eComprador;

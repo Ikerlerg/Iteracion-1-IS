@@ -123,6 +123,7 @@ public class CrearReseGUI extends JFrame {
 			BLFacade facade = MainGUI.getBusinessLogic();
 			List<Offer> offers = facade.getReseValid(this.buyerMail);
 			if (!offers.isEmpty()) {
+			
 				modeloOffer.addAll(offers);
 			}
 			else {
