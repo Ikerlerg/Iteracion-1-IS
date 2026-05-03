@@ -231,6 +231,26 @@ public class BLFacadeImplementation  implements BLFacade {
 		dbManager.close();
 		return res;
 	}
+	@WebMethod public boolean reportar(Reportes reporte) {
+        dbManager.open();
+        boolean res = dbManager.reportar(reporte);
+        dbManager.close();
+        return res;
+	
+	}
+	@WebMethod public List<Reportes> getReportesEnviados(String sellerMail){
+		dbManager.open();
+		List<Reportes> res = dbManager.getReportesEnviados(sellerMail);
+		dbManager.close();
+		return res;
+		
+	}
+	@WebMethod public List<Reportes> getReportesRecibidos(){
+		dbManager.open();
+		List<Reportes> res = dbManager.getReportesRecibidos();
+		dbManager.close();
+		return res;
+	}
 
 }
 

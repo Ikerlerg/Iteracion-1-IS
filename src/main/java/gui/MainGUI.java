@@ -59,10 +59,13 @@ public class MainGUI extends JFrame {
 	//variable para controlar si soy vendedor o comprador
 	 //(0=nada,1=vendedor,2=comprador)
 	private int mode = 0;
+	private final JButton buttonReportes = new JButton(""); 
 	
 	public MainGUI() {
 	}
-
+	/**
+	 * @wbp.parser.constructor
+	 */
 	public MainGUI(String mail, PrincipalGUI ventPadre) {
 		super();
 		
@@ -136,6 +139,36 @@ public class MainGUI extends JFrame {
 		
 		jContentPane = new JPanel();
 		jContentPane.setLayout(null);
+		
+
+		loged = new JLabel("Sin usuario");
+		loged.setBounds(10, 20, 122, 24);
+		loged.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		loged.addMouseListener(new MouseAdapter() {
+		    public void mouseClicked(MouseEvent e) {
+		        if (!sellerMail.equals("Sin usuario") && !sellerMail.equals("admin@gmail.com")) {
+		        	JFrame a = new UsuarioGUI(sellerMail, MainGUI.this);
+					a.setVisible(true);
+		        }
+		    }
+		});
+		
+		jContentPane.add(loged);
+		
+		close.setBounds(307, 22, 153, 20);
+		jContentPane.add(close);
+		close.setText(ResourceBundle.getBundle("Etiquetas").getString("MainGUI.close"));
+		close.setVisible(false);
+		
+		close.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				//actualizarEstadoUsuario("Sin usuario");
+				ventPadre.setVisible(true);
+  				Timer timer = new Timer(200, evt -> dispose());
+  				timer.setRepeats(false);
+  				timer.start();		
+			}
+		});
 		jContentPane.add(jLabelSelectOption);
 		jContentPane.add(jButtonCreateQuery);
 		jContentPane.add(jButtonQueryQueries);
@@ -180,6 +213,14 @@ public class MainGUI extends JFrame {
 		JComboBox IdiomaBox = new JComboBox<>(idi);
 		IdiomaBox.setBounds(10, 11, 64, 22);
 		panel.add(IdiomaBox);
+		buttonReportes.setBounds(10, 35, 101, 20);
+		panel.add(buttonReportes);
+		buttonReportes.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				//
+			}
+		});
+	
 		
 		//Sincro de Idiomas
 		String idiomaActual = Locale.getDefault().getLanguage();
@@ -239,36 +280,6 @@ public class MainGUI extends JFrame {
 				System.exit(1);
 			}
 		});*/
-		
-		close.setBounds(307, 22, 153, 20);
-		jContentPane.add(close);
-		close.setText(ResourceBundle.getBundle("Etiquetas").getString("MainGUI.close"));
-		
-
-		loged = new JLabel("Sin usuario");
-		loged.setBounds(10, 0, 122, 24);
-		loged.setCursor(new Cursor(Cursor.HAND_CURSOR));
-		loged.addMouseListener(new MouseAdapter() {
-		    public void mouseClicked(MouseEvent e) {
-		        if (!sellerMail.equals("Sin usuario") && !sellerMail.equals("admin@gmail.com")) {
-		        	JFrame a = new UsuarioGUI(sellerMail, MainGUI.this);
-					a.setVisible(true);
-		        }
-		    }
-		});
-		
-		jContentPane.add(loged);
-		close.setVisible(false);
-		
-		close.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				//actualizarEstadoUsuario("Sin usuario");
-				ventPadre.setVisible(true);
-  				Timer timer = new Timer(200, evt -> dispose());
-  				timer.setRepeats(false);
-  				timer.start();		
-			}
-		});
 		
 		
 		//Llamada al paint para que se carguen por primera vez todo los botones.

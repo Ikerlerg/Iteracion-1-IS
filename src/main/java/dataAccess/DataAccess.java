@@ -556,9 +556,37 @@ public class DataAccess {
 		query.setParameter("buyerMail", buyerMail);
 		return query.getResultList();
 	}
+	public boolean reportar(Reportes reporte) {
+	    try {       
+	        db.getTransaction().begin();
+	        db.persist(reporte); 	        
+	        db.getTransaction().commit();
+	        return true; 
+
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	        if (db.getTransaction().isActive()) {
+	            db.getTransaction().rollback();
+	        }
+	        return false;
+	    }
+	}
+	public List<Reportes> getReportesRecibidos() {
+		TypedQuery<Reportes> query = db.createQuery("SELECT o FROM Reportes", Reportes.class);
+		return query.getResultList();
+	}
+	public List<Reportes> getReportesEnviados(String bullerMail) {
+		TypedQuery<Reportes> query = db.createQuery("SELECT o FROM Reportes o WHERE o.eComprador = :bullerMail", Reportes.class);
+		query.setParameter("bullerMail", bullerMail);
+		return query.getResultList();
+	}
+
+		
+	
 	public void close() {
 		db.close();
 		System.out.println("DataAcess closed");
 	}
+	
 
 }
