@@ -79,8 +79,8 @@ public class CrearReseGUI extends JFrame {
 		        Offer ofertaSeleccionada = OfferList.getSelectedValue();
 		        if (ofertaSeleccionada != null) {
 		            String mailVendedor = ofertaSeleccionada.getEmail_vendedor();
-		            idProd = ofertaSeleccionada.getId();
-		            valoracionGUI valVentana = new valoracionGUI(null, buyerMail, mailVendedor, idProd);
+		            Offer productoResena = ofertaSeleccionada;
+		            valoracionGUI valVentana = new valoracionGUI(null, buyerMail, mailVendedor, productoResena);
 		            valVentana.setVisible(true);
 		            dispose(); 
 		        }

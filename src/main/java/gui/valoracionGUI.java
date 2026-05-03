@@ -31,7 +31,7 @@ public class valoracionGUI extends JFrame {
 	private JTextField Descripcion;
 	private final ButtonGroup buttonGroup = new ButtonGroup();
 	
-	public valoracionGUI(CrearReseGUI ventanaPadre, String mailComp, String mailVend, long idProd) {
+	public valoracionGUI(CrearReseGUI ventanaPadre, String mailComp, String mailVend, Offer productoResena) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -97,7 +97,7 @@ public class valoracionGUI extends JFrame {
 				BLFacade bl = MainGUI.getBusinessLogic();
 				if(buttonGroup.getSelection() != null) {
 					String val = buttonGroup.getSelection().getActionCommand();
-					Valoraciones valora = new Valoraciones(idProd,mailVend,mailComp,val,desc);
+					Valoraciones valora = new Valoraciones(productoResena,mailVend,mailComp,val,desc);
 					bl.publicarValoracion(valora);
 					textoConf.setText("Reseña enviada correctamente");
 					Timer timer = new Timer(2000, evt -> dispose());

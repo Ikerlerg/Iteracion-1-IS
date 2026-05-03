@@ -100,7 +100,7 @@ public class VisualizarReseGUI extends JFrame {
 					for (Valoraciones val : valoraciones){
 						Vector<Object> row = new Vector<Object>();
 						row.add(val.geteVendedor());
-						row.add(val.getIdProd()); 
+						row.add(val.getProductoResena()); 
 						row.add(val.getValoracion());
 						row.add(val.getDescripcion()); 
 						row.add(val);
