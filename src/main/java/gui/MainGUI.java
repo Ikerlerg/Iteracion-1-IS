@@ -210,6 +210,15 @@ public class MainGUI extends JFrame {
 		}
 
 		String[] idi = {"es","eus","en"};
+		buttonReportes.setBounds(10, 35, 101, 20);
+		panel.add(buttonReportes);
+		buttonReportes.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JFrame ventanaReportar= new VisualizarReportesGUI(MainGUI.this, sellerMail);
+				ventanaReportar.setVisible(true);
+			}
+		});
+	
 		
 
 		JComboBox IdiomaBox = new JComboBox<>(idi);
@@ -333,6 +342,8 @@ public class MainGUI extends JFrame {
 			
 			adminButton.setVisible(false);
 			aceptar_visuali.setVisible(false);
+		
+			buttonReportes.setVisible(false);
 			
 			close.setVisible(true);
 			close.setEnabled(false);
@@ -360,6 +371,11 @@ public class MainGUI extends JFrame {
 				if (mode == 1) {
 					aceptar_visuali.setText(ResourceBundle.getBundle("Etiquetas").getString("MainGUI.Visualizar"));
 					aceptar_visuali.setVisible(true);
+					buttonReportes.setVisible(false);
+				} else if (mode == 2) {
+					aceptar_visuali.setText(ResourceBundle.getBundle("Etiquetas").getString("MainGUI.Aceptar"));
+					aceptar_visuali.setVisible(true);
+					buttonReportes.setVisible(true);
 					adminButton.setVisible(false);
 					this.setSize(675, 336);
 				} else if (mode == 2) {
@@ -373,6 +389,7 @@ public class MainGUI extends JFrame {
 					aceptar_visuali.setVisible(true);
 					adminButton.setText(ResourceBundle.getBundle("Etiquetas").getString("MainGUI.Aceptar"));
 					adminButton.setVisible(true);
+					buttonReportes.setVisible(true);
 					this.setSize(675, 429);
 				}
 				this.setTitle(ResourceBundle.getBundle("Etiquetas").getString("MainGUI.MainTitle")+ ": "+sellerMail);
@@ -397,6 +414,9 @@ public class MainGUI extends JFrame {
 		bLogin.setText(ResourceBundle.getBundle("Etiquetas").getString("MainGUI.Login"));
 	    bRegist.setText(ResourceBundle.getBundle("Etiquetas").getString("MainGUI.Register"));
 	    close.setText(ResourceBundle.getBundle("Etiquetas").getString("MainGUI.close"));
+	    
+	    
+	  
 	    
 	}
 	

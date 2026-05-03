@@ -41,9 +41,10 @@ public class CrearReseGUI extends JFrame {
 	private JLabel OffersLabel = new JLabel("Lista de ofertas compradas:");
 	private JButton aceptarButton = new JButton("Crear valoración");
 	private JButton reportButton = new JButton("Reportar Producto");
+	BLFacade bl = MainGUI.getBusinessLogic();
 
 	private final JLabel avisoLabel = new JLabel("");
-	public CrearReseGUI(JFrame MainGUI, String mailComp, String mailVend, long idPrd) {
+	public CrearReseGUI(JFrame MainGUI, String mailComp, String mailVend) {
 		
 		this.buyerMail=mailComp;
 		this.sellerMail=mailVend;
@@ -123,11 +124,14 @@ public class CrearReseGUI extends JFrame {
 			BLFacade facade = MainGUI.getBusinessLogic();
 			List<Offer> offers = facade.getReseValid(this.buyerMail);
 			if (!offers.isEmpty()) {
-			
-				modeloOffer.addAll(offers);
+				for (Offer offer : offers) {
+				    if(bl.hayRese(offer.getEmail_vendedor(), buyerMail, offer.getId())) {
+						modeloOffer.addElement(offer);
+				    }
+				}
 			}
 			else {
-				//mensaje de que no hay ofertas publicas
+				OffersLabel.setText("No tienes ofertas aceptadas");
 			}
 
 		} catch (Exception e) {

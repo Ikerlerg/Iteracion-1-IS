@@ -562,7 +562,7 @@ public class DataAccess {
 	}
 	
 	//Este método devuelve true si no hay reseñas asociadas a un email de vendedor, email comprador e id de producto dados como paramétros. En caso contrario, devuelve false.
-	public boolean hayRese(String eVend, String eComp, float idP) {
+	public boolean hayRese(String eVend, String eComp, long idP) {
 	    try {
 	        TypedQuery<Long> query = db.createQuery(
 	            "SELECT COUNT(v) FROM Valoraciones v WHERE v.eVendedor = :email AND v.eComprador = :emailcom AND v.productoResena.id = :idProd", 
@@ -650,7 +650,7 @@ public class DataAccess {
 	}
 
 	public List<Reportes> getReportesRecibidos() {
-		TypedQuery<Reportes> query = db.createQuery("SELECT o FROM Reportes", Reportes.class);
+		TypedQuery<Reportes> query = db.createQuery("SELECT o FROM Reportes o", Reportes.class);
 		return query.getResultList();
 	}
 
