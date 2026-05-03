@@ -80,12 +80,12 @@ public class DataAccess {
 			db.getTransaction().begin();
 
 			// Create sellers y admin
-			Seller admin = new Seller("admin@gmail.com", "admin", "admin", -1);
-			Seller seller1 = new Seller("seller1@gmail.com", "12345", "Aitor Fernandez", 1);
-			Seller seller2 = new Seller("seller22@gmail.com", "54321", "Ane Gaztañaga", 1);
-			Seller seller3 = new Seller("seller3@gmail.com", "12121", "Test Seller", 1);
-			User comp1 = new User("comprador1@gmail.com", "12345", "Comprador1", 2);
-			User comp2 = new User("comprador2@gmail.com", "12345", "Comprador2", 2);
+			Seller admin = new Seller("admin@gmail.com", "admin", "admin", -1, null);
+			Seller seller1 = new Seller("seller1@gmail.com", "12345", "Aitor Fernandez", 1, null);
+			Seller seller2 = new Seller("seller22@gmail.com", "54321", "Ane Gaztañaga", 1, null);
+			Seller seller3 = new Seller("seller3@gmail.com", "12121", "Test Seller", 1, null);
+			User comp1 = new User("comprador1@gmail.com", "12345", "Comprador1", 2, null);
+			User comp2 = new User("comprador2@gmail.com", "12345", "Comprador2", 2, null);
 
 			// Create products
 			Date today = UtilDate.trim(new Date());
@@ -96,12 +96,12 @@ public class DataAccess {
 
 			Sale s4 = seller2.addSale("imac 27", "7 urte, dena ondo dabil", 1, 200, today, null);
 			Sale s5 = seller2.addSale("iphone 17", "oso gutxi erabilita", 2, 400, today, null);
-			Sale s6 = seller2.addSale("orbea mendiko bizikleta", "29\" 10 urte, mantenua behar du", 3, 225, today, null);
+			Sale s6 = seller2.addSale("orbea mendiko bizikleta", "29\" 10 urte, mantenua behar du", 3, 225, today,
+					null);
 			Sale s7 = seller2.addSale("polar kilor erlojua", "Vantage M, ondo dago", 3, 30, today, null);
 
 			Sale s8 = seller3.addSale("sukaldeko mahaia", "1.8*0.8, 4 aulkiekin. Prezio finkoa", 3, 45, today, null);
 
-			
 			// Offers para seller 1
 			seller1.addOffer(10.0, "seller1@gmail.com", s1, true);
 			seller1.addOffer(20.0, "seller1@gmail.com", s2, true);
@@ -230,15 +230,27 @@ public class DataAccess {
 		return res;
 	}
 
-	public List<Valoraciones> getReseñasPublicadas(String mail, String busq) {
+	public List<Valoraciones> getReseñasPublicadas(String mail, String busq, int tipo) {
 		System.out.println(">> DataAccess: getReseñas=> from= " + busq);
 
 		List<Valoraciones> res = new ArrayList<Valoraciones>();
-		TypedQuery<Valoraciones> query = db.createQuery(
-				"SELECT v FROM Valoraciones v WHERE v.eVendedor LIKE ?1 AND v.eComprador LIKE ?2", Valoraciones.class);
-		query.setParameter(1, "%" + busq + "%");
-		query.setParameter(2, mail);
-
+		TypedQuery<Valoraciones> query = null;
+		
+		if (tipo == 2) {
+			query = db.createQuery(
+	                "SELECT v FROM Valoraciones v, User u " +
+	                "WHERE v.eVendedor = :mail AND v.eComprador = u.email AND u.name LIKE :busq",
+	                Valoraciones.class);
+	        query.setParameter("mail", mail);
+	        query.setParameter("busq", "%" + busq + "%");
+		} else {
+			query = db.createQuery(
+	                "SELECT v FROM Valoraciones v, User u " +
+	                "WHERE v.eComprador = :mail AND v.eVendedor = u.email AND u.name LIKE :busq",
+	                Valoraciones.class);
+	        query.setParameter("mail", mail);
+	        query.setParameter("busq", "%" + busq + "%");
+		}
 		List<Valoraciones> reseñas = query.getResultList();
 		for (Valoraciones r : reseñas) {
 			res.add(r);
@@ -306,9 +318,9 @@ public class DataAccess {
 		if (db.find(User.class, email) == null) {
 			User registrar;
 			if (tipo == 1) {
-				registrar = new Seller(email, password, name, tipo);
+				registrar = new Seller(email, password, name, tipo, null);
 			} else {
-				registrar = new User(email, password, name, tipo);
+				registrar = new User(email, password, name, tipo, null);
 			}
 
 			db.persist(registrar);
@@ -520,42 +532,84 @@ public class DataAccess {
 
 	// Meter reseña en la base de datos
 	public boolean publicarVal(Valoraciones val) {
-		   try {
-		        
-		        db.getTransaction().begin();
-		        Seller vend = db.find(Seller.class, val.geteVendedor());
+		try {
 
-		        if (vend != null) {
-		        	Valoraciones valGuardada = db.merge(val); 
-					vend.addValoracion(valGuardada);
-					db.persist(vend); 
-					db.getTransaction().commit();
-					return true;
+			db.getTransaction().begin();
+			Seller vend = db.find(Seller.class, val.geteVendedor());
 
-		        } else {
-		            db.getTransaction().rollback();
-		            return false; 
-		        }
+			if (vend != null) {
+				Valoraciones valGuardada = db.merge(val);
+				vend.addValoracion(valGuardada);
+				db.persist(vend);
+				db.getTransaction().commit();
+				return true;
 
-		    } catch (Exception e) {
-		        e.printStackTrace();
-		        if (db.getTransaction().isActive()) {
-		            db.getTransaction().rollback();
-		        }
-		        return false;
-		    }
+			} else {
+				db.getTransaction().rollback();
+				return false;
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			if (db.getTransaction().isActive()) {
+				db.getTransaction().rollback();
+			}
+			return false;
+		}
 	}
 
 	public List<String> getAllSellers() {
 		TypedQuery<String> query = db.createQuery("SELECT o.email FROM Seller o", String.class);
 		return query.getResultList();
 	}
-	
+
 	public List<Offer> getReseValid(String buyerMail) {
-		TypedQuery<Offer> query = db.createQuery("SELECT DISTINCT o FROM Offer o JOIN o.pendientes p WHERE o.estado = false AND p.buyerMail = :buyerMail AND p.estado = 1", Offer.class);
+		TypedQuery<Offer> query = db.createQuery(
+				"SELECT DISTINCT o FROM Offer o JOIN o.pendientes p WHERE o.estado = false AND p.buyerMail = :buyerMail AND p.estado = 1",
+				Offer.class);
 		query.setParameter("buyerMail", buyerMail);
 		return query.getResultList();
 	}
+	
+	public boolean guardarImagen(String email, String fotoBase64) {
+	    try {
+	        db.getTransaction().begin();
+	        
+	        User usuario = db.find(User.class, email);
+	        
+	        if (usuario != null) {
+	            usuario.setFotoBase64(fotoBase64);
+	            
+	            db.getTransaction().commit();
+	            return true;
+	        } else {
+	            db.getTransaction().rollback();
+	            return false;
+	        }
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	        if (db.getTransaction().isActive()) {
+	            db.getTransaction().rollback();
+	        }
+	        return false;
+	    }
+	}
+
+	public String obtenerImagen(String email) {
+	    try {
+	        User usuario = db.find(User.class, email);
+	        
+	        if (usuario != null) {
+	            return usuario.getFotoBase64();
+	        }
+	        return null;
+	        
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	        return null;
+	    }
+	}
+	
 	public void close() {
 		db.close();
 		System.out.println("DataAcess closed");

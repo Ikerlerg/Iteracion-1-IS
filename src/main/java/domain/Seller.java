@@ -41,8 +41,8 @@ public class Seller extends User {
 		super();
 	}
 
-	public Seller(String email, String password, String name, int tipo){
-		super(email, password, name, tipo);
+	public Seller(String email, String password, String name, int tipo, String fotoBase64){
+		super(email, password, name, tipo, fotoBase64);
 	}
 	 public Valoraciones addValoracion(Valoraciones val) {
 	    	this.valoracion.add(val);

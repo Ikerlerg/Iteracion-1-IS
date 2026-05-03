@@ -176,9 +176,9 @@ public class BLFacadeImplementation  implements BLFacade {
 	}
     
     @WebMethod
-    public List<Valoraciones> getReseñasPublicadas(String email, String busq) {
+    public List<Valoraciones> getReseñasPublicadas(String email, String busq, int tipo) {
 		dbManager.open();
-		List<Valoraciones> res = dbManager.getReseñasPublicadas(email, busq);
+		List<Valoraciones> res = dbManager.getReseñasPublicadas(email, busq, tipo);
 		dbManager.close();
 		return res;
 	}
@@ -231,6 +231,19 @@ public class BLFacadeImplementation  implements BLFacade {
 		dbManager.close();
 		return res;
 	}
-
+	
+	@WebMethod public boolean guardarImagen(String email, String fotoBase64){
+		dbManager.open();
+		boolean res = dbManager.guardarImagen(email, fotoBase64);
+		dbManager.close();
+		return res;
+	}
+	
+	@WebMethod public String obtenerImagen(String email){
+		dbManager.open();
+		String res = dbManager.obtenerImagen(email);
+		dbManager.close();
+		return res;
+	}
 }
 

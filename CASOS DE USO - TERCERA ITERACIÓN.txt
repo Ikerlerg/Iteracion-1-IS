@@ -31,5 +31,5 @@ Clase de dominio principal: Report
 Descripción:
 
 CASO DE USO 8: Cambiar foto de perfil del usuario 
-Clase de dominio principal: Report
+Clase de dominio principal: Usuario
 Descripción:

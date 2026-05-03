@@ -66,15 +66,21 @@ public interface BLFacade  {
 	@WebMethod  public boolean Registro(String email, String password, String name, int tipo);
 		
 	@WebMethod public Image downloadImage(String imageName);
+	@WebMethod public String obtenerImagen(String email);
+	@WebMethod public boolean guardarImagen(String email, String fotoBase64);
+	
 	@WebMethod public int obtUser(String email);
 	@WebMethod public User devolverUser(String email);
+	
 	@WebMethod public boolean buscarContraseña(String email, String pwsd);
 	@WebMethod public boolean eliminarCuenta(String email);
+	
 	@WebMethod public List<Offer> getActiveOffers();
 	@WebMethod public boolean acceptOffer(Long offerId);
 	@WebMethod public boolean proposeOffer(Long offerId, String buyer);
 	@WebMethod public List<Offer> getAcceptedOffers(String sellerEmail);
-	@WebMethod public List<Valoraciones> getReseñasPublicadas(String email, String busq);
+	
+	@WebMethod public List<Valoraciones> getReseñasPublicadas(String email, String busq, int tipo);
 	@WebMethod public boolean cancelOffer(Long offerId, String buyerMail);
 	@WebMethod public List<Offer> getUserOffers(String mail);
 	@WebMethod public boolean terminarSolicitud(Long offerId, String buyerMail);
