@@ -31,7 +31,7 @@ public class valoracionGUI extends JFrame {
 	private JTextField Descripcion;
 	private final ButtonGroup buttonGroup = new ButtonGroup();
 	
-	public valoracionGUI(CrearReseGUI ventanaPadre, String mailComp, String mailVend, long idProd) {
+	public valoracionGUI(CrearReseGUI ventanaPadre, String mailComp, String mailVend, Offer prodRese) {
 		
 		BLFacade bl = MainGUI.getBusinessLogic();
 		
@@ -98,9 +98,9 @@ public class valoracionGUI extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				String desc = Descripcion.getText();
 				BLFacade bl = MainGUI.getBusinessLogic();
-				if((buttonGroup.getSelection() != null) && !(bl.hayRese(mailVend,mailComp,idProd))) {
+				if((buttonGroup.getSelection() != null) && !(bl.hayRese(mailVend,mailComp,prodRese.getId()))) {
 					String val = buttonGroup.getSelection().getActionCommand();
-					Valoraciones valora = new Valoraciones(productoResena,mailVend,mailComp,val,desc);
+					Valoraciones valora = new Valoraciones(null,mailVend,mailComp,val,desc);
 					bl.publicarValoracion(valora);
 					textoConf.setText("Reseña enviada correctamente");
 					Timer timer = new Timer(2000, evt -> dispose());

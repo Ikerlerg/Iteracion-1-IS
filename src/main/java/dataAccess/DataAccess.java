@@ -114,16 +114,9 @@ public class DataAccess {
 			seller2.addOffer(30.0, "seller22@gmail.com", s7, true);
 
 			// Create offers para seller 3
-			seller3.addOffer(45.0, "seller3@gmail.com",
-					new Sale("sukaldeko mahaia", "1.8*0.8, 4 aulkiekin. Prezio finkoa", 3, 45, today, null, seller3),
-					true);
-			
-			//Valoraciones long idProd, String eVendedor, String eComprador,  String val, String desc
-			Valoraciones val1 = new Valoraciones(1,"seller1@gmail.com","comprador1@gmail.com","3","Buen producto");
-			seller1.addValor(val1);
-			Valoraciones val2 = new Valoraciones(2,"seller1@gmail.com","comprador1@gmail.com","5","Buen producto");
-			seller1.addValor(val2);
+			seller3.addOffer(45.0, "seller3@gmail.com",s8,true);
 
+			
 			db.persist(seller1);
 			db.persist(seller2);
 			db.persist(seller3);
