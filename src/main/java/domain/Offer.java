@@ -20,7 +20,7 @@ public class Offer {
 	private boolean estado; //true = activa.
 	@ElementCollection(fetch = FetchType.EAGER)
 	private List<Solicitud> pendientes= new ArrayList<>();
-	@ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+	@ManyToOne(cascade = CascadeType.MERGE)
 	private Sale orgSale;
 	
 	public Offer() {

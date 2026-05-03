@@ -1,6 +1,8 @@
 package domain;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.GeneratedValue;
 
 @Entity
@@ -8,7 +10,8 @@ public class Valoraciones {
 	@Id @GeneratedValue
 	private long idRes;
 	
-	private long idProd;
+	@ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+	private Offer productoResena;
 	private String eVendedor;
 	private String eComprador;
 	private String valoracion;
@@ -17,16 +20,16 @@ public class Valoraciones {
 	public Valoraciones() {
 		
 	}
-	public Valoraciones(long idProd, String eVendedor, String eComprador,  String val, String desc) {
-		this.idProd = idProd;
+	public Valoraciones(Offer productoResena, String eVendedor, String eComprador,  String val, String desc) {
+		this.productoResena = productoResena;
 		this.eVendedor = eVendedor;
 		this.eComprador = eComprador;
 		this.valoracion = val;
 		this.descripcion = desc;
 	}
 	
-	public long getIdProd() {
-		return idProd;
+	public Offer getProductoResena() {
+		return productoResena;
 	}
 	public String geteVendedor() {
 		return eVendedor;
@@ -43,8 +46,7 @@ public class Valoraciones {
 	
 	@Override
 	public String toString() {
-		return "Valoraciones [id de la reseña=" + idRes + ", id del producto=" + idProd + ", email del vendedor=" + eVendedor + ", email del comprador="
-				+ eComprador + ", valoracion=" + valoracion + "]";
+		return "Feedback del comprador: " + valoracion;
 	}
 
 	

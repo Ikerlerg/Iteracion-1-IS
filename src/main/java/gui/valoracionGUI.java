@@ -100,7 +100,7 @@ public class valoracionGUI extends JFrame {
 				BLFacade bl = MainGUI.getBusinessLogic();
 				if((buttonGroup.getSelection() != null) && !(bl.hayRese(mailVend,mailComp,idProd))) {
 					String val = buttonGroup.getSelection().getActionCommand();
-					Valoraciones valora = new Valoraciones(idProd,mailVend,mailComp,val,desc);
+					Valoraciones valora = new Valoraciones(productoResena,mailVend,mailComp,val,desc);
 					bl.publicarValoracion(valora);
 					textoConf.setText("Reseña enviada correctamente");
 					Timer timer = new Timer(2000, evt -> dispose());

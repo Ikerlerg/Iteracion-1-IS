@@ -90,34 +90,28 @@ public class DataAccess {
 			// Create products
 			Date today = UtilDate.trim(new Date());
 
-			seller1.addSale("futbol baloia", "oso polita, gutxi erabilita", 2, 10, today, null);
-			seller1.addSale("salomon mendiko botak", "44 zenbakia, 3 ateraldi", 2, 20, today, null);
-			seller1.addSale("samsung 42\" telebista", "berria, erabili gabe", 2, 175, today, null);
+			Sale s1 = seller1.addSale("futbol baloia", "oso polita, gutxi erabilita", 2, 10, today, null);
+			Sale s2 = seller1.addSale("salomon mendiko botak", "44 zenbakia, 3 ateraldi", 2, 20, today, null);
+			Sale s3 = seller1.addSale("samsung 42\" telebista", "berria, erabili gabe", 2, 175, today, null);
 
-			seller2.addSale("imac 27", "7 urte, dena ondo dabil", 1, 200, today, null);
-			seller2.addSale("iphone 17", "oso gutxi erabilita", 2, 400, today, null);
-			seller2.addSale("orbea mendiko bizikleta", "29\" 10 urte, mantenua behar du", 3, 225, today, null);
-			seller2.addSale("polar kilor erlojua", "Vantage M, ondo dago", 3, 30, today, null);
+			Sale s4 = seller2.addSale("imac 27", "7 urte, dena ondo dabil", 1, 200, today, null);
+			Sale s5 = seller2.addSale("iphone 17", "oso gutxi erabilita", 2, 400, today, null);
+			Sale s6 = seller2.addSale("orbea mendiko bizikleta", "29\" 10 urte, mantenua behar du", 3, 225, today, null);
+			Sale s7 = seller2.addSale("polar kilor erlojua", "Vantage M, ondo dago", 3, 30, today, null);
 
-			seller3.addSale("sukaldeko mahaia", "1.8*0.8, 4 aulkiekin. Prezio finkoa", 3, 45, today, null);
+			Sale s8 = seller3.addSale("sukaldeko mahaia", "1.8*0.8, 4 aulkiekin. Prezio finkoa", 3, 45, today, null);
 
-			// Create offers para seller 1
-			seller1.addOffer(10.0, "seller1@gmail.com",
-					new Sale("futbol baloia", "oso polita, gutxi erabilita", 2, 10, today, null, seller1), true);
-			seller1.addOffer(20.0, "seller1@gmail.com",
-					new Sale("salomon mendiko botak", "44 zenbakia, 3 ateraldi", 2, 20, today, null, seller1), true);
-			seller1.addOffer(175.0, "seller1@gmail.com",
-					new Sale("samsung 42\" telebista", "berria, erabili gabe", 2, 175, today, null, seller1), true);
+			
+			// Offers para seller 1
+			seller1.addOffer(10.0, "seller1@gmail.com", s1, true);
+			seller1.addOffer(20.0, "seller1@gmail.com", s2, true);
+			seller1.addOffer(175.0, "seller1@gmail.com", s3, true);
 
-			// Create offers para seller 2
-			seller2.addOffer(200.0, "seller22@gmail.com",
-					new Sale("imac 27", "7 urte, dena ondo dabil", 1, 200, today, null, seller2), true);
-			seller2.addOffer(400.0, "seller22@gmail.com",
-					new Sale("iphone 17", "oso gutxi erabilita", 2, 400, today, null, seller2), true);
-			seller2.addOffer(225.0, "seller22@gmail.com", new Sale("orbea mendiko bizikleta",
-					"29\" 10 urte, mantenua behar du", 3, 225, today, null, seller2), true);
-			seller2.addOffer(30.0, "seller22@gmail.com",
-					new Sale("polar kilor erlojua", "Vantage M, ondo dago", 3, 30, today, null, seller2), true);
+			// Offers para seller 2
+			seller2.addOffer(200.0, "seller22@gmail.com", s4, true);
+			seller2.addOffer(400.0, "seller22@gmail.com", s5, true);
+			seller2.addOffer(225.0, "seller22@gmail.com", s6, true);
+			seller2.addOffer(30.0, "seller22@gmail.com", s7, true);
 
 			// Create offers para seller 3
 			seller3.addOffer(45.0, "seller3@gmail.com",
@@ -534,26 +528,30 @@ public class DataAccess {
 
 	// Meter reseña en la base de datos
 	public boolean publicarVal(Valoraciones val) {
-		try {
-			db.getTransaction().begin();
+		   try {
+		        
+		        db.getTransaction().begin();
+		        Seller vend = db.find(Seller.class, val.geteVendedor());
 
-			TypedQuery<Seller> query;
-			query = db.createQuery("SELECT s FROM Seller s WHERE s.email = :email", Seller.class);
-			query.setParameter("email", val.geteVendedor());
-			Seller vend = query.getSingleResult();
+		        if (vend != null) {
+		        	Valoraciones valGuardada = db.merge(val); 
+					vend.addValoracion(valGuardada);
+					db.persist(vend); 
+					db.getTransaction().commit();
+					return true;
 
-			db.persist(val);
-			vend.addValoracion(val);
+		        } else {
+		            db.getTransaction().rollback();
+		            return false; 
+		        }
 
-			db.getTransaction().commit();
-			return true;
-		} catch (Exception e) {
-			e.printStackTrace();
-			if (db.getTransaction().isActive()) {
-				db.getTransaction().rollback();
-			}
-			return false;
-		}
+		    } catch (Exception e) {
+		        e.printStackTrace();
+		        if (db.getTransaction().isActive()) {
+		            db.getTransaction().rollback();
+		        }
+		        return false;
+		    }
 	}
 	
 	//Este método devuelve true si no hay reseñas asociadas a un email de vendedor, email comprador e id de producto dados como paramétros. En caso contrario, devuelve false.
