@@ -46,6 +46,7 @@ public class CrearReseGUI extends JFrame {
 		
 		this.buyerMail=mailComp;
 		this.sellerMail=mailVend;
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		getContentPane().setLayout(null);
 		this.setSize(new Dimension(420, 350));
 		

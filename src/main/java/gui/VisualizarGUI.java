@@ -37,6 +37,7 @@ public class VisualizarGUI extends JFrame {
 	public VisualizarGUI(MainGUI parent, String mail) {
 		this.parentFrame = parent;
 		this.sellerMail = mail;
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		
 		this.getContentPane().setLayout(null);
 		this.setSize(new Dimension(500, 300));
