@@ -113,9 +113,10 @@ public class DataAccess {
 			seller2.addOffer(225.0, "seller22@gmail.com", s6, true);
 			seller2.addOffer(30.0, "seller22@gmail.com", s7, true);
 
-			// Offers para seller 3
-			seller3.addOffer(45.0, "seller3@gmail.com", s8, true);
+			// Create offers para seller 3
+			seller3.addOffer(45.0, "seller3@gmail.com",s8,true);
 
+			
 			db.persist(seller1);
 			db.persist(seller2);
 			db.persist(seller3);
@@ -557,6 +558,27 @@ public class DataAccess {
 			return false;
 		}
 	}
+	
+	//Este método devuelve true si no hay reseñas asociadas a un email de vendedor, email comprador e id de producto dados como paramétros. En caso contrario, devuelve false.
+	public boolean hayRese(String eVend, String eComp, float idP) {
+	    try {
+	        TypedQuery<Long> query = db.createQuery(
+	            "SELECT COUNT(v) FROM Valoraciones v WHERE v.eVendedor = :email AND v.eComprador = :emailcom AND v.productoResena.id = :idProd", 
+	            Long.class
+	        );
+	        
+	        query.setParameter("email", eVend);
+	        query.setParameter("emailcom", eComp);
+	        query.setParameter("idProd", idP);
+	        Long numResenas = query.getSingleResult();
+	        return numResenas == 0;
+	        
+	    } catch(Exception e) {
+	        e.printStackTrace();
+	        return false;
+	    }
+	}
+	
 
 	public List<String> getAllSellers() {
 		TypedQuery<String> query = db.createQuery("SELECT o.email FROM Seller o", String.class);
@@ -572,47 +594,74 @@ public class DataAccess {
 	}
 	
 	public boolean guardarImagen(String email, String fotoBase64) {
-	    try {
-	        db.getTransaction().begin();
-	        
-	        User usuario = db.find(User.class, email);
-	        
-	        if (usuario != null) {
-	            usuario.setFotoBase64(fotoBase64);
-	            
-	            db.getTransaction().commit();
-	            return true;
-	        } else {
-	            db.getTransaction().rollback();
-	            return false;
-	        }
-	    } catch (Exception e) {
-	        e.printStackTrace();
-	        if (db.getTransaction().isActive()) {
-	            db.getTransaction().rollback();
-	        }
-	        return false;
-	    }
+		try {
+			db.getTransaction().begin();
+				
+				User usuario = db.find(User.class, email);
+				
+			if (usuario != null) {
+				usuario.setFotoBase64(fotoBase64);
+					
+				db.getTransaction().commit();
+				return true;
+			} else {
+				db.getTransaction().rollback();
+				return false;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			if (db.getTransaction().isActive()) {
+				db.getTransaction().rollback();
+			}
+			return false;
+		}
+	}
+
+	public boolean reportar(Reportes reporte) {
+		try {       
+	    	db.getTransaction().begin();
+	    	db.persist(reporte); 	        
+	    	db.getTransaction().commit();
+	    	return true; 
+		} catch (Exception e) {
+	    	e.printStackTrace();
+	    	if (db.getTransaction().isActive()) {
+	        	db.getTransaction().rollback();
+	    	}
+	    	return false;
+		}
 	}
 
 	public String obtenerImagen(String email) {
-	    try {
-	        User usuario = db.find(User.class, email);
+		try {
+		    User usuario = db.find(User.class, email);
 	        
-	        if (usuario != null) {
-	            return usuario.getFotoBase64();
-	        }
-	        return null;
+	 	    if (usuario != null) {
+	  	    	return usuario.getFotoBase64();
+	  	    }
+	   		return null;
 	        
-	    } catch (Exception e) {
-	        e.printStackTrace();
-	        return null;
-	    }
+		} catch (Exception e) {
+		    e.printStackTrace();
+		    return null;
+		}
+	}
+
+	public List<Reportes> getReportesRecibidos() {
+		TypedQuery<Reportes> query = db.createQuery("SELECT o FROM Reportes", Reportes.class);
+		return query.getResultList();
+	}
+
+	public List<Reportes> getReportesEnviados(String bullerMail) {
+		TypedQuery<Reportes> query = db.createQuery("SELECT o FROM Reportes o WHERE o.eComprador = :bullerMail", Reportes.class);
+		query.setParameter("bullerMail", bullerMail);
+		return query.getResultList();
 	}
 	
 	public void close() {
 		db.close();
 		System.out.println("DataAcess closed");
 	}
+	
 
 }

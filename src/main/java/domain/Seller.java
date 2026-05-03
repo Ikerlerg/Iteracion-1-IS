@@ -73,6 +73,11 @@ public class Seller extends User {
         sales.add(sale);
         return sale;
 	}
+	
+
+	public void addValor(Valoraciones val)  {	
+		valoracion.add(val);
+	}
 	/**
 	 * This method checks if the ride already exists for that driver
 	 * 

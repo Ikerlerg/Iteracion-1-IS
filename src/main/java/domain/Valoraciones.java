@@ -10,7 +10,7 @@ public class Valoraciones {
 	@Id @GeneratedValue
 	private long idRes;
 	
-	@ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+	@ManyToOne(cascade = CascadeType.MERGE)
 	private Offer productoResena;
 	private String eVendedor;
 	private String eComprador;
@@ -21,6 +21,7 @@ public class Valoraciones {
 		
 	}
 	public Valoraciones(Offer productoResena, String eVendedor, String eComprador,  String val, String desc) {
+		
 		this.productoResena = productoResena;
 		this.eVendedor = eVendedor;
 		this.eComprador = eComprador;

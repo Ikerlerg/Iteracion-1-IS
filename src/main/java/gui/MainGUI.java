@@ -65,10 +65,11 @@ public class MainGUI extends JFrame {
 	//variable para controlar si soy vendedor o comprador
 	 //(0=nada,1=vendedor,2=comprador)
 	private int mode = 0;
-	
-	/*public MainGUI() {
-	}*/
+	private final JButton buttonReportes = new JButton(""); 
 
+	public MainGUI() {
+	}
+	
 	public MainGUI(String mail, PrincipalGUI ventPadre) {
 		super();
 		
@@ -146,6 +147,36 @@ public class MainGUI extends JFrame {
 		
 		jContentPane = new JPanel();
 		jContentPane.setLayout(null);
+		
+
+		loged = new JLabel("Sin usuario");
+		loged.setBounds(10, 20, 122, 24);
+		loged.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		loged.addMouseListener(new MouseAdapter() {
+		    public void mouseClicked(MouseEvent e) {
+		        if (!sellerMail.equals("Sin usuario") && !sellerMail.equals("admin@gmail.com")) {
+		        	JFrame a = new UsuarioGUI(sellerMail, MainGUI.this);
+					a.setVisible(true);
+		        }
+		    }
+		});
+		
+		jContentPane.add(loged);
+		
+		close.setBounds(513, 32, 143, 20);
+		jContentPane.add(close);
+		close.setText(ResourceBundle.getBundle("Etiquetas").getString("MainGUI.close"));
+		close.setVisible(false);
+		
+		close.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				//actualizarEstadoUsuario("Sin usuario");
+				ventPadre.setVisible(true);
+  				Timer timer = new Timer(200, evt -> dispose());
+  				timer.setRepeats(false);
+  				timer.start();		
+			}
+		});
 		jContentPane.add(jLabelSelectOption);
 		jContentPane.add(jButtonCreateQuery);
 		jContentPane.add(jButtonQueryQueries);
@@ -195,10 +226,14 @@ public class MainGUI extends JFrame {
 		}
 
 		String[] idi = {"es","eus","en"};
-		close.setBounds(513, 32, 143, 20);
-		panel.add(close);
-		close.setText(ResourceBundle.getBundle("Etiquetas").getString("MainGUI.close"));
-		close.setVisible(false);
+
+		buttonReportes.setBounds(10, 35, 101, 20);
+		panel.add(buttonReportes);
+		buttonReportes.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				//
+			}
+		});
 		
 		close.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -212,6 +247,7 @@ public class MainGUI extends JFrame {
 		JComboBox IdiomaBox = new JComboBox<>(idi);
 		IdiomaBox.setBounds(10, 9, 64, 22);
 		jContentPane.add(IdiomaBox);
+
 		//Sincro de Idiomas
 		String idiomaActual = Locale.getDefault().getLanguage();
 		if (idiomaActual.equals("eus")) {
@@ -247,7 +283,6 @@ public class MainGUI extends JFrame {
 		setContentPane(jContentPane);
 		setTitle(ResourceBundle.getBundle("Etiquetas").getString("MainGUI.MainTitle"));
 		
-
 		loged = new JLabel("Sin usuario");
 		loged.setHorizontalAlignment(SwingConstants.CENTER);
 		loged.setBounds(511, 9, 143, 24);
@@ -273,6 +308,14 @@ public class MainGUI extends JFrame {
 				MainGUI.this.setVisible(false);
 			}
 		});
+		
+		//Metodo para cerrar todo el sistema si se cierra la ventana Main
+		/*addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosing(WindowEvent e) {
+				System.exit(1);
+			}
+		});*/
 		
 		
 		// Cambio de idioma

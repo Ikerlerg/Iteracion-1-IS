@@ -87,5 +87,9 @@ public interface BLFacade  {
 	@WebMethod public boolean publicarValoracion(Valoraciones val1);
 	@WebMethod public List<String> getAllSellers();
 	@WebMethod public List<Offer> getReseValid(String buyerMail);
+	@WebMethod public boolean reportar(Reportes reporte);
+	@WebMethod public List<Reportes> getReportesEnviados(String sellerMail);
+	@WebMethod public List<Reportes> getReportesRecibidos();
 	
-}
+	@WebMethod public boolean hayRese(String eVend, String eComp, float idP);
+ }

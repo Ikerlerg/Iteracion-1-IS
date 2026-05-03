@@ -24,17 +24,14 @@ import java.util.ResourceBundle;
 import java.awt.event.ActionEvent;
 import javax.swing.Timer;
 
-public class valoracionGUI extends JFrame {
+public class ReportarGUI extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTextField Descripcion;
-	private final ButtonGroup buttonGroup = new ButtonGroup();
+
 	
-	public valoracionGUI(CrearReseGUI ventanaPadre, String mailComp, String mailVend, Offer prodRese) {
-		
-		BLFacade bl = MainGUI.getBusinessLogic();
-		
+	public ReportarGUI(CrearReseGUI ventanaPadre, String mailComp, String mailVend, Offer productoReporte) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -42,48 +39,18 @@ public class valoracionGUI extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JRadioButton radio1 = new JRadioButton("1");
-		buttonGroup.add(radio1);
-		radio1.setActionCommand("1");
-		radio1.setBounds(122, 187, 40, 35);
-		contentPane.add(radio1);
-		
 		JLabel lblNewLabel = new JLabel("Descripción:");
 		lblNewLabel.setBounds(50, 44, 100, 16);
 		contentPane.add(lblNewLabel);
 		
 		Descripcion = new JTextField();
-		Descripcion.setBounds(60, 72, 321, 107);
+		Descripcion.setBounds(60, 72, 321, 129);
 		contentPane.add(Descripcion);
 		Descripcion.setColumns(10);
 		
-		JRadioButton radio4 = new JRadioButton("4");
-		buttonGroup.add(radio4);
-		radio4.setActionCommand("4");
-		radio4.setBounds(248, 187, 40, 35);
-		contentPane.add(radio4);
-		
-		JRadioButton radio2 = new JRadioButton("2");
-		buttonGroup.add(radio2);
-		radio2.setBounds(160, 187, 40, 35);
-		radio2.setActionCommand("2");
-		contentPane.add(radio2);
-		
-		JRadioButton radio3 = new JRadioButton("3");
-		buttonGroup.add(radio3);
-		radio3.setBounds(204, 187, 40, 35);
-		radio3.setActionCommand("3");
-		contentPane.add(radio3);
-		
-		JRadioButton radio5 = new JRadioButton("5");
-		buttonGroup.add(radio5);
-		radio5.setBounds(292, 187, 40, 35);
-		radio5.setActionCommand("5");
-		contentPane.add(radio5);
-		
-		JLabel lblNewLabel_1 = new JLabel("Reseña ");
+		JLabel lblNewLabel_1 = new JLabel("REPORTE");
 		lblNewLabel_1.setFont(new Font("Dialog", Font.PLAIN, 28));
-		lblNewLabel_1.setBounds(160, 0, 108, 35);
+		lblNewLabel_1.setBounds(140, 10, 156, 35);
 		contentPane.add(lblNewLabel_1);
 		
 		JLabel textoConf = new JLabel("");
@@ -98,17 +65,16 @@ public class valoracionGUI extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				String desc = Descripcion.getText();
 				BLFacade bl = MainGUI.getBusinessLogic();
-				if((buttonGroup.getSelection() != null) && (bl.hayRese(mailVend,mailComp,prodRese.getId()))) {
-					String val = buttonGroup.getSelection().getActionCommand();
-					Valoraciones valora = new Valoraciones(null,mailVend,mailComp,val,desc);
-					bl.publicarValoracion(valora);
-					textoConf.setText("Reseña enviada correctamente");
-					Timer timer = new Timer(2000, evt -> dispose());
+				if(!desc.isBlank()) {	
+					Reportes reporte = new Reportes(productoReporte, mailComp,desc);
+					bl.reportar(reporte);
+					textoConf.setText("Reporte enviado, espere respuesta pacientemente");
+					Timer timer = new Timer(3000, evt -> dispose());
 					timer.setRepeats(false);
 					timer.start();
 				}
-				else{
-					textoConf.setText("Error: has hecho algo mal");
+				else {
+					textoConf.setText("Por favor, incluya el motivo de reporte");
 				}
 			}
 		});

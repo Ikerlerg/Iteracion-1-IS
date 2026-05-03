@@ -40,6 +40,7 @@ public class CrearReseGUI extends JFrame {
 	protected JList <Offer>OfferList = new JList<>(modeloOffer);
 	private JLabel OffersLabel = new JLabel("Lista de ofertas compradas:");
 	private JButton aceptarButton = new JButton("Crear valoración");
+	private JButton reportButton = new JButton("Reportar Producto");
 
 	private final JLabel avisoLabel = new JLabel("");
 	public CrearReseGUI(JFrame MainGUI, String mailComp, String mailVend, long idPrd) {
@@ -63,15 +64,17 @@ public class CrearReseGUI extends JFrame {
 		            if (OfferList.getSelectedIndex() != -1) {
 		                // Hay un elemento seleccionado, habilitamos el botón
 		                aceptarButton.setEnabled(true);
+		                reportButton.setEnabled(true);
 		            } else {
 		                // No hay nada seleccionado (o se deseleccionó), apagamos el botón
 		                aceptarButton.setEnabled(false);
+		                reportButton.setEnabled(false);
 		            }
 		        }
 		    }
 		});
 		
-		aceptarButton.setBounds(149, 233, 127, 20);
+		aceptarButton.setBounds(224, 234, 127, 20);
 		getContentPane().add(aceptarButton);
 		aceptarButton.setEnabled(false);
 		aceptarButton.addActionListener(new ActionListener() {
@@ -80,7 +83,7 @@ public class CrearReseGUI extends JFrame {
 		        if (ofertaSeleccionada != null) {
 		            String mailVendedor = ofertaSeleccionada.getEmail_vendedor();
 		            Offer productoResena = ofertaSeleccionada;
-		            valoracionGUI valVentana = new valoracionGUI(null, buyerMail, mailVendedor, productoResena);
+		            valoracionGUI valVentana = new valoracionGUI(CrearReseGUI.this, buyerMail, mailVendedor, productoResena);
 		            valVentana.setVisible(true);
 		            dispose(); 
 		        }
@@ -94,6 +97,24 @@ public class CrearReseGUI extends JFrame {
 				JScrollPane scrollPane = new JScrollPane(OfferList);
 				scrollPane.setBounds(68, 44, 283, 117);
 				getContentPane().add(scrollPane);
+				
+				
+				reportButton.setEnabled(false);
+				reportButton.setBounds(68, 234, 127, 20);
+				getContentPane().add(reportButton);
+				reportButton.addActionListener(new ActionListener() {
+				    public void actionPerformed(ActionEvent e) {
+				        Offer ofertaSeleccionada = OfferList.getSelectedValue();
+				        if (ofertaSeleccionada != null) {
+				            String mailVendedor = ofertaSeleccionada.getEmail_vendedor();
+				            Offer productoReport = ofertaSeleccionada;
+				            ReportarGUI ventanaReporte = new ReportarGUI(CrearReseGUI.this, buyerMail, mailVendedor, productoReport);
+				           ventanaReporte.setVisible(true);
+				            dispose(); 
+				        }
+				    }
+				});
+				
 	}
 	
 	private void loadAceptSoli() {
@@ -102,6 +123,7 @@ public class CrearReseGUI extends JFrame {
 			BLFacade facade = MainGUI.getBusinessLogic();
 			List<Offer> offers = facade.getReseValid(this.buyerMail);
 			if (!offers.isEmpty()) {
+			
 				modeloOffer.addAll(offers);
 			}
 			else {
@@ -112,5 +134,4 @@ public class CrearReseGUI extends JFrame {
 			e.printStackTrace();
 		}
  }
-
 }
