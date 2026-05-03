@@ -33,7 +33,7 @@ public class UsuarioGUI extends JFrame {
     private JFrame thisFrame;
     public JPanel panel_1;
     
-    private static final int baseSize = 32;
+    private static final int baseSize = 86;
 	private static final String basePath="src/main/resources/images/";
 	private static final long serialVersionUID = 1L;
 
@@ -71,6 +71,31 @@ public class UsuarioGUI extends JFrame {
 		panel_1 = new JPanel();
 		panel_1.setBounds(26, 26, 86, 86);
 		getContentPane().add(panel_1);
+		
+		try {
+		    BLFacade pFacade = MainGUI.getBusinessLogic();
+		    String fotoGuardadaBase64 = pFacade.obtenerImagen(userMail); 
+
+		    if (fotoGuardadaBase64 != null && !fotoGuardadaBase64.isEmpty()) {
+		        ImageIcon icon = decodeBase64ToImageIcon(fotoGuardadaBase64);
+		        panel_1.add(new JLabel(icon));
+		    } else {
+		        ImageIcon im = new ImageIcon("userDefault.png");
+		        
+		        Image escalada = im.getImage().getScaledInstance(86,86,Image.SCALE_SMOOTH);
+		        ImageIcon iconDefault = new ImageIcon(escalada);
+		        
+		        JLabel panelImagenDefault = new JLabel(iconDefault);
+		        
+		        panel_1.add(panelImagenDefault);
+		    }
+		    panel_1.revalidate();
+		    panel_1.repaint();
+		    
+		} catch (Exception ex) {
+		    ex.printStackTrace();
+		}
+		
 		/*
 		btnNewButton_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -100,7 +125,7 @@ public class UsuarioGUI extends JFrame {
 		
 		btnReseñas.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				JFrame a = new VisualizarReseGUI(userMail);
+				JFrame a = new VisualizarReseGUI(userMail, usuario.getTipo());
 				a.setVisible(true);
 			}
 		});
@@ -117,9 +142,9 @@ public class UsuarioGUI extends JFrame {
 		getContentPane().add(btnBorrar);
 		
 		btnFoto.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {/*
+			public void actionPerformed(ActionEvent e) {
 				JFileChooser fileChooser = new JFileChooser();
-				FileNameExtensionFilter filter = new FileNameExtensionFilter("JPG & GIF", "jpg", "gif");
+				FileNameExtensionFilter filter = new FileNameExtensionFilter("JPG, PNG & GIF", "jpg", "png", "gif");
 				fileChooser.setFileFilter(filter);
 		        int result = fileChooser.showOpenDialog(null);  
 
@@ -127,24 +152,65 @@ public class UsuarioGUI extends JFrame {
 
 		        if (result == JFileChooser.APPROVE_OPTION) {
 		            targetFile = fileChooser.getSelectedFile();
-		            panel_1.removeAll();
-		            panel_1.repaint();
-
 		            try {
-		                targetImg = rescale(ImageIO.read(targetFile));
-		                BLFacade facade = MainGUI.getBusinessLogic();
-		                facade.guardarImagen(userMail, targetImg);
+		            	BufferedImage originalImg = ImageIO.read(targetFile);
+		                targetImg = rescale(originalImg);
 		                
+		                String fotoBase64 = encodeImageToBase64(targetImg);
+		                
+		                BLFacade facade = MainGUI.getBusinessLogic();
+		                facade.guardarImagen(userMail, fotoBase64);
+		                
+		                panel_1.removeAll();
+                		panel_1.setLayout(new BorderLayout(0, 0));
+                		panel_1.add(new JLabel(new ImageIcon(targetImg))); 
+                		
+                		panel_1.revalidate();
+                		panel_1.repaint();
 		                //encodeFileToBase64Binary(targetFile);
 		            } catch (IOException ex) {
 		                //Logger.getLogger(MainAppFrame.class.getName()).log(Level.SEVERE, null, ex);
+		            	ex.printStackTrace();
 		            }
 		            
 		            panel_1.setLayout(new BorderLayout(0, 0));
 		            panel_1.add(new JLabel(new ImageIcon(targetImg))); 
 		            setVisible(true);
 
-		        }*/
+		        }
+		        /*
+		        JFileChooser fileChooser = new JFileChooser();
+        		FileNameExtensionFilter filter = new FileNameExtensionFilter("JPG, PNG & GIF", "jpg", "png", "gif");
+        		fileChooser.setFileFilter(filter);
+        		int result = fileChooser.showOpenDialog(null);  
+
+        		if (result == JFileChooser.APPROVE_OPTION) {
+            		targetFile = fileChooser.getSelectedFile();
+
+            		try {
+                		// 1. Leemos la imagen del archivo y la reescalamos
+                		BufferedImage originalImg = ImageIO.read(targetFile);
+                		targetImg = rescale(originalImg); // Tu método que la pone a 32x32
+
+                		// 2. La convertimos a String Base64
+                		String fotoBase64 = encodeImageToBase64(targetImg);
+
+                		// 3. Guardamos en BD a través de la lógica de negocio
+                		BLFacade facade = MainGUI.getBusinessLogic();
+                		// OJO: Tendrás que adaptar guardarImagen para que reciba un String
+                		facade.guardarImagen(userMail, fotoBase64); 
+                
+                		// 4. Actualizamos la interfaz
+                		panel_1.removeAll();
+                		panel_1.setLayout(new BorderLayout(0, 0));
+                		panel_1.add(new JLabel(new ImageIcon(targetImg))); 
+                		panel_1.revalidate(); // Usar revalidate + repaint asegura que se actualice visualmente
+                		panel_1.repaint();
+
+            		} catch (IOException ex) {
+                		ex.printStackTrace();
+            		}
+        		}*/
 			}
 		});
 		btnFoto.setBounds(26, 123, 86, 29);
@@ -158,7 +224,7 @@ public class UsuarioGUI extends JFrame {
 		this.addWindowListener(new java.awt.event.WindowAdapter() {
 		    @Override
 		    public void windowClosed(java.awt.event.WindowEvent windowEvent) {
-		        // Al cerrarse esta ventana, hacemos que la principal vuelva a ser visible
+		        // Al cerrarse esta ventana, la principal vuelve a ser visible
 		        if (mGUI != null) {
 		            mGUI.setVisible(true);
 		        }
@@ -175,7 +241,7 @@ public class UsuarioGUI extends JFrame {
         return resizedImage;
     }
 	
-	
+	/*
 	public  String encodeFileToBase64Binary(File file){
         try {
             @SuppressWarnings("resource")
@@ -194,6 +260,29 @@ public class UsuarioGUI extends JFrame {
 
         return encodedfile;
     }
-	
+	*/
+	public String encodeImageToBase64(BufferedImage img) {
+	    try {
+	        java.io.ByteArrayOutputStream baos = new java.io.ByteArrayOutputStream();
+	        ImageIO.write(img, "png", baos);
+	        byte[] bytes = baos.toByteArray();
+	        return Base64.getEncoder().encodeToString(bytes);
+	    } catch (IOException e) {
+	        e.printStackTrace();
+	        return null;
+	    }
+	}
+
+	public ImageIcon decodeBase64ToImageIcon(String base64String) {
+	    try {
+	        byte[] bytes = Base64.getDecoder().decode(base64String);
+	        java.io.ByteArrayInputStream bais = new java.io.ByteArrayInputStream(bytes);
+	        BufferedImage img = ImageIO.read(bais);
+	        return new ImageIcon(img);
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	        return null;
+	    }
+	}
 	
 }

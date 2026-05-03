@@ -1,5 +1,7 @@
 package gui;
 
+import javax.imageio.ImageIO;
+
 /**
  * @author Software Engineering teachers
  */
@@ -12,8 +14,11 @@ import businessLogic.*;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.Image;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.awt.image.BufferedImage;
+import java.util.Base64;
 import java.util.Locale;
 import java.util.ResourceBundle;
 import domain.*;
@@ -47,6 +52,7 @@ public class MainGUI extends JFrame {
 	//private JRadioButton rdbtnNewRadioButton_1;
 	//private JRadioButton rdbtnNewRadioButton_2;
 	private JPanel panel;
+	private JPanel panel_1;
 	//private final ButtonGroup buttonGroup = new ButtonGroup();
 	protected final JButton bLogin = new JButton(); 
 	protected final JButton bRegist = new JButton();
@@ -60,21 +66,19 @@ public class MainGUI extends JFrame {
 	 //(0=nada,1=vendedor,2=comprador)
 	private int mode = 0;
 	private final JButton buttonReportes = new JButton(""); 
-	
+/*
 	public MainGUI() {
 	}
-	/**
-	 * @wbp.parser.constructor
-	 */
+	*/
 	public MainGUI(String mail, PrincipalGUI ventPadre) {
 		super();
 		
 		ventPadre.setVisible(false);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.sellerMail=mail;
-		this.setSize(495, 290);
+		this.setSize(675, 429);
 		jLabelSelectOption = new JLabel(ResourceBundle.getBundle("Etiquetas").getString("MainGUI.SelectOption"));
-		jLabelSelectOption.setBounds(0, 0, 481, 63);
+		jLabelSelectOption.setBounds(72, 9, 429, 63);
 		jLabelSelectOption.setFont(new Font("Tahoma", Font.BOLD, 13));
 		jLabelSelectOption.setForeground(Color.BLACK);
 		jLabelSelectOption.setHorizontalAlignment(SwingConstants.CENTER);
@@ -109,14 +113,18 @@ public class MainGUI extends JFrame {
 		buttonGroup.add(rdbtnNewRadioButton_2);*/
 	
 		panel = new JPanel();
-		panel.setBounds(0, 189, 481, 63);
+		panel.setBounds(0, 137, 654, 253);
 		panel.setLayout(null);
 		//panel.add(rdbtnNewRadioButton_1);
 		//panel.add(rdbtnNewRadioButton_2);
 		//panel.add(rdbtnNewRadioButton);
 		
+		panel_1 = new JPanel();
+		panel_1.setBounds(540, 40, 86, 86);
+		panel_1.setLayout(new java.awt.BorderLayout());
+		
 		jButtonCreateQuery = new JButton();
-		jButtonCreateQuery.setBounds(0, 63, 481, 63);
+		jButtonCreateQuery.setBounds(20, 83, 481, 63);
 		jButtonCreateQuery.setEnabled(false);
 		jButtonCreateQuery.setText(ResourceBundle.getBundle("Etiquetas").getString("MainGUI.CreateSale"));
 		jButtonCreateQuery.addActionListener(new java.awt.event.ActionListener() {
@@ -127,7 +135,7 @@ public class MainGUI extends JFrame {
 		});
 		
 		jButtonQueryQueries = new JButton();
-		jButtonQueryQueries.setBounds(0, 126, 481, 63);
+		jButtonQueryQueries.setBounds(20, 157, 481, 63);
 		jButtonQueryQueries.setEnabled(true);
 		jButtonQueryQueries.setText(ResourceBundle.getBundle("Etiquetas").getString("MainGUI.QuerySales"));
 		jButtonQueryQueries.addActionListener(new java.awt.event.ActionListener() {
@@ -139,24 +147,31 @@ public class MainGUI extends JFrame {
 		
 		jContentPane = new JPanel();
 		jContentPane.setLayout(null);
-		
-
-		loged = new JLabel("Sin usuario");
-		loged.setBounds(10, 20, 122, 24);
-		loged.setCursor(new Cursor(Cursor.HAND_CURSOR));
-		loged.addMouseListener(new MouseAdapter() {
-		    public void mouseClicked(MouseEvent e) {
-		        if (!sellerMail.equals("Sin usuario") && !sellerMail.equals("admin@gmail.com")) {
-		        	JFrame a = new UsuarioGUI(sellerMail, MainGUI.this);
-					a.setVisible(true);
-		        }
-		    }
+		jContentPane.add(jLabelSelectOption);
+		jContentPane.add(jButtonCreateQuery);
+		jContentPane.add(jButtonQueryQueries);
+		jContentPane.add(panel);
+		jContentPane.add(panel_1);
+		bRegist.setBounds(511, 69, 143, 21);
+		bRegist.setText(ResourceBundle.getBundle("Etiquetas").getString("MainGUI.Register"));
+		panel.add(bRegist);
+		bRegist.setVisible(false);
+		bRegist.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JFrame ventanaRegister = new RegisterGUI(ventPadre);
+				ventanaRegister.setVisible(true);
+				MainGUI.this.setVisible(false);
+			}
 		});
 		
-		jContentPane.add(loged);
 		
-		close.setBounds(307, 22, 153, 20);
-		jContentPane.add(close);
+		aceptar_visuali.setBounds(20, 93, 481, 63);
+		panel.add(aceptar_visuali);
+		
+		adminButton.setBounds(20, 167, 481, 63);
+		panel.add(adminButton);
+		close.setBounds(511, 38, 143, 20);
+		panel.add(close);
 		close.setText(ResourceBundle.getBundle("Etiquetas").getString("MainGUI.close"));
 		close.setVisible(false);
 		
@@ -169,50 +184,32 @@ public class MainGUI extends JFrame {
   				timer.start();		
 			}
 		});
-		jContentPane.add(jLabelSelectOption);
-		jContentPane.add(jButtonCreateQuery);
-		jContentPane.add(jButtonQueryQueries);
-		jContentPane.add(panel);
 		
-	
-		bLogin.setBounds(328, 5, 143, 21);
-		bLogin.setHorizontalAlignment(SwingConstants.LEADING);
-		bLogin.setText(ResourceBundle.getBundle("Etiquetas").getString("MainGUI.Login")); 
-		panel.add(bLogin);
-		bLogin.setVisible(false);
-		bLogin.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				JFrame ventanaLogin = new LoginGUI(ventPadre);
-				ventanaLogin.setVisible(true);
-				MainGUI.this.setVisible(false);
-			}
-		});
-		
-		
-		bRegist.setHorizontalAlignment(SwingConstants.LEADING);
-		bRegist.setBounds(328, 30, 143, 21);
-		bRegist.setText(ResourceBundle.getBundle("Etiquetas").getString("MainGUI.Register"));
-		panel.add(bRegist);
-		bRegist.setVisible(false);
-		bRegist.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				JFrame ventanaRegister = new RegisterGUI(ventPadre);
-				ventanaRegister.setVisible(true);
-				MainGUI.this.setVisible(false);
-			}
-		});
-		
-		aceptar_visuali.setBounds(276, 33, 186, 22);
-		panel.add(aceptar_visuali);
-		
-		adminButton.setBounds(276, 5, 186, 20);
-		panel.add(adminButton);
-		
+		try {
+		    BLFacade pFacade = getBusinessLogic();
+		    String fotoGuardadaBase64 = pFacade.obtenerImagen(mail); 
+
+		    if (fotoGuardadaBase64 != null && !fotoGuardadaBase64.isEmpty()) {
+		        ImageIcon icon = decodeBase64ToImageIcon(fotoGuardadaBase64);
+		        panel_1.add(new JLabel(icon));
+		    } else {
+		        ImageIcon im = new ImageIcon("userDefault.png");
+		        
+		        Image escalada = im.getImage().getScaledInstance(86,86,Image.SCALE_SMOOTH);
+		        ImageIcon iconDefault = new ImageIcon(escalada);
+		        
+		        JLabel panelImagenDefault = new JLabel(iconDefault);
+		        
+		        panel_1.add(panelImagenDefault);
+		    }
+		    panel_1.revalidate();
+		    panel_1.repaint();
+		    	
+		} catch (Exception ex) {
+		    ex.printStackTrace();
+		}
 
 		String[] idi = {"es","eus","en"};
-		JComboBox IdiomaBox = new JComboBox<>(idi);
-		IdiomaBox.setBounds(10, 11, 64, 22);
-		panel.add(IdiomaBox);
 		buttonReportes.setBounds(10, 35, 101, 20);
 		panel.add(buttonReportes);
 		buttonReportes.addActionListener(new ActionListener() {
@@ -223,6 +220,11 @@ public class MainGUI extends JFrame {
 		});
 	
 		
+
+		JComboBox IdiomaBox = new JComboBox<>(idi);
+		IdiomaBox.setBounds(10, 9, 64, 22);
+		jContentPane.add(IdiomaBox);
+
 		//Sincro de Idiomas
 		String idiomaActual = Locale.getDefault().getLanguage();
 		if (idiomaActual.equals("eus")) {
@@ -232,22 +234,6 @@ public class MainGUI extends JFrame {
 		} else {
 			IdiomaBox.setSelectedIndex(0);
 		}
-		
-		
-		
-		// Cambio de idioma
-        IdiomaBox.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                if(IdiomaBox.getSelectedIndex() == 0) {
-                    Locale.setDefault(new Locale("es"));
-                } else if(IdiomaBox.getSelectedIndex() == 1) {
-                    Locale.setDefault(new Locale("eus"));
-                } else if(IdiomaBox.getSelectedIndex() == 2) {
-                    Locale.setDefault(new Locale("en"));
-                }
-                paintAgain(); 
-            }
-        });
 		adminButton.setVisible(false);
 		
 		aceptar_visuali.setVisible(false);
@@ -274,6 +260,46 @@ public class MainGUI extends JFrame {
 		setContentPane(jContentPane);
 		setTitle(ResourceBundle.getBundle("Etiquetas").getString("MainGUI.MainTitle"));
 		
+		loged = new JLabel("Sin usuario");
+		loged.setHorizontalAlignment(SwingConstants.CENTER);
+		loged.setBounds(511, 9, 143, 24);
+		loged.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		loged.addMouseListener(new MouseAdapter() {
+		    public void mouseClicked(MouseEvent e) {
+		        if (!sellerMail.equals("Sin usuario") && !sellerMail.equals("admin@gmail.com")) {
+		        	JFrame a = new UsuarioGUI(sellerMail, MainGUI.this);
+					a.setVisible(true);
+		        }
+		    }
+		});
+		
+		jContentPane.add(loged);
+		bLogin.setBounds(511, 101, 143, 21);
+		panel.add(bLogin);
+		
+		bLogin.setText(ResourceBundle.getBundle("Etiquetas").getString("MainGUI.Login"));
+		buttonReportes.setBounds(511, 6, 143, 21);
+		panel.add(buttonReportes);
+		
+		JLabel lblVersion = new JLabel(); //$NON-NLS-1$ //$NON-NLS-2$
+		lblVersion.setText("1.21 v"); //$NON-NLS-1$ //$NON-NLS-2$
+		lblVersion.setBounds(10, 34, 64, 14);
+		jContentPane.add(lblVersion);
+		
+		buttonReportes.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				//
+			}
+		});
+		bLogin.setVisible(false);
+		bLogin.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JFrame ventanaLogin = new LoginGUI(ventPadre);
+				ventanaLogin.setVisible(true);
+				MainGUI.this.setVisible(false);
+			}
+		});
+		
 		//Metodo para cerrar todo el sistema si se cierra la ventana Main
 		/*addWindowListener(new WindowAdapter() {
 			@Override
@@ -281,6 +307,21 @@ public class MainGUI extends JFrame {
 				System.exit(1);
 			}
 		});*/
+		
+		
+		// Cambio de idioma
+        IdiomaBox.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                if(IdiomaBox.getSelectedIndex() == 0) {
+                    Locale.setDefault(new Locale("es"));
+                } else if(IdiomaBox.getSelectedIndex() == 1) {
+                    Locale.setDefault(new Locale("eus"));
+                } else if(IdiomaBox.getSelectedIndex() == 2) {
+                    Locale.setDefault(new Locale("en"));
+                }
+                paintAgain(); 
+            }
+        });
 		
 		
 		//Llamada al paint para que se carguen por primera vez todo los botones.
@@ -295,15 +336,21 @@ public class MainGUI extends JFrame {
 			jButtonCreateQuery.setEnabled(false);
 			bLogin.setEnabled(true);
 			bLogin.setVisible(true);
+			
 			bRegist.setEnabled(true);
 			bRegist.setVisible(true);
+			
 			adminButton.setVisible(false);
 			aceptar_visuali.setVisible(false);
-			close.setVisible(false);
+		
 			buttonReportes.setVisible(false);
+			
+			close.setVisible(true);
+			close.setEnabled(false);
 			this.setTitle(ResourceBundle.getBundle("Etiquetas").getString("MainGUI.MainTitle"));
 			loged.setText("Sin usuario");
 			this.sellerMail = "Sin usuario";
+			this.setSize(675, 336);
 		}
 		else {
 			try {
@@ -311,10 +358,16 @@ public class MainGUI extends JFrame {
 				mode = appFacadeInterface.obtUser(email);
 				this.sellerMail=email;
 				
-				bLogin.setVisible(false);
-				bRegist.setVisible(false);
+				bLogin.setVisible(true);
+				bRegist.setVisible(true);
 				close.setVisible(true);
+				
+				bLogin.setEnabled(false);
+				bRegist.setEnabled(false);
+				close.setEnabled(true);
 
+				jButtonCreateQuery.setEnabled(true);
+				
 				if (mode == 1) {
 					aceptar_visuali.setText(ResourceBundle.getBundle("Etiquetas").getString("MainGUI.Visualizar"));
 					aceptar_visuali.setVisible(true);
@@ -323,6 +376,13 @@ public class MainGUI extends JFrame {
 					aceptar_visuali.setText(ResourceBundle.getBundle("Etiquetas").getString("MainGUI.Aceptar"));
 					aceptar_visuali.setVisible(true);
 					buttonReportes.setVisible(true);
+					adminButton.setVisible(false);
+					this.setSize(675, 336);
+				} else if (mode == 2) {
+					aceptar_visuali.setText(ResourceBundle.getBundle("Etiquetas").getString("MainGUI.Aceptar"));
+					aceptar_visuali.setVisible(true);
+					adminButton.setVisible(false);
+					this.setSize(675, 336);
 				} 
 				else if(mode==-1) {
 					aceptar_visuali.setText(ResourceBundle.getBundle("Etiquetas").getString("MainGUI.Visualizar"));
@@ -330,9 +390,12 @@ public class MainGUI extends JFrame {
 					adminButton.setText(ResourceBundle.getBundle("Etiquetas").getString("MainGUI.Aceptar"));
 					adminButton.setVisible(true);
 					buttonReportes.setVisible(true);
+					this.setSize(675, 429);
 				}
-				
 				this.setTitle(ResourceBundle.getBundle("Etiquetas").getString("MainGUI.MainTitle")+ ": "+sellerMail);
+				
+				loged.setText(sellerMail);
+				
 				panel.revalidate();
 				panel.repaint();
 				
@@ -357,5 +420,15 @@ public class MainGUI extends JFrame {
 	    
 	}
 	
-	
+	public ImageIcon decodeBase64ToImageIcon(String base64String) {
+	    try {
+	        byte[] bytes = Base64.getDecoder().decode(base64String);
+	        java.io.ByteArrayInputStream bais = new java.io.ByteArrayInputStream(bytes);
+	        BufferedImage img = ImageIO.read(bais);
+	        return new ImageIcon(img);
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	        return null;
+	    }
+	}
 }
