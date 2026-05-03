@@ -33,7 +33,7 @@ public class valoracionGUI extends JFrame {
 	
 	public valoracionGUI(CrearReseGUI ventanaPadre, String mailComp, String mailVend, Offer prodRese) {
 		
-		BLFacade bl = MainGUI.getBusinessLogic();
+
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
@@ -98,12 +98,12 @@ public class valoracionGUI extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				String desc = Descripcion.getText();
 				BLFacade bl = MainGUI.getBusinessLogic();
-				if((buttonGroup.getSelection() != null) && (bl.hayRese(mailVend,mailComp,prodRese.getId()))) {
+				if(buttonGroup.getSelection() != null) {
 					String val = buttonGroup.getSelection().getActionCommand();
-					Valoraciones valora = new Valoraciones(null,mailVend,mailComp,val,desc);
+					Valoraciones valora = new Valoraciones(prodRese,mailVend,mailComp,val,desc);
 					bl.publicarValoracion(valora);
 					textoConf.setText("Reseña enviada correctamente");
-					Timer timer = new Timer(2000, evt -> dispose());
+					Timer timer = new Timer(1000, evt -> dispose());
 					timer.setRepeats(false);
 					timer.start();
 				}

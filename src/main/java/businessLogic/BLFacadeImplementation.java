@@ -269,7 +269,7 @@ public class BLFacadeImplementation implements BLFacade {
 	}
 
 	@WebMethod
-	public boolean hayRese(String eVend, String eComp, float idP) {
+	public boolean hayRese(String eVend, String eComp, long idP) {
 		dbManager.open();
 		boolean res = dbManager.hayRese(eVend, eComp, idP);
 		dbManager.close();
