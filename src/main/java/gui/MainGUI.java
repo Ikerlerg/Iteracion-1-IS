@@ -217,7 +217,8 @@ public class MainGUI extends JFrame {
 		panel.add(buttonReportes);
 		buttonReportes.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//
+				JFrame ventanaReportar= new VisualizarReportesGUI(MainGUI.this, sellerMail);
+				ventanaReportar.setVisible(true);
 			}
 		});
 	
@@ -299,6 +300,7 @@ public class MainGUI extends JFrame {
 			adminButton.setVisible(false);
 			aceptar_visuali.setVisible(false);
 			close.setVisible(false);
+			buttonReportes.setVisible(false);
 			this.setTitle(ResourceBundle.getBundle("Etiquetas").getString("MainGUI.MainTitle"));
 			loged.setText("Sin usuario");
 			this.sellerMail = "Sin usuario";
@@ -316,15 +318,18 @@ public class MainGUI extends JFrame {
 				if (mode == 1) {
 					aceptar_visuali.setText(ResourceBundle.getBundle("Etiquetas").getString("MainGUI.Visualizar"));
 					aceptar_visuali.setVisible(true);
+					buttonReportes.setVisible(false);
 				} else if (mode == 2) {
 					aceptar_visuali.setText(ResourceBundle.getBundle("Etiquetas").getString("MainGUI.Aceptar"));
 					aceptar_visuali.setVisible(true);
+					buttonReportes.setVisible(true);
 				} 
 				else if(mode==-1) {
 					aceptar_visuali.setText(ResourceBundle.getBundle("Etiquetas").getString("MainGUI.Visualizar"));
 					aceptar_visuali.setVisible(true);
 					adminButton.setText(ResourceBundle.getBundle("Etiquetas").getString("MainGUI.Aceptar"));
 					adminButton.setVisible(true);
+					buttonReportes.setVisible(true);
 				}
 				
 				this.setTitle(ResourceBundle.getBundle("Etiquetas").getString("MainGUI.MainTitle")+ ": "+sellerMail);
@@ -346,6 +351,9 @@ public class MainGUI extends JFrame {
 		bLogin.setText(ResourceBundle.getBundle("Etiquetas").getString("MainGUI.Login"));
 	    bRegist.setText(ResourceBundle.getBundle("Etiquetas").getString("MainGUI.Register"));
 	    close.setText(ResourceBundle.getBundle("Etiquetas").getString("MainGUI.close"));
+	    
+	    
+	  
 	    
 	}
 	

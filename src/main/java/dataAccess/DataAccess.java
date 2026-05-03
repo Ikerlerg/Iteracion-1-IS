@@ -594,7 +594,7 @@ public class DataAccess {
 	    }
 	}
 	public List<Reportes> getReportesRecibidos() {
-		TypedQuery<Reportes> query = db.createQuery("SELECT o FROM Reportes", Reportes.class);
+		TypedQuery<Reportes> query = db.createQuery("SELECT o FROM Reportes o", Reportes.class);
 		return query.getResultList();
 	}
 	public List<Reportes> getReportesEnviados(String bullerMail) {
