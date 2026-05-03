@@ -10,10 +10,26 @@ CASO DE USO 2: Modo Invitado
 Clase de dominio principal: Guest
 Descripción: Un usuario no registrado navega por el catálogo para acceder a las listas de los productos disponibles, pero la interfaz gráfica oculta o bloquea los botones de compra, realizar oferta y publicar valoración hasta que inicie sesión.
 
-CASO DE USO 3: Modificar un producto publicado
-Clase de dominio principal: Vendedor
-Descripción: El vendedor accede a sus artículos en venta, selecciona un producto que él mismo ha publicado previamente y modifica sus detalles (título, precio o descripción). El sistema actualiza los datos, siempre y cuando el producto no haya sido vendido todavía.
+CASO DE USO 3: Eliminar cuenta
+Clase de dominio principal: Usuario
+Descripción: El usuario accede a su cuenta y se introduce a su menú propio para poder confirmar si quiere borrar su cuenta de la base de datos.
 
-CASO DE USO 4: Eliminar un producto publicado
+CASO DE USO 4: Cambiar contraseña de cuenta
+Clase de dominio principal: Usuario
+Descripción: El usuario accede a su cuenta y se cambia su contraseña, teniendo que poner la que tiene actualmente y después confirmando la nueva que desee, actualizándose la propia base de datos.
+
+CASO DE USO 5: Visualizar reseñas propias 
 Clase de dominio principal: Vendedor
-Descripción: El vendedor selecciona un producto de su lista de artículos publicados y lo elimina permanentemente del sistema, retirándolo del catálogo general de la aplicación, con la condición de que el producto no haya sido vendido todavía.
+Descripción: El vendedor puede acceder a la lista de compradores que han rellenado reseñas sobre los productos del propio vendedor, pudiendo filtrar una búsqueda por los correos de los compradores.
+
+CASO DE USO 6: Presentar una denuncia a un producto comprado 
+Clase de dominio principal: Report
+Descripción:
+
+CASO DE USO 7: Presentar una denuncia a un producto comprado 
+Clase de dominio principal: Report
+Descripción:
+
+CASO DE USO 8: Cambiar foto de perfil del usuario 
+Clase de dominio principal: Report
+Descripción:
