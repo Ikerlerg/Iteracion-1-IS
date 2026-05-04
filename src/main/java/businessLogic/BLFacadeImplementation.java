@@ -305,6 +305,7 @@ public class BLFacadeImplementation implements BLFacade {
 		boolean res = dbManager.actualizarEstado(idRep, estado);
 		dbManager.close();
 		return res;
+	}
 
 	@WebMethod
 	public boolean crearCupon(String codigo,double porcentaje) {
