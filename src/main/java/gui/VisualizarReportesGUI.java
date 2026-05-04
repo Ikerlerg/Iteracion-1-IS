@@ -52,7 +52,7 @@ public class VisualizarReportesGUI extends JFrame {
 		this.tipo = facade.obtUser(mail);
 
 		this.setSize(new Dimension(500, 353));
-		this.setTitle(ResourceBundle.getBundle("Etiquetas").getString("MainGUI.aceptar"));
+		this.setTitle(ResourceBundle.getBundle("Etiquetas").getString("VisualizarReportesGUI.titulo"));
 		this.setLocationRelativeTo(parentFrame); // Centra la ventana sobre el MainGUI
 		getContentPane().setLayout(null);
 
