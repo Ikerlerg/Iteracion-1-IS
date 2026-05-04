@@ -659,6 +659,27 @@ public class DataAccess {
 		query.setParameter("bullerMail", bullerMail);
 		return query.getResultList();
 	}
+	public boolean actualizarEstado(long idRep, int estado) {
+		try {
+			db.getTransaction().begin();
+
+				Reportes reporte = db.find(Reportes.class, idRep);		
+			if (reporte != null&& Math.abs(estado)==1) {				
+				reporte.setEstado(estado);
+				db.getTransaction().commit();
+				return true;
+			} else {
+				db.getTransaction().rollback();
+				return false;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			if (db.getTransaction().isActive()) {
+				db.getTransaction().rollback();
+			}
+			return false;
+		}
+	}
 	
 	public void close() {
 		db.close();

@@ -56,7 +56,13 @@ public class VisualizarReportesGUI extends JFrame {
 		this.setLocationRelativeTo(parentFrame); // Centra la ventana sobre el MainGUI
 		getContentPane().setLayout(null);
 
-		JLabel lblSelect = new JLabel(ResourceBundle.getBundle("Etiquetas").getString("AceptarGUI.ofertas"));
+		JLabel lblSelect = new JLabel("");
+		if(tipo==-1) {
+			lblSelect.setText("Seleccione un reporte sin resolver");		
+			}
+		else {
+			lblSelect.setText("Reportes realizados");
+		}
 		lblSelect.setBounds(30, 20, 250, 20);
 		this.getContentPane().add(lblSelect);
 
@@ -70,6 +76,8 @@ public class VisualizarReportesGUI extends JFrame {
 				if (fila != -1) { 
 					int columnaOffer = tableReportes.convertRowIndexToModel(fila);
 					Reportes selectedOffer = (Reportes) tableModelReport.getValueAt(columnaOffer, 2);
+					JFrame ventanaReporte= new AdminReportesGUI(VisualizarReportesGUI.this, selectedOffer );
+					ventanaReporte.setVisible(true);
 				}
 			}
 		});
@@ -92,13 +100,21 @@ public class VisualizarReportesGUI extends JFrame {
 		scrollPanelReport.setBounds(10, 50, 459, 150);
 
 		scrollPanelReport.setViewportView(tableReportes);
+		
 
-		tableModelReport = new DefaultTableModel(null, columnNamesReports);
+		tableModelReport = new DefaultTableModel(null, columnNamesReports) {
+		    @Override
+		    public boolean isCellEditable(int row, int column) {
+		        return false; 
+		    }
+		};
 		tableModelReport.setColumnCount(3);
 		tableReportes.setModel(tableModelReport);
 		tableReportes.getColumnModel().getColumn(0).setPreferredWidth(150);
 		tableReportes.getColumnModel().getColumn(1).setPreferredWidth(150);
 		tableReportes.getColumnModel().removeColumn(tableReportes.getColumnModel().getColumn(2));
+
+
 		tableReportes.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
 			public void valueChanged(ListSelectionEvent event) {
 				if (tipo == -1 && !event.getValueIsAdjusting()) {
@@ -123,6 +139,8 @@ public class VisualizarReportesGUI extends JFrame {
 
 		loadOffers();
 	}
+
+
 
 	protected void loadOffers() {
 		try {
