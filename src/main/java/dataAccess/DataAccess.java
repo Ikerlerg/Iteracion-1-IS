@@ -689,16 +689,19 @@ public class DataAccess {
 
 	public String obtenerImagen(String email) {
 		try {
+			System.out.println(">> DataAccess: obtenerImagen=> user= "+email);
 		    User usuario = db.find(User.class, email);
 	        
 	 	    if (usuario != null) {
+	 	    	System.out.println(">> DataAccess: obtenerImagen=> PROFILE IMAGE OBTAINED");
 	  	    	return usuario.getFotoBase64();
 	  	    }
+	 	    System.out.println(">> DataAccess: obtenerImagen=> NO EXISTING USER");
 	   		return null;
 	        
 		} catch (Exception e) {
 		    e.printStackTrace();
-		    System.out.println(">> DataAccess: reportar=> An error ocurred");
+		    System.out.println(">> DataAccess: obtenerImagen=> An error ocurred");
 		    return null;
 		}
 	}
@@ -717,15 +720,17 @@ public class DataAccess {
 	}
 	public boolean actualizarEstado(long idRep, int estado) {
 		try {
+			System.out.println(">> DataAccess: actualizarEstado=> idRep= "+idRep);
 			db.getTransaction().begin();
-
-				Reportes reporte = db.find(Reportes.class, idRep);		
+			Reportes reporte = db.find(Reportes.class, idRep);		
 			if (reporte != null&& Math.abs(estado)==1) {				
 				reporte.setEstado(estado);
 				db.getTransaction().commit();
+				System.out.println(">> DataAccess: actualizarEstado=> REPORT UPDATED | idRep= "+idRep);
 				return true;
 			} else {
 				db.getTransaction().rollback();
+				System.out.println(">> DataAccess: actualizarEstado=> NOT EXISTING REPORT| idRep= "+idRep);
 				return false;
 			}
 		} catch (Exception e) {
@@ -733,6 +738,7 @@ public class DataAccess {
 			if (db.getTransaction().isActive()) {
 				db.getTransaction().rollback();
 			}
+			System.out.println(">> DataAccess: actualizarEstado=> An error ocurred");
 			return false;
 		}
 	}
