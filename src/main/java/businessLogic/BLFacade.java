@@ -72,6 +72,7 @@ public interface BLFacade  {
 	@WebMethod public int obtUser(String email);
 	@WebMethod public User devolverUser(String email);
 	
+	@WebMethod public boolean cambiarContraseña(String email, String pwsd);
 	@WebMethod public boolean buscarContraseña(String email, String pwsd);
 	@WebMethod public boolean eliminarCuenta(String email);
 	

@@ -359,7 +359,7 @@ public class DataAccess {
 		}
 	}
 
-	public boolean buscarContraseña(String email, String pwsd) {
+	public boolean cambiarContraseña(String email, String pwsd) {
 		try {
 			db.getTransaction().begin();
 			User u = db.find(User.class, email);
@@ -378,6 +378,14 @@ public class DataAccess {
 			e.printStackTrace();
 			return false;
 		}
+	}
+	
+	public boolean buscarContraseña(String email, String pwsd) {
+		User u = db.find(User.class, email);
+		if (u != null && u.getPassword().equals(pwsd)) {
+			return true;
+		} 
+		return false;
 	}
 
 	public boolean eliminarCuenta(String email) {

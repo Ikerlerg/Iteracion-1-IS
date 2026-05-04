@@ -158,6 +158,14 @@ public class BLFacadeImplementation implements BLFacade {
 		dbManager.close();
 		return u;
 	}
+	
+	@WebMethod
+	public boolean cambiarContraseña(String email, String pwsd) {
+		dbManager.open();
+		boolean u = dbManager.cambiarContraseña(email, pwsd);
+		dbManager.close();
+		return u;
+	}
 
 	@WebMethod
 	public List<Offer> getActiveOffers() {

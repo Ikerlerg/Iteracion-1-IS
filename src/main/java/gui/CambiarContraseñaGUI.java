@@ -76,7 +76,7 @@ public class CambiarContraseñaGUI extends JFrame{
 			        errorLabel.setText(ResourceBundle.getBundle("Etiquetas").getString("CambiarContraseñaGUI.FormatoError"));
 			    }
 			   
-			    else if(facade.buscarContraseña(userMail ,conf) == false){ 
+			    else if(facade.cambiarContraseña(userMail ,conf) == false){ 
 			        errorLabel.setText(ResourceBundle.getBundle("Etiquetas").getString("CambiarContraseñaGUI.UsuarioError"));
 			    }
 			    else {
