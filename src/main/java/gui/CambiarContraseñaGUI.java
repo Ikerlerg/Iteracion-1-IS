@@ -20,6 +20,7 @@ public class CambiarContraseñaGUI extends JFrame{
 	private String userMail;
 	private JPasswordField confirmationField;
 	private static final long serialVersionUID = 1L;
+	private JPasswordField currentPasswordField;
 
 	public CambiarContraseñaGUI(String mail) {
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -28,42 +29,54 @@ public class CambiarContraseñaGUI extends JFrame{
 		this.setTitle(ResourceBundle.getBundle("Etiquetas").getString("UsuarioGUI.cambiar")+": "+userMail);
 
 		getContentPane().setLayout(null);
-		this.setSize(455, 210);
+		this.setSize(455, 265);
 		passwordField = new JPasswordField();
-		passwordField.setBounds(87, 82, 266, 18);
+		passwordField.setBounds(87, 141, 266, 18);
 		getContentPane().add(passwordField);
 		
 		JLabel jLabelConfirmation = new JLabel(ResourceBundle.getBundle("Etiquetas").getString("CambiarContraseñaGUI.labelConfirmation"));
-		jLabelConfirmation.setBounds(77, 61, 172, 12);
+		jLabelConfirmation.setBounds(77, 118, 172, 12);
 		getContentPane().add(jLabelConfirmation);
 		
 		JLabel jLabelPassword = new JLabel(ResourceBundle.getBundle("Etiquetas").getString("CambiarContraseñaGUI.labelPassword"));
-		jLabelPassword.setBounds(77, 11, 169, 12);
+		jLabelPassword.setBounds(77, 66, 169, 12);
 		getContentPane().add(jLabelPassword);
 		
 		JLabel errorLabel = new JLabel(""); 
-		errorLabel.setBounds(54, 111, 338, 12);
+		errorLabel.setBounds(54, 167, 338, 12);
 		getContentPane().add(errorLabel);
 		
 		JButton btnCambio = new JButton(ResourceBundle.getBundle("Etiquetas").getString("CambiarContraseñaGUI.cambio"));
-		btnCambio.setBounds(127, 135, 169, 25);
+		btnCambio.setBounds(127, 190, 169, 25);
 		getContentPane().add(btnCambio);
 		
 		confirmationField = new JPasswordField();
-		confirmationField.setBounds(87, 34, 266, 18);
+		confirmationField.setBounds(87, 89, 266, 18);
 		getContentPane().add(confirmationField);
+		
+		currentPasswordField = new JPasswordField();
+		currentPasswordField.setBounds(87, 38, 266, 18);
+		getContentPane().add(currentPasswordField);
+		
+		JLabel jLabelCurrentPassword = new JLabel(ResourceBundle.getBundle("Etiquetas").getString("CambiarContraseñaGUI.actual"));
+		jLabelCurrentPassword.setBounds(77, 15, 169, 12);
+		getContentPane().add(jLabelCurrentPassword);
+		
 		btnCambio.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String pswd= passwordField.getText();
 				String conf= confirmationField.getText();
+				String curr= currentPasswordField.getText();
 				BLFacade facade = MainGUI.getBusinessLogic();
 				
-				
-				if(!pswd.equals(conf)) {
+				if((facade.buscarContraseña(userMail ,curr) == false)) {
+					errorLabel.setText(ResourceBundle.getBundle("Etiquetas").getString("CambiarContraseñaGUI.NoContraseña"));
+				}
+				else if(!pswd.equals(conf)) {
 			        errorLabel.setText(ResourceBundle.getBundle("Etiquetas").getString("CambiarContraseñaGUI.FormatoError"));
 			    }
 			   
-			    else if(facade.buscarContraseña(userMail ,conf) == false){ 
+			    else if(facade.cambiarContraseña(userMail ,conf) == false){ 
 			        errorLabel.setText(ResourceBundle.getBundle("Etiquetas").getString("CambiarContraseñaGUI.UsuarioError"));
 			    }
 			    else {
@@ -76,5 +89,4 @@ public class CambiarContraseñaGUI extends JFrame{
 		
 
 	}
-
 }
