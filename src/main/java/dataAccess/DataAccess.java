@@ -308,9 +308,11 @@ public class DataAccess {
 		User intentoLog = db.find(User.class, email);
 		// System.out.println(intentoLog.toString());
 		if (intentoLog == null || !intentoLog.getPassword().equals(password)) {
+			System.out.println(">> DataAccess: login=> NOT EXISTING USER");
 			return null;
 		} else {
 			// System.out.println(intentoLog.toString());
+			System.out.println(">> DataAccess: login=> SUCCESS");
 			return intentoLog;
 		}
 	}
@@ -328,9 +330,11 @@ public class DataAccess {
 
 			db.persist(registrar);
 			db.getTransaction().commit();
+			System.out.println(">> DataAccess: register=> USER CREATED | tipo= "+tipo);
 			return true;
 		} else {
 			db.getTransaction().rollback();
+			System.out.println(">> DataAccess: register=> USER NOT CREATED");
 			return false;
 		}
 
@@ -339,8 +343,10 @@ public class DataAccess {
 	public int obtUser(String email) {
 		User usuario = db.find(User.class, email);
 		if (usuario != null) {
+			System.out.println(">> DataAccess: obtUser=> tipo= "+usuario.getTipo());
 			return usuario.getTipo();
 		} else {
+			System.out.println(">> DataAccess: obtUser=> NO TYPE EXISTS");
 			return 0;
 		}
 	}
@@ -349,12 +355,14 @@ public class DataAccess {
 		try {
 			db.getTransaction().begin();
 			User usuario = db.find(User.class, email);
+			System.out.println(">> DataAccess: devolverUser=> email= "+usuario.getEmail());
 			return usuario;
 		} catch (Exception e) {
 			if (db.getTransaction().isActive()) {
 				db.getTransaction().rollback();
 			}
 			e.printStackTrace();
+			System.out.println(">> DataAccess: devolverUser=> NOT EXISTING USER");
 			return null;
 		}
 	}
@@ -366,9 +374,11 @@ public class DataAccess {
 			if (u != null) {
 				u.setPassword(pwsd);
 				db.getTransaction().commit();
+				System.out.println(">> DataAccess: cambiarContraseña=> pswd= "+pwsd);
 				return true;
 			} else {
 				db.getTransaction().rollback();
+				System.out.println(">> DataAccess: cambiarContraseña=> NOT EXISTING USER");
 				return false;
 			}
 		} catch (Exception e) {
@@ -376,6 +386,7 @@ public class DataAccess {
 				db.getTransaction().rollback();
 			}
 			e.printStackTrace();
+			System.out.println(">> DataAccess: cambiarContraseña=> An error ocurred");
 			return false;
 		}
 	}
@@ -383,8 +394,10 @@ public class DataAccess {
 	public boolean buscarContraseña(String email, String pwsd) {
 		User u = db.find(User.class, email);
 		if (u != null && u.getPassword().equals(pwsd)) {
+			System.out.println(">> DataAccess: buscarContraseña=> USER FOUND | password= "+pwsd);
 			return true;
 		} 
+		System.out.println(">> DataAccess: buscarContraseña=> NOT EXISTING USER");
 		return false;
 	}
 
@@ -395,9 +408,11 @@ public class DataAccess {
 			if (u != null) {
 				db.remove(u);
 				db.getTransaction().commit();
+				System.out.println(">> DataAccess: eliminarCuenta=> SUCCEEDED DELETE | user= "+u.getEmail());
 				return true;
 			} else {
 				db.getTransaction().rollback();
+				System.out.println(">> DataAccess: eliminarCuenta=> NOT EXISTING USER");
 				return false;
 			}
 		} catch (Exception e) {
@@ -405,12 +420,14 @@ public class DataAccess {
 				db.getTransaction().rollback();
 			}
 			e.printStackTrace();
+			System.out.println(">> DataAccess: eliminarCuenta=> An error ocurred");
 			return false;
 		}
 	}
 
 	public List<Offer> getActiveOffers() {
 		TypedQuery<Offer> query = db.createQuery("SELECT o FROM Offer o WHERE o.estado = true", Offer.class);
+		System.out.println(">> DataAccess: getActiveOffers");
 		return query.getResultList();
 	}
 
@@ -420,8 +437,10 @@ public class DataAccess {
 		List<Offer> UserOffers = query.getResultList();
 
 		if (UserOffers != null) {
+			System.out.println(">> DataAccess: getUserOffers=> OFFERS | mail= "+mail);
 			return UserOffers;
 		} else {
+			System.out.println(">> DataAccess: getUserOffers=> NO EXISTING OFFERS | mail= "+mail);
 			return new ArrayList<Offer>();
 		}
 	}
@@ -435,13 +454,16 @@ public class DataAccess {
 				oferta.setEstado(false); // Solo cambiamos el estado
 				db.persist(oferta);
 				db.getTransaction().commit();
+				System.out.println(">> DataAccess: acceptOffer=> OFFER ACCEPTED");
 				return true;
 			}
 			db.getTransaction().rollback();
+			System.out.println(">> DataAccess: acceptOffer=> NO EXISTING OFFER | estado= "+oferta.isEstado());
 			return false;
 		} catch (Exception e) {
 			e.printStackTrace();
 			db.getTransaction().rollback();
+			System.out.println(">> DataAccess: acceptOffer=> An error ocurred");
 			return false;
 		}
 	}
@@ -464,6 +486,7 @@ public class DataAccess {
 
 	public boolean proposeOffer(Long offerId, String buyerMail) {
 		try {
+			System.out.println(">> DataAccess: proposeOffer=> buyerMail= "+buyerMail);
 			db.getTransaction().begin();
 			Offer oferta = db.find(Offer.class, offerId);
 
@@ -472,19 +495,23 @@ public class DataAccess {
 				oferta.addPendientes(solicitud); // Solo cambiamos el estado
 				db.persist(oferta);
 				db.getTransaction().commit();
+				System.out.println(">> DataAccess: proposeOffer=> REQUEST ADDED | buyerMail= "+buyerMail);
 				return true;
 			}
 			db.getTransaction().rollback();
+			System.out.println(">> DataAccess: proposeOffer=> REQUEST NOT ADDED | buyerMail= "+buyerMail);
 			return false;
 		} catch (Exception e) {
 			e.printStackTrace();
 			db.getTransaction().rollback();
+			System.out.println(">> DataAccess: proposeOffer=> An error ocurred");
 			return false;
 		}
 	}
 
 	public boolean cancelOffer(Long offerId, String buyerMail) {
 		try {
+			System.out.println(">> DataAccess: cancelOffer=> buyerMail= "+buyerMail);
 			db.getTransaction().begin();
 			Offer oferta = db.find(Offer.class, offerId);
 
@@ -492,19 +519,23 @@ public class DataAccess {
 				oferta.deletePendientes(buyerMail); // Solo cambiamos el estado
 				db.persist(oferta);
 				db.getTransaction().commit();
+				System.out.println(">> DataAccess: cancelOffer=> OFFER CANCELED | buyerMail= "+buyerMail);
 				return true;
 			}
 			db.getTransaction().rollback();
+			System.out.println(">> DataAccess: cancelOffer=> OFFER NOT CANCELED | buyerMail= "+buyerMail);
 			return false;
 		} catch (Exception e) {
 			e.printStackTrace();
 			db.getTransaction().rollback();
+			System.out.println(">> DataAccess: proposeOffer=> An error ocurred");
 			return false;
 		}
 	}
 
 	public boolean terminarSolicitud(Long offerId, String buyerMail) {
 		try {
+			System.out.println(">> DataAccess: terminarSolicitud=> buyerMail= "+buyerMail);
 			db.getTransaction().begin();
 
 			// 1. Buscamos la oferta
@@ -526,17 +557,20 @@ public class DataAccess {
 				ofertaDB.setEstado(false);
 				db.persist(ofertaDB);
 				db.getTransaction().commit();
+				System.out.println(">> DataAccess: terminarSolicitud=> REQUEST FINISHED | buyerMail= "+buyerMail);
 				return true;
 			}
 			// Si no se encuentra la oferta o ya estaba cerrada
 			if (db.getTransaction().isActive())
 				db.getTransaction().rollback();
+			System.out.println(">> DataAccess: terminarSolicitud=> REQUEST NOT FINISHED | buyerMail= "+buyerMail);
 			return false;
 
 		} catch (Exception ex) {
 			ex.printStackTrace();
 			if (db.getTransaction().isActive())
 				db.getTransaction().rollback();
+			System.out.println(">> DataAccess: terminarSolicitud=> An error ocurred");
 			return false;
 		}
 	}
@@ -544,7 +578,7 @@ public class DataAccess {
 	// Meter reseña en la base de datos
 	public boolean publicarVal(Valoraciones val) {
 		try {
-
+			System.out.println(">> DataAccess: publicarVal=> REQUEST NOT FINISHED | user= "+val.geteComprador());
 			db.getTransaction().begin();
 			Seller vend = db.find(Seller.class, val.geteVendedor());
 
@@ -553,10 +587,12 @@ public class DataAccess {
 				vend.addValoracion(valGuardada);
 				db.persist(vend);
 				db.getTransaction().commit();
+				System.out.println(">> DataAccess: publicarVal=> REVIEW PUBLISHED | seller= "+val.geteVendedor());
 				return true;
 
 			} else {
 				db.getTransaction().rollback();
+				System.out.println(">> DataAccess: publicarVal=> NO EXISTING REVIEW | seller= "+val.geteVendedor());
 				return false;
 			}
 
@@ -565,6 +601,7 @@ public class DataAccess {
 			if (db.getTransaction().isActive()) {
 				db.getTransaction().rollback();
 			}
+			System.out.println(">> DataAccess: publicarVal=> An error ocurred");
 			return false;
 		}
 	}
@@ -581,10 +618,12 @@ public class DataAccess {
 	        query.setParameter("emailcom", eComp);
 	        query.setParameter("idProd", idP);
 	        Long numResenas = query.getSingleResult();
+	        System.out.println(">> DataAccess: hayRese=> numReseñas= "+ numResenas);
 	        return numResenas == 0;
 	        
 	    } catch(Exception e) {
 	        e.printStackTrace();
+	        System.out.println(">> DataAccess: hayRese=> An error ocurred");
 	        return false;
 	    }
 	}
@@ -592,10 +631,12 @@ public class DataAccess {
 
 	public List<String> getAllSellers() {
 		TypedQuery<String> query = db.createQuery("SELECT o.email FROM Seller o", String.class);
+		System.out.println(">> DataAccess: getAllSellers");
 		return query.getResultList();
 	}
 
 	public List<Offer> getReseValid(String buyerMail) {
+		System.out.println(">> DataAccess: getReseValid");
 		TypedQuery<Offer> query = db.createQuery(
 				"SELECT DISTINCT o FROM Offer o JOIN o.pendientes p WHERE o.estado = false AND p.buyerMail = :buyerMail AND p.estado = 1",
 				Offer.class);
@@ -605,17 +646,18 @@ public class DataAccess {
 	
 	public boolean guardarImagen(String email, String fotoBase64) {
 		try {
+			System.out.println(">> DataAccess: guardarImagen=> user= "+email);
 			db.getTransaction().begin();
-				
-				User usuario = db.find(User.class, email);
+			User usuario = db.find(User.class, email);
 				
 			if (usuario != null) {
 				usuario.setFotoBase64(fotoBase64);
-					
 				db.getTransaction().commit();
+				System.out.println(">> DataAccess: guardarImagen=> PROFILE PICTURE SAVED | user= "+email);
 				return true;
 			} else {
 				db.getTransaction().rollback();
+				System.out.println(">> DataAccess: guardarImagen=> NO EXISTING USER");
 				return false;
 			}
 		} catch (Exception e) {
@@ -623,6 +665,7 @@ public class DataAccess {
 			if (db.getTransaction().isActive()) {
 				db.getTransaction().rollback();
 			}
+			System.out.println(">> DataAccess: guardarImagen=> An error ocurred");
 			return false;
 		}
 	}
@@ -632,12 +675,14 @@ public class DataAccess {
 	    	db.getTransaction().begin();
 	    	db.persist(reporte); 	        
 	    	db.getTransaction().commit();
+	    	System.out.println(">> DataAccess: reportar=> REPORT SAVED");
 	    	return true; 
 		} catch (Exception e) {
 	    	e.printStackTrace();
 	    	if (db.getTransaction().isActive()) {
 	        	db.getTransaction().rollback();
 	    	}
+	    	System.out.println(">> DataAccess: reportar=> An error ocurred");
 	    	return false;
 		}
 	}
@@ -653,16 +698,19 @@ public class DataAccess {
 	        
 		} catch (Exception e) {
 		    e.printStackTrace();
+		    System.out.println(">> DataAccess: reportar=> An error ocurred");
 		    return null;
 		}
 	}
 
 	public List<Reportes> getReportesRecibidos() {
+		System.out.println(">> DataAccess: getReportesRecibidos");
 		TypedQuery<Reportes> query = db.createQuery("SELECT o FROM Reportes o", Reportes.class);
 		return query.getResultList();
 	}
 
 	public List<Reportes> getReportesEnviados(String bullerMail) {
+		System.out.println(">> DataAccess: getReportesEnviados");
 		TypedQuery<Reportes> query = db.createQuery("SELECT o FROM Reportes o WHERE o.eComprador = :bullerMail", Reportes.class);
 		query.setParameter("bullerMail", bullerMail);
 		return query.getResultList();

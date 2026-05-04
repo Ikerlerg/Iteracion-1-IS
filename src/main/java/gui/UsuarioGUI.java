@@ -180,39 +180,6 @@ public class UsuarioGUI extends JFrame {
 		            setVisible(true);
 
 		        }
-		        /*
-		        JFileChooser fileChooser = new JFileChooser();
-        		FileNameExtensionFilter filter = new FileNameExtensionFilter("JPG, PNG & GIF", "jpg", "png", "gif");
-        		fileChooser.setFileFilter(filter);
-        		int result = fileChooser.showOpenDialog(null);  
-
-        		if (result == JFileChooser.APPROVE_OPTION) {
-            		targetFile = fileChooser.getSelectedFile();
-
-            		try {
-                		// 1. Leemos la imagen del archivo y la reescalamos
-                		BufferedImage originalImg = ImageIO.read(targetFile);
-                		targetImg = rescale(originalImg); // Tu método que la pone a 32x32
-
-                		// 2. La convertimos a String Base64
-                		String fotoBase64 = encodeImageToBase64(targetImg);
-
-                		// 3. Guardamos en BD a través de la lógica de negocio
-                		BLFacade facade = MainGUI.getBusinessLogic();
-                		// OJO: Tendrás que adaptar guardarImagen para que reciba un String
-                		facade.guardarImagen(userMail, fotoBase64); 
-                
-                		// 4. Actualizamos la interfaz
-                		panel_1.removeAll();
-                		panel_1.setLayout(new BorderLayout(0, 0));
-                		panel_1.add(new JLabel(new ImageIcon(targetImg))); 
-                		panel_1.revalidate(); // Usar revalidate + repaint asegura que se actualice visualmente
-                		panel_1.repaint();
-
-            		} catch (IOException ex) {
-                		ex.printStackTrace();
-            		}
-        		}*/
 			}
 		});
 		btnFoto.setBounds(26, 123, 86, 29);
