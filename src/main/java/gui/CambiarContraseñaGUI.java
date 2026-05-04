@@ -82,7 +82,10 @@ public class CambiarContraseñaGUI extends JFrame{
 			    else {
 			    	errorLabel.setText(ResourceBundle.getBundle("Etiquetas").getString("CambiarContraseñaGUI.CambioConfirmado"));
 			    }
-			
+				
+				Timer timer = new Timer(500, evt -> CambiarContraseñaGUI.this.setVisible(false));
+				timer.setRepeats(false);
+				timer.start();
 			}
 			
 		});
