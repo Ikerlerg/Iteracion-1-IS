@@ -29,7 +29,9 @@ public class ReportarGUI extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTextField Descripcion;
-
+	/*
+	 * Queda por añadir y cargar una foto en los reportes 
+	 */
 	
 	public ReportarGUI(CrearReseGUI ventanaPadre, String mailComp, String mailVend, Offer productoReporte) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

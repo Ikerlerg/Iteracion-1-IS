@@ -298,5 +298,12 @@ public class BLFacadeImplementation implements BLFacade {
 		dbManager.close();
 		return res;
 	}
+	@WebMethod 
+	public boolean actualizarEstado(long idRep, int estado){
+		dbManager.open();
+		boolean res = dbManager.actualizarEstado(idRep, estado);
+		dbManager.close();
+		return res;
+	}
 
 }
