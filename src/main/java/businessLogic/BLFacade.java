@@ -96,8 +96,8 @@ public interface BLFacade  {
 
 	@WebMethod public boolean actualizarEstado(long idRep, int estado);
 
-	@WebMethod public boolean crearCupon(String codigo, double porcentaje);
-	@WebMethod public double validarCupon(String codigo);
+	@WebMethod public boolean crearCupon(String codigo, double porcentaje,String creador);
+	@WebMethod public double validarCupon(String codigo,String vendedorProductoMail);
 	@WebMethod public void usarCupon(String codigo);
 
  }

@@ -326,7 +326,7 @@ public class MainGUI extends JFrame {
 
         btnCrearCupon.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                JFrame v = new CrearCuponGUI(MainGUI.this);
+                JFrame v = new CrearCuponGUI(MainGUI.this,sellerMail);
                 v.setVisible(true);
             }
         });

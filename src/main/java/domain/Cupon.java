@@ -8,12 +8,17 @@ public class Cupon {
     @Id
     private String codigo;       
     private double porcentaje;   
-    private boolean usado;       
+    private boolean usado; 
+    private String creador;
 
-    public Cupon(String codigo, double porcentaje) {
+    public Cupon(String codigo, double porcentaje, String creador) {
         this.codigo = codigo;
         this.porcentaje = porcentaje;
+        this.creador = creador;
         this.usado = false;
+    }
+    public String getCreador() {
+        return creador;
     }
 
 	public String getCodigo() {

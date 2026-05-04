@@ -17,9 +17,11 @@ public class CrearCuponGUI extends JFrame {
 	private JTextField txtCodigo;
 	private JTextField txtPorcentaje;
 	private JLabel lblMensaje;
+	private String creadorMail;
 
-	public CrearCuponGUI(MainGUI padre) {
+	public CrearCuponGUI(MainGUI padre, String mailUsuario) {
 		padre.setVisible(false);
+		this.creadorMail = mailUsuario;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setTitle(ResourceBundle.getBundle("Etiquetas").getString("CrearCuponGUI.Titulo"));
 		this.setSize(400, 250);
@@ -52,10 +54,15 @@ public class CrearCuponGUI extends JFrame {
 				try {
 					String codigo = txtCodigo.getText();
 					double porcentaje = Double.parseDouble(txtPorcentaje.getText());
-					
+					if(porcentaje < 1 || porcentaje > 100) {
+						lblMensaje.setForeground(Color.RED);
+						lblMensaje.setText(ResourceBundle.getBundle("Etiquetas").getString("CrearCuponGUI.Error2"));
+						return;
+					}
+					porcentaje = porcentaje/100;
 					BLFacade facade = MainGUI.getBusinessLogic();
 					
-					boolean exito = facade.crearCupon(codigo, porcentaje);
+					boolean exito = facade.crearCupon(codigo, porcentaje, creadorMail);
 					
 					if(exito) {
 						lblMensaje.setForeground(Color.GREEN);

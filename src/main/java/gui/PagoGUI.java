@@ -11,6 +11,7 @@ import java.util.ResourceBundle;
 import javax.swing.JButton;
 
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 
 import businessLogic.BLFacade;
 import domain.Offer;
@@ -24,10 +25,15 @@ public class PagoGUI extends JFrame {
 	private JTextField NumberField;
 	private JTextField CvvField;
 	private JTextField FechaField;
+	private JLabel lblCuponStatus;
+	private double descuentoPorcentaje = 0.0;
+	private String codigoAplicado = "";
+	private double precioFinal;
+	private Offer compra;
 	
 	public PagoGUI(AceptarGUI parent, Offer compra, String buyerMail) {
 		super();
-		
+		this.compra = compra;
 		getContentPane().setLayout(null);
 		this.setSize(new Dimension(500, 325));
 		
@@ -35,26 +41,51 @@ public class PagoGUI extends JFrame {
 		PagoButton.setBounds(282, 210, 95, 29);
 		getContentPane().add(PagoButton);
 		PagoButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-            	try {
-				BLFacade facade = MainGUI.getBusinessLogic();//no se si usar aquí MainGUI dará problemas
-				boolean success = facade.proposeOffer(compra.getId(),buyerMail);
-				
-				if (success) {
-					parent.jLabelMsg.setForeground(Color.GREEN);
-					parent.jLabelMsg.setText(ResourceBundle.getBundle("Etiquetas").getString("AceptarGUI.aceptada"));
-					parent.loadOffers(); // 
-				} else {
-					parent.jLabelMsg.setForeground(Color.RED);
-					parent.jLabelMsg.setText(ResourceBundle.getBundle("Etiquetas").getString("AceptarGUI.erroraceptar"));
-				}
-			} catch (Exception ex) {
-				ex.printStackTrace();
-			}finally {
-				dispose();
-			}
-		}
-	});
+		    public void actionPerformed(ActionEvent e) {
+		        try {
+		            BLFacade facade = MainGUI.getBusinessLogic();
+		            boolean success = facade.proposeOffer(compra.getId(), buyerMail);
+		            
+		            if (success) {
+		                if (!codigoAplicado.isEmpty()) {
+		                    facade.usarCupon(codigoAplicado);
+		                }
+		                PagoGUI.this.setVisible(false);
+		                
+		                // GENERAR FACTURA
+		                double precioOriginal = compra.getPrecio();
+		                double totalDescuento = precioOriginal * descuentoPorcentaje;
+		                double totalAPagar = precioOriginal - totalDescuento;
+
+		                String factura = String.format(
+		                    "---------------------------------------------------------\n" +
+		                    "      %s\n" +
+		                    "---------------------------------------------------------\n" +
+		                    "%s %s\n" +
+		                    "%s %.2f€\n" +
+		                    "%s -%.2f€ (%s)\n" +
+		                    "---------------------------------------------------------\n" +
+		                    "%s %.2f€\n" +
+		                    "---------------------------------------------------------",
+		                    ResourceBundle.getBundle("Etiquetas").getString("PagoGUI.facturaTitulo"),
+		                    ResourceBundle.getBundle("Etiquetas").getString("PagoGUI.facturaProducto"), compra.getSale().getTitle(),
+		                    ResourceBundle.getBundle("Etiquetas").getString("PagoGUI.facturaPrecioOrig"), precioOriginal,
+		                    ResourceBundle.getBundle("Etiquetas").getString("PagoGUI.facturaDescuento"), totalDescuento, codigoAplicado,
+		                    ResourceBundle.getBundle("Etiquetas").getString("PagoGUI.facturaTotal"), totalAPagar
+		                );
+
+		                JOptionPane.showMessageDialog(null, factura, "Invoice", JOptionPane.INFORMATION_MESSAGE);
+
+		                parent.jLabelMsg.setForeground(Color.GREEN);
+		                parent.jLabelMsg.setText(ResourceBundle.getBundle("Etiquetas").getString("AceptarGUI.aceptada"));
+		                parent.loadOffers();
+		                dispose();
+		            }
+		        } catch (Exception ex) {
+		            ex.printStackTrace();
+		        }
+		    }
+		});
 		
 		
 		JButton Cancel = new JButton(ResourceBundle.getBundle("Etiquetas").getString("CarritoGUI.exit"));
@@ -107,10 +138,25 @@ public class PagoGUI extends JFrame {
 		getContentPane().add(btnCupon);
 		btnCupon.addActionListener(new ActionListener() {
 		    public void actionPerformed(ActionEvent e) {
-		        JFrame cuponVentana = new AplicarCuponGUI(PagoGUI.this);
+		        JFrame cuponVentana = new AplicarCuponGUI(PagoGUI.this, compra);
 		        cuponVentana.setVisible(true);
 		    }
 		});
+		lblCuponStatus = new JLabel("");
+		lblCuponStatus.setForeground(new Color(0, 128, 0)); // Color verde
+		lblCuponStatus.setBounds(63, 185, 314, 20);
+		getContentPane().add(lblCuponStatus);
 		
+	}
+	public void aplicarDescuento(String codigo, double porcentaje) {
+	    this.codigoAplicado = codigo;
+	    this.descuentoPorcentaje = porcentaje;
+	    int descEntero = (int)(porcentaje*100.0);
+	    
+	    this.precioFinal = compra.getPrecio() - (compra.getPrecio() * porcentaje);
+	    
+	    // Actualizamos el texto de la interfaz
+	    String msg = String.format(ResourceBundle.getBundle("Etiquetas").getString("PagoGUI.cuponAplicado"), codigo, descEntero);
+	    lblCuponStatus.setText(msg);
 	}
 }

@@ -748,7 +748,7 @@ public class DataAccess {
 		System.out.println("DataAcess closed");
 	}
 	
-	public boolean crearCupon(String codigo, double porcentaje) {
+	public boolean crearCupon(String codigo, double porcentaje, String creadorMail) {
 	    try {
 	        db.getTransaction().begin();
 	        Cupon c = db.find(Cupon.class, codigo);
@@ -757,7 +757,8 @@ public class DataAccess {
 	            return false;
 	        }
 	        
-	        Cupon nuevo = new Cupon(codigo, porcentaje);
+	        // Pasamos el creador al constructor
+	        Cupon nuevo = new Cupon(codigo, porcentaje, creadorMail);
 	        db.persist(nuevo);
 	        db.getTransaction().commit();
 	        return true;
@@ -768,13 +769,17 @@ public class DataAccess {
 	    }
 	}
 	//Devuelve el porcentaje de descuento que hay que aplicar, si está usado devuelve 0
-	public double validarCupon(String codigo) {
+	public double validarCupon(String codigo, String vendedorProductoMail) {
 	    try {
 	        Cupon c = db.find(Cupon.class, codigo);
 	        if (c != null && !c.isUsado()) {
-	            return c.getPorcentaje();
+	            
+	            // LA MAGIA: ¿Es admin O es el mismo vendedor del producto?
+	            if (c.getCreador().equals("admin@gmail.com") || c.getCreador().equals(vendedorProductoMail)) {
+	                return c.getPorcentaje();
+	            }
 	        }
-	        return -1.0;
+	        return 0.0;
 	    } catch (Exception e) {
 	        e.printStackTrace();
 	        return 0.0;
