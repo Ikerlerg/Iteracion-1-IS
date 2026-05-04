@@ -298,12 +298,34 @@ public class BLFacadeImplementation implements BLFacade {
 		dbManager.close();
 		return res;
 	}
+
 	@WebMethod 
 	public boolean actualizarEstado(long idRep, int estado){
 		dbManager.open();
 		boolean res = dbManager.actualizarEstado(idRep, estado);
 		dbManager.close();
 		return res;
+
+	@WebMethod
+	public boolean crearCupon(String codigo,double porcentaje) {
+		dbManager.open(); 
+	    boolean res = dbManager.crearCupon(codigo, porcentaje);
+	    dbManager.close();
+	    return res;
+	}
+	@WebMethod
+	public double validarCupon(String codigo) {
+	    dbManager.open();
+	    double res = dbManager.validarCupon(codigo);
+	    dbManager.close();
+	    return res;
+	}
+	@WebMethod
+	public void usarCupon(String codigo) {
+	    dbManager.open();
+	    dbManager.usarCupon(codigo);
+	    dbManager.close();
+
 	}
 
 }

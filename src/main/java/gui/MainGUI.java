@@ -65,7 +65,8 @@ public class MainGUI extends JFrame {
 	//variable para controlar si soy vendedor o comprador
 	 //(0=nada,1=vendedor,2=comprador)
 	private int mode = 0;
-	private final JButton buttonReportes = new JButton(""); 
+	private final JButton buttonReportes = new JButton("");
+	protected JButton btnCrearCupon = new JButton();
 /*
 	public MainGUI() {
 	}
@@ -317,6 +318,18 @@ public class MainGUI extends JFrame {
                 paintAgain(); 
             }
         });
+        
+        //Botón para crear el cupon
+        btnCrearCupon.setBounds(511, 133, 143, 21); // Ajusta la posición según tu diseño
+        panel.add(btnCrearCupon);
+        btnCrearCupon.setVisible(false); // Por defecto oculto
+
+        btnCrearCupon.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                JFrame v = new CrearCuponGUI(MainGUI.this);
+                v.setVisible(true);
+            }
+        });
 		
 		
 		//Llamada al paint para que se carguen por primera vez todo los botones.
@@ -385,6 +398,13 @@ public class MainGUI extends JFrame {
 				
 				loged.setText(sellerMail);
 				
+				if (mode == 1 || mode == -1) {
+	                btnCrearCupon.setText(ResourceBundle.getBundle("Etiquetas").getString("MainGUI.BotonCrearCupon"));
+	                btnCrearCupon.setVisible(true);
+	                btnCrearCupon.setEnabled(true);
+	            } else {
+	                btnCrearCupon.setVisible(false);
+	            }
 				panel.revalidate();
 				panel.repaint();
 				

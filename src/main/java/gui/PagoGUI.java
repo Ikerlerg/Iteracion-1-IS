@@ -1,5 +1,4 @@
 package gui;
-
 import javax.swing.JFrame;
 import java.awt.Color;
 
@@ -50,8 +49,7 @@ public class PagoGUI extends JFrame {
 					parent.jLabelMsg.setText(ResourceBundle.getBundle("Etiquetas").getString("AceptarGUI.erroraceptar"));
 				}
 			} catch (Exception ex) {
-				parent.jLabelMsg.setForeground(Color.RED);
-				parent.jLabelMsg.setText(ex.getMessage());
+				ex.printStackTrace();
 			}finally {
 				dispose();
 			}
@@ -104,6 +102,15 @@ public class PagoGUI extends JFrame {
 		FechaLabel.setBounds(282, 155, 116, 12);
 		getContentPane().add(FechaLabel);
 		
+		JButton btnCupon = new JButton(ResourceBundle.getBundle("Etiquetas").getString("PagoGUI.BotonCupon"));
+		btnCupon.setBounds(63, 250, 150, 24);
+		getContentPane().add(btnCupon);
+		btnCupon.addActionListener(new ActionListener() {
+		    public void actionPerformed(ActionEvent e) {
+		        JFrame cuponVentana = new AplicarCuponGUI(PagoGUI.this);
+		        cuponVentana.setVisible(true);
+		    }
+		});
 		
 	}
 }

@@ -748,5 +748,55 @@ public class DataAccess {
 		System.out.println("DataAcess closed");
 	}
 	
+	public boolean crearCupon(String codigo, double porcentaje) {
+	    try {
+	        db.getTransaction().begin();
+	        Cupon c = db.find(Cupon.class, codigo);
+	        if (c != null) {
+	            db.getTransaction().rollback();
+	            return false;
+	        }
+	        
+	        Cupon nuevo = new Cupon(codigo, porcentaje);
+	        db.persist(nuevo);
+	        db.getTransaction().commit();
+	        return true;
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	        if (db.getTransaction().isActive()) db.getTransaction().rollback();
+	        return false;
+	    }
+	}
+	//Devuelve el porcentaje de descuento que hay que aplicar, si está usado devuelve 0
+	public double validarCupon(String codigo) {
+	    try {
+	        Cupon c = db.find(Cupon.class, codigo);
+	        if (c != null && !c.isUsado()) {
+	            return c.getPorcentaje();
+	        }
+	        return -1.0;
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	        return 0.0;
+	    }
+	}
+
+	//Modifica el estado del cupón y lo pone como usado
+	public void usarCupon(String codigo) {
+	    try {
+	        db.getTransaction().begin();
+	        Cupon c = db.find(Cupon.class, codigo);
+	        if (c != null) {
+	            c.setUsado(true);
+	            db.getTransaction().commit();
+	        } else {
+	            db.getTransaction().rollback();
+	        }
+	    } catch (Exception e) {
+	        if (db.getTransaction().isActive()) db.getTransaction().rollback();
+	        e.printStackTrace();
+	    }
+	}
+	
 
 }
