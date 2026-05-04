@@ -209,7 +209,7 @@ public class MainGUI extends JFrame {
 		    ex.printStackTrace();
 		}
 
-		String[] idi = {"es","eus","en"};
+		
 		buttonReportes.setBounds(10, 35, 101, 20);
 		panel.add(buttonReportes);
 		buttonReportes.addActionListener(new ActionListener() {
@@ -220,7 +220,7 @@ public class MainGUI extends JFrame {
 		});
 	
 		
-
+		String[] idi = {"es","eus","en"};
 		JComboBox IdiomaBox = new JComboBox<>(idi);
 		IdiomaBox.setBounds(10, 9, 64, 22);
 		jContentPane.add(IdiomaBox);
@@ -286,11 +286,6 @@ public class MainGUI extends JFrame {
 		lblVersion.setBounds(10, 34, 64, 14);
 		jContentPane.add(lblVersion);
 		
-		buttonReportes.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				//
-			}
-		});
 		bLogin.setVisible(false);
 		bLogin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -378,13 +373,7 @@ public class MainGUI extends JFrame {
 					buttonReportes.setVisible(true);
 					adminButton.setVisible(false);
 					this.setSize(675, 336);
-				} else if (mode == 2) {
-					aceptar_visuali.setText(ResourceBundle.getBundle("Etiquetas").getString("MainGUI.Aceptar"));
-					aceptar_visuali.setVisible(true);
-					adminButton.setVisible(false);
-					this.setSize(675, 336);
-				} 
-				else if(mode==-1) {
+				} else if(mode==-1) {
 					aceptar_visuali.setText(ResourceBundle.getBundle("Etiquetas").getString("MainGUI.Visualizar"));
 					aceptar_visuali.setVisible(true);
 					adminButton.setText(ResourceBundle.getBundle("Etiquetas").getString("MainGUI.Aceptar"));
