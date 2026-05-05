@@ -48,9 +48,9 @@ public class VisualizarGUI extends JFrame {
 		JLabel lblTitle = new JLabel();
 		int tipo = facade.obtUser(sellerMail);
 		if (tipo == -1) {
-			lblTitle.setText("Todas las ofertas aceptadas en el sistema (Modo Admin):");
+			lblTitle.setText(ResourceBundle.getBundle("Etiquetas").getString("VisualizarGUI.TituloAdmin"));
 		} else {
-			lblTitle.setText("Tus ofertas que han sido aceptadas:");
+			lblTitle.setText(ResourceBundle.getBundle("Etiquetas").getString("VisualizarGUI.TituloVendedor"));
 		}
 		lblTitle.setBounds(new Rectangle(30, 20, 300, 20));
 		this.getContentPane().add(lblTitle);
@@ -108,7 +108,7 @@ public class VisualizarGUI extends JFrame {
 			
 			if (offers.isEmpty()) {
 				jLabelMsg.setForeground(java.awt.Color.BLUE);
-				jLabelMsg.setText("Aún no tienes ninguna oferta aceptada.");
+				jLabelMsg.setText(ResourceBundle.getBundle("Etiquetas").getString("VisualizarGUI.NoOfertas"));
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

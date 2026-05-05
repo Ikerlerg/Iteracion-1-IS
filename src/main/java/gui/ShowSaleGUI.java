@@ -50,7 +50,7 @@ public class ShowSaleGUI extends JFrame {
 		this.setVisible(true);
 		this.getContentPane().setLayout(null);
 		this.setSize(new Dimension(604, 370));
-		//this.setTitle(ResourceBundle.getBundle("Etiquetas").getString("CreateProductGUI.CreateProduct"));
+		this.setTitle(ResourceBundle.getBundle("Etiquetas").getString("ShowSaleGUI.Title"));
 
 		fieldTitle.setText(sale.getTitle());
 		fieldDescription.setText(sale.getDescription());
