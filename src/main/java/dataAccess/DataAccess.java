@@ -609,21 +609,45 @@ public class DataAccess {
 	//Este método devuelve true si no hay reseñas asociadas a un email de vendedor, email comprador e id de producto dados como paramétros. En caso contrario, devuelve false.
 	public boolean hayRese(String eVend, String eComp, long idP) {
 	    try {
-	        TypedQuery<Long> query = db.createQuery(
+	        TypedQuery<Long> queryReses = db.createQuery(
 	            "SELECT COUNT(v) FROM Valoraciones v WHERE v.eVendedor = :email AND v.eComprador = :emailcom AND v.productoResena.id = :idProd", 
 	            Long.class
-	        );
-	        
-	        query.setParameter("email", eVend);
-	        query.setParameter("emailcom", eComp);
-	        query.setParameter("idProd", idP);
-	        Long numResenas = query.getSingleResult();
+	        );	        
+	        queryReses.setParameter("email", eVend);
+	        queryReses.setParameter("emailcom", eComp);
+	        queryReses.setParameter("idProd", idP);       
+	        Long numResenas = queryReses.getSingleResult(); 
+
 	        System.out.println(">> DataAccess: hayRese=> numReseñas= "+ numResenas);
-	        return numResenas == 0;
+	        
+	        return numResenas  == 0;
 	        
 	    } catch(Exception e) {
 	        e.printStackTrace();
 	        System.out.println(">> DataAccess: hayRese=> An error ocurred");
+	        return false;
+	    }
+	}
+	//Este método devuelve true si no hay reportes asociadas a un email de vendedor, email comprador e id de producto dados como paramétros. En caso contrario, devuelve false
+	public boolean hayRepo(String eVend, String eComp, long idP) {
+	    try {
+
+	        TypedQuery<Long> queryReports = db.createQuery(
+	            "SELECT COUNT(v) FROM domain.Reportes v WHERE v.eVendedor = :email AND v.eComprador = :emailcom AND v.productoReport.id = :idProd", 
+	            Long.class
+	        );
+	                
+	        queryReports.setParameter("email", eVend);
+	        queryReports.setParameter("emailcom", eComp);
+	        queryReports.setParameter("idProd", idP);
+	        Long numReports = queryReports.getSingleResult(); 		
+	        System.out.println(">> DataAccess: hayRepo=> numReports= "+ numReports);
+	        
+	        return numReports == 0;
+	        
+	    } catch(Exception e) {
+	        e.printStackTrace();
+	        System.out.println(">> DataAccess: hayRepo=> An error ocurred");
 	        return false;
 	    }
 	}
@@ -774,7 +798,6 @@ public class DataAccess {
 	        Cupon c = db.find(Cupon.class, codigo);
 	        if (c != null && !c.isUsado()) {
 	            
-	            // LA MAGIA: ¿Es admin O es el mismo vendedor del producto?
 	            if (c.getCreador().equals("admin@gmail.com") || c.getCreador().equals(vendedorProductoMail)) {
 	                return c.getPorcentaje();
 	            }

@@ -93,6 +93,7 @@ public interface BLFacade  {
 	@WebMethod public List<Reportes> getReportesRecibidos();
 	
 	@WebMethod public boolean hayRese(String eVend, String eComp, long idP);
+	@WebMethod public boolean hayRepo(String eVend, String eComp, long idP);
 
 	@WebMethod public boolean actualizarEstado(long idRep, int estado);
 

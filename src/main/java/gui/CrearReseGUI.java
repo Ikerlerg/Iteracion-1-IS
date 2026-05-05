@@ -129,7 +129,7 @@ public class CrearReseGUI extends JFrame {
 			List<Offer> offers = facade.getReseValid(this.buyerMail);
 			if (!offers.isEmpty()) {
 				for (Offer offer : offers) {
-					if(bl.hayRese(offer.getEmail_vendedor(), buyerMail, offer.getId())) {
+					if(bl.hayRese(offer.getEmail_vendedor(), buyerMail, offer.getId())&&bl.hayRepo(offer.getEmail_vendedor(), buyerMail, offer.getId())) {
 						modeloOffer.addElement(offer);
 					}
 				}
