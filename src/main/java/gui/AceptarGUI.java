@@ -167,7 +167,7 @@ public class AceptarGUI extends JFrame {
 			
 			if (offers.isEmpty()||posibles==0) {
 				jLabelMsg.setForeground(Color.BLUE);
-				jLabelMsg.setText("No hay ofertas activas en este momento.");
+				jLabelMsg.setText(ResourceBundle.getBundle("Etiquetas").getString("AceptarGUI.noOfertas"));
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

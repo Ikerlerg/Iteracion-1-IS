@@ -3,6 +3,7 @@ package domain;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.GeneratedValue;
 
@@ -17,17 +18,20 @@ public class Reportes {
 	private String eComprador;
 	private String reporte;
 	private int estado;//0=pendiente, 1=aceptado, -1=denegado
+    @Lob
+    private String fotoBase64;
 
 	public Reportes() {
 
 	}
 
-	public Reportes(Offer productoReport, String eComprador, String reporte) {
+	public Reportes(Offer productoReport, String eComprador, String reporte,String foto) {
 		this.productoReport = productoReport;
 		this.eVendedor = productoReport.getEmail_vendedor();
 		this.eComprador = eComprador;
 		this.reporte = reporte;
 		this.estado=0;
+		this.fotoBase64=foto;
 	}
 	public long getIdRep() {
 		return idRep;
@@ -54,6 +58,10 @@ public class Reportes {
 	public void setEstado(int estado) {
 		this.estado = estado;
 	}
+	public String getFotoBase64() {
+		return fotoBase64;
+	}
+
 
 	@Override
 	public String toString() {

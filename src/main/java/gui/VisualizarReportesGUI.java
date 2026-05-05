@@ -34,15 +34,16 @@ public class VisualizarReportesGUI extends JFrame {
 	private JFrame parentFrame;
 	private int tipo;
 
-	private JButton jButtonVisualizar = new JButton(ResourceBundle.getBundle("Etiquetas").getString("MainGUI.aceptar"));
+	private JButton jButtonVisualizar = new JButton(ResourceBundle.getBundle("Etiquetas").getString("VisualizarReportesGUI.visualizar"));
 	private JButton jButtonClose = new JButton(ResourceBundle.getBundle("Etiquetas").getString("MainGUI.Close"));
 	protected JLabel jLabelMsg = new JLabel();
 
 	private final JScrollPane scrollPanelReport = new JScrollPane();
 	private JTable tableReportes = new JTable();
 	private DefaultTableModel tableModelReport;
-	private String[] columnNamesReports = new String[] { "Correo:", "estado",
-
+	private String[] columnNamesReports = new String[] { 
+			ResourceBundle.getBundle("Etiquetas").getString("VisualizarReportesGUI.correo"), 
+			ResourceBundle.getBundle("Etiquetas").getString("CreateSaleGUI.Status")
 	};
 
 	public VisualizarReportesGUI(MainGUI parent, String mail) {
@@ -58,10 +59,10 @@ public class VisualizarReportesGUI extends JFrame {
 
 		JLabel lblSelect = new JLabel("");
 		if(tipo==-1) {
-			lblSelect.setText("Seleccione un reporte sin resolver");		
+			lblSelect.setText(ResourceBundle.getBundle("Etiquetas").getString("VisualizarReportesGUI.seleccionarAdmin"));		
 			}
 		else {
-			lblSelect.setText("Reportes realizados");
+			lblSelect.setText(ResourceBundle.getBundle("Etiquetas").getString("VisualizarReportesGUI.realizados"));
 		}
 		lblSelect.setBounds(30, 20, 250, 20);
 		this.getContentPane().add(lblSelect);
@@ -156,11 +157,11 @@ public class VisualizarReportesGUI extends JFrame {
 				Object[] dataOfertas = new Object[3];
 				dataOfertas[0] = r.geteComprador();
 				if (r.getEstado() == -1) {
-					dataOfertas[1] = "Denegado";
+					dataOfertas[1] = ResourceBundle.getBundle("Etiquetas").getString("VisualizarReportesGUI.denegado");
 				} else if (r.getEstado() == 1) {
-					dataOfertas[1] = "Aceptado";
+					dataOfertas[1] = ResourceBundle.getBundle("Etiquetas").getString("VisualizarReportesGUI.aceptado");
 				} else {
-					dataOfertas[1] = "Pendiente";
+					dataOfertas[1] = ResourceBundle.getBundle("Etiquetas").getString("VisualizarReportesGUI.pendiente");
 				}
 
 				dataOfertas[2] = r;
@@ -171,7 +172,7 @@ public class VisualizarReportesGUI extends JFrame {
 
 			if (reportes.isEmpty()) {
 				jLabelMsg.setForeground(Color.BLUE);
-				jLabelMsg.setText("No hay ofertas activas en este momento.");
+				jLabelMsg.setText(ResourceBundle.getBundle("Etiquetas").getString("VisualizarReportesGUI.noreportes"));
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

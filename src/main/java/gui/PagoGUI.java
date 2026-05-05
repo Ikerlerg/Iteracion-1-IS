@@ -125,7 +125,7 @@ public class PagoGUI extends JFrame {
 		NumeroLabel.setBounds(63, 96, 314, 12);
 		getContentPane().add(NumeroLabel);
 		
-		JLabel CvvLabel = new JLabel("CVV:");
+		JLabel CvvLabel = new JLabel(ResourceBundle.getBundle("Etiquetas").getString("PagoGUI.cvv"));
 		CvvLabel.setBounds(63, 155, 44, 12);
 		getContentPane().add(CvvLabel);
 		
