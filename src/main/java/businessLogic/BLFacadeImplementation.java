@@ -298,6 +298,12 @@ public class BLFacadeImplementation implements BLFacade {
 		dbManager.close();
 		return res;
 	}
+	@WebMethod public boolean hayRepo(String eVend, String eComp, long idP){
+		dbManager.open();
+		boolean res = dbManager.hayRepo(eVend, eComp, idP);
+		dbManager.close();
+		return res;
+	}
 
 	@WebMethod 
 	public boolean actualizarEstado(long idRep, int estado){
