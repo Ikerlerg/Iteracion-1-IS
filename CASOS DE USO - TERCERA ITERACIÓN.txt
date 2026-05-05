@@ -26,10 +26,22 @@ CASO DE USO 6: Presentar una denuncia a un producto comprado
 Clase de dominio principal: Report
 Descripción:
 
-CASO DE USO 7: Presentar una denuncia a un producto comprado 
-Clase de dominio principal: Report
+CASO DE USO 7: Crear un cupón 
+Clase de dominio principal: Cupon
 Descripción:
 
 CASO DE USO 8: Cambiar foto de perfil del usuario 
 Clase de dominio principal: Usuario
+Descripción: El usuario puede adjuntar una foto en los formatos permitidos (JPG, PNG y GIF), esta se guardara en una String codificada en base 64 para que después pueda ser guardada de forma mas sencilla.
+
+CASO DE USO 9: Utilizar un cupón 
+Clase de dominio principal: Cupon
+Descripción:
+
+CASO DE USO 10: Aceptar/Denegar reporte 
+Clase de dominio principal: Report
+Descripción:
+
+CASO DE USO 11: Visualizar reporte 
+Clase de dominio principal: Report
 Descripción:
