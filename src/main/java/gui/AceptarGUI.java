@@ -110,7 +110,7 @@ public class AceptarGUI extends JFrame {
 		this.getContentPane().add(jButtonClose);
 		jLabelMsg.setBounds(47, 286, 400, 20);
 		this.getContentPane().add(jLabelMsg);
-		CarritoButton.setBounds(366, 20, 84, 20);
+		CarritoButton.setBounds(309, 20, 165, 20);
 		
 		getContentPane().add(CarritoButton);
 		
@@ -167,7 +167,7 @@ public class AceptarGUI extends JFrame {
 			
 			if (offers.isEmpty()||posibles==0) {
 				jLabelMsg.setForeground(Color.BLUE);
-				jLabelMsg.setText("No hay ofertas activas en este momento.");
+				jLabelMsg.setText(ResourceBundle.getBundle("Etiquetas").getString("AceptarGUI.noOfertas"));
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

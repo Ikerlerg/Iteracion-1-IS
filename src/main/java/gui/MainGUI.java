@@ -6,7 +6,6 @@ import javax.imageio.ImageIO;
  * @author Software Engineering teachers
  */
 
-
 import javax.swing.*;
 
 import businessLogic.*;
@@ -28,7 +27,6 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.ActionEvent;
 
-
 public class MainGUI extends JFrame {
 	
 	private String sellerMail = "Sin usuario";
@@ -38,44 +36,38 @@ public class MainGUI extends JFrame {
 	protected JButton jButtonCreateQuery = null;
 	protected JButton jButtonQueryQueries = null;
 
-    private static BLFacade appFacadeInterface;
+	private static BLFacade appFacadeInterface;
 	
 	public static BLFacade getBusinessLogic(){
 		return appFacadeInterface;
 	}
-	 
+	
 	public static void setBussinessLogic (BLFacade facade){
 		appFacadeInterface=facade;
 	}
 	protected JLabel jLabelSelectOption;
-	//private JRadioButton rdbtnNewRadioButton;
-	//private JRadioButton rdbtnNewRadioButton_1;
-	//private JRadioButton rdbtnNewRadioButton_2;
+
 	private JPanel panel;
 	private JPanel panel_1;
-	//private final ButtonGroup buttonGroup = new ButtonGroup();
+
 	protected final JButton bLogin = new JButton(); 
 	protected final JButton bRegist = new JButton();
 	protected JButton close = new JButton(); 
 	
-	//public static String logEmail = "Sin usuario";
 	protected JLabel loged;
 	protected JButton adminButton = new JButton();
 	protected JButton aceptar_visuali = new JButton(""); 
 	//variable para controlar si soy vendedor o comprador
 	 //(0=nada,1=vendedor,2=comprador)
 	private int mode = 0;
-	private final JButton buttonReportes = new JButton("");
+	private final JButton buttonReportes = new JButton(ResourceBundle.getBundle("Etiquetas").getString("MainGUI.Reportes"));
 	protected JButton btnCrearCupon = new JButton();
-/*
-	public MainGUI() {
-	}
-	*/
+
 	public MainGUI(String mail, PrincipalGUI ventPadre) {
 		super();
 		
 		ventPadre.setVisible(false);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.sellerMail=mail;
 		this.setSize(675, 429);
 		jLabelSelectOption = new JLabel(ResourceBundle.getBundle("Etiquetas").getString("MainGUI.SelectOption"));
@@ -84,41 +76,9 @@ public class MainGUI extends JFrame {
 		jLabelSelectOption.setForeground(Color.BLACK);
 		jLabelSelectOption.setHorizontalAlignment(SwingConstants.CENTER);
 		
-		/*rdbtnNewRadioButton = new JRadioButton("English");
-		rdbtnNewRadioButton.setBounds(188, 5, 78, 21);
-		rdbtnNewRadioButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				Locale.setDefault(new Locale("en"));
-				paintAgain();				}
-		});
-
-		buttonGroup.add(rdbtnNewRadioButton);
-		
-		rdbtnNewRadioButton_1 = new JRadioButton("Euskara");
-		rdbtnNewRadioButton_1.setBounds(6, 5, 86, 21);
-		rdbtnNewRadioButton_1.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				Locale.setDefault(new Locale("eus"));
-				paintAgain();				}
-		});
-		buttonGroup.add(rdbtnNewRadioButton_1);
-		
-		rdbtnNewRadioButton_2 = new JRadioButton("Castellano");
-		rdbtnNewRadioButton_2.setBounds(94, 5, 86, 21);
-		rdbtnNewRadioButton_2.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				Locale.setDefault(new Locale("es"));
-				paintAgain();
-			}
-		});
-		buttonGroup.add(rdbtnNewRadioButton_2);*/
-	
 		panel = new JPanel();
 		panel.setBounds(0, 137, 654, 253);
 		panel.setLayout(null);
-		//panel.add(rdbtnNewRadioButton_1);
-		//panel.add(rdbtnNewRadioButton_2);
-		//panel.add(rdbtnNewRadioButton);
 		
 		panel_1 = new JPanel();
 		panel_1.setBounds(540, 40, 86, 86);
@@ -178,36 +138,35 @@ public class MainGUI extends JFrame {
 		
 		close.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//actualizarEstadoUsuario("Sin usuario");
 				ventPadre.setVisible(true);
-  				Timer timer = new Timer(200, evt -> dispose());
-  				timer.setRepeats(false);
-  				timer.start();		
+				Timer timer = new Timer(200, evt -> dispose());
+				timer.setRepeats(false);
+				timer.start();		
 			}
 		});
 		
 		try {
-		    BLFacade pFacade = getBusinessLogic();
-		    String fotoGuardadaBase64 = pFacade.obtenerImagen(mail); 
+			BLFacade pFacade = getBusinessLogic();
+			String fotoGuardadaBase64 = pFacade.obtenerImagen(mail); 
 
-		    if (fotoGuardadaBase64 != null && !fotoGuardadaBase64.isEmpty()) {
-		        ImageIcon icon = decodeBase64ToImageIcon(fotoGuardadaBase64);
-		        panel_1.add(new JLabel(icon));
-		    } else {
-		        ImageIcon im = new ImageIcon("userDefault.png");
-		        
-		        Image escalada = im.getImage().getScaledInstance(86,86,Image.SCALE_SMOOTH);
-		        ImageIcon iconDefault = new ImageIcon(escalada);
-		        
-		        JLabel panelImagenDefault = new JLabel(iconDefault);
-		        
-		        panel_1.add(panelImagenDefault);
-		    }
-		    panel_1.revalidate();
-		    panel_1.repaint();
-		    	
+			if (fotoGuardadaBase64 != null && !fotoGuardadaBase64.isEmpty()) {
+				ImageIcon icon = decodeBase64ToImageIcon(fotoGuardadaBase64);
+				panel_1.add(new JLabel(icon));
+			} else {
+				ImageIcon im = new ImageIcon("userDefault.png");
+				
+				Image escalada = im.getImage().getScaledInstance(86,86,Image.SCALE_SMOOTH);
+				ImageIcon iconDefault = new ImageIcon(escalada);
+				
+				JLabel panelImagenDefault = new JLabel(iconDefault);
+				
+				panel_1.add(panelImagenDefault);
+			}
+			panel_1.revalidate();
+			panel_1.repaint();
+				
 		} catch (Exception ex) {
-		    ex.printStackTrace();
+			ex.printStackTrace();
 		}
 
 		
@@ -261,17 +220,17 @@ public class MainGUI extends JFrame {
 		setContentPane(jContentPane);
 		setTitle(ResourceBundle.getBundle("Etiquetas").getString("MainGUI.MainTitle"));
 		
-		loged = new JLabel("Sin usuario");
+		loged = new JLabel(ResourceBundle.getBundle("Etiquetas").getString("MainGUI.SinUsuario"));
 		loged.setHorizontalAlignment(SwingConstants.CENTER);
 		loged.setBounds(511, 9, 143, 24);
 		loged.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		loged.addMouseListener(new MouseAdapter() {
-		    public void mouseClicked(MouseEvent e) {
-		        if (!sellerMail.equals("Sin usuario") && !sellerMail.equals("admin@gmail.com")) {
-		        	JFrame a = new UsuarioGUI(sellerMail, MainGUI.this);
+			public void mouseClicked(MouseEvent e) {
+				if (!sellerMail.equals("Sin usuario") && !sellerMail.equals("admin@gmail.com")) {
+					JFrame a = new UsuarioGUI(sellerMail, MainGUI.this);
 					a.setVisible(true);
-		        }
-		    }
+				}
+			}
 		});
 		
 		jContentPane.add(loged);
@@ -296,41 +255,31 @@ public class MainGUI extends JFrame {
 			}
 		});
 		
-		//Metodo para cerrar todo el sistema si se cierra la ventana Main
-		/*addWindowListener(new WindowAdapter() {
-			@Override
-			public void windowClosing(WindowEvent e) {
-				System.exit(1);
-			}
-		});*/
-		
-		
 		// Cambio de idioma
-        IdiomaBox.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                if(IdiomaBox.getSelectedIndex() == 0) {
-                    Locale.setDefault(new Locale("es"));
-                } else if(IdiomaBox.getSelectedIndex() == 1) {
-                    Locale.setDefault(new Locale("eus"));
-                } else if(IdiomaBox.getSelectedIndex() == 2) {
-                    Locale.setDefault(new Locale("en"));
-                }
-                paintAgain(); 
-            }
-        });
-        
-        //Botón para crear el cupon
-        btnCrearCupon.setBounds(511, 133, 143, 21); // Ajusta la posición según tu diseño
-        panel.add(btnCrearCupon);
-        btnCrearCupon.setVisible(false); // Por defecto oculto
-
-        btnCrearCupon.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                JFrame v = new CrearCuponGUI(MainGUI.this,sellerMail);
-                v.setVisible(true);
-            }
-        });
+		IdiomaBox.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(IdiomaBox.getSelectedIndex() == 0) {
+					Locale.setDefault(new Locale("es"));
+				} else if(IdiomaBox.getSelectedIndex() == 1) {
+					Locale.setDefault(new Locale("eus"));
+				} else if(IdiomaBox.getSelectedIndex() == 2) {
+					Locale.setDefault(new Locale("en"));
+				}
+				paintAgain(); 
+			}
+		});
 		
+		//Botón para crear el cupon
+		btnCrearCupon.setBounds(511, 133, 143, 21); // Ajusta la posición según tu diseño
+		panel.add(btnCrearCupon);
+		btnCrearCupon.setVisible(false); // Por defecto oculto
+
+		btnCrearCupon.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JFrame v = new CrearCuponGUI(MainGUI.this,sellerMail);
+				v.setVisible(true);
+			}
+		});
 		
 		//Llamada al paint para que se carguen por primera vez todo los botones.
 		paintAgain();
@@ -356,7 +305,7 @@ public class MainGUI extends JFrame {
 			close.setVisible(true);
 			close.setEnabled(false);
 			this.setTitle(ResourceBundle.getBundle("Etiquetas").getString("MainGUI.MainTitle"));
-			loged.setText("Sin usuario");
+			loged.setText(ResourceBundle.getBundle("Etiquetas").getString("MainGUI.SinUsuario"));
 			this.sellerMail = "Sin usuario";
 			this.setSize(675, 336);
 		}
@@ -399,12 +348,12 @@ public class MainGUI extends JFrame {
 				loged.setText(sellerMail);
 				
 				if (mode == 1 || mode == -1) {
-	                btnCrearCupon.setText(ResourceBundle.getBundle("Etiquetas").getString("MainGUI.BotonCrearCupon"));
-	                btnCrearCupon.setVisible(true);
-	                btnCrearCupon.setEnabled(true);
-	            } else {
-	                btnCrearCupon.setVisible(false);
-	            }
+					btnCrearCupon.setText(ResourceBundle.getBundle("Etiquetas").getString("MainGUI.BotonCrearCupon"));
+					btnCrearCupon.setVisible(true);
+					btnCrearCupon.setEnabled(true);
+				} else {
+					btnCrearCupon.setVisible(false);
+				}
 				panel.revalidate();
 				panel.repaint();
 				
@@ -421,47 +370,51 @@ public class MainGUI extends JFrame {
 		jButtonQueryQueries.setText(ResourceBundle.getBundle("Etiquetas").getString("MainGUI.QuerySales"));
 		jButtonCreateQuery.setText(ResourceBundle.getBundle("Etiquetas").getString("MainGUI.CreateSale"));
 		bLogin.setText(ResourceBundle.getBundle("Etiquetas").getString("MainGUI.Login"));
-	    bRegist.setText(ResourceBundle.getBundle("Etiquetas").getString("MainGUI.Register"));
-	    close.setText(ResourceBundle.getBundle("Etiquetas").getString("MainGUI.close"));
-	    
-	    
-	  
-	    
+		bRegist.setText(ResourceBundle.getBundle("Etiquetas").getString("MainGUI.Register"));
+		close.setText(ResourceBundle.getBundle("Etiquetas").getString("MainGUI.close"));
+		buttonReportes.setText(ResourceBundle.getBundle("Etiquetas").getString("MainGUI.Reportes"));
+		btnCrearCupon.setText(ResourceBundle.getBundle("Etiquetas").getString("MainGUI.BotonCrearCupon"));
+		
+		if (sellerMail.equals("Sin usuario")) {
+			loged.setText(ResourceBundle.getBundle("Etiquetas").getString("MainGUI.SinUsuario"));
+		}
+		// Refresca textos dinámicos como aceptar_visuali y adminButton según el rol
+		actualizarEstadoUsuario(sellerMail);
 	}
 	
 	public ImageIcon decodeBase64ToImageIcon(String base64String) {
-	    try {
-	        byte[] bytes = Base64.getDecoder().decode(base64String);
-	        java.io.ByteArrayInputStream bais = new java.io.ByteArrayInputStream(bytes);
-	        BufferedImage img = ImageIO.read(bais);
-	        return new ImageIcon(img);
-	    } catch (Exception e) {
-	        e.printStackTrace();
-	        return null;
-	    }
+		try {
+			byte[] bytes = Base64.getDecoder().decode(base64String);
+			java.io.ByteArrayInputStream bais = new java.io.ByteArrayInputStream(bytes);
+			BufferedImage img = ImageIO.read(bais);
+			return new ImageIcon(img);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
 	}
 	
 	public void actualizarFotoPerfil() {
-	    try {
-	        BLFacade pFacade = getBusinessLogic();
-	        String fotoGuardadaBase64 = pFacade.obtenerImagen(this.sellerMail); 
-	        panel_1.removeAll();
+		try {
+			BLFacade pFacade = getBusinessLogic();
+			String fotoGuardadaBase64 = pFacade.obtenerImagen(this.sellerMail); 
+			panel_1.removeAll();
 
-	        if (fotoGuardadaBase64 != null && !fotoGuardadaBase64.isEmpty()) {
-	            ImageIcon icon = decodeBase64ToImageIcon(fotoGuardadaBase64);
-	            panel_1.add(new JLabel(icon));
-	        } else {
-	            ImageIcon im = new ImageIcon("userDefault.png");
-	            Image escalada = im.getImage().getScaledInstance(86, 86, Image.SCALE_SMOOTH);
-	            ImageIcon iconDefault = new ImageIcon(escalada);
-	            panel_1.add(new JLabel(iconDefault));
-	        }
+			if (fotoGuardadaBase64 != null && !fotoGuardadaBase64.isEmpty()) {
+				ImageIcon icon = decodeBase64ToImageIcon(fotoGuardadaBase64);
+				panel_1.add(new JLabel(icon));
+			} else {
+				ImageIcon im = new ImageIcon("userDefault.png");
+				Image escalada = im.getImage().getScaledInstance(86, 86, Image.SCALE_SMOOTH);
+				ImageIcon iconDefault = new ImageIcon(escalada);
+				panel_1.add(new JLabel(iconDefault));
+			}
 
-	        panel_1.revalidate();
-	        panel_1.repaint();
-	        
-	    } catch (Exception ex) {
-	        ex.printStackTrace();
-	    }
+			panel_1.revalidate();
+			panel_1.repaint();
+			
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
 	}
 }

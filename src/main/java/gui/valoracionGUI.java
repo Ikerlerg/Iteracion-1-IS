@@ -37,6 +37,8 @@ public class valoracionGUI extends JFrame {
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
+		// Título de la ventana
+		setTitle(ResourceBundle.getBundle("Etiquetas").getString("ValoracionGUI.Titulo"));
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -48,7 +50,7 @@ public class valoracionGUI extends JFrame {
 		radio1.setBounds(122, 187, 40, 35);
 		contentPane.add(radio1);
 		
-		JLabel lblNewLabel = new JLabel("Descripción:");
+		JLabel lblNewLabel = new JLabel(ResourceBundle.getBundle("Etiquetas").getString("CreateSaleGUI.Description"));
 		lblNewLabel.setBounds(50, 44, 100, 16);
 		contentPane.add(lblNewLabel);
 		
@@ -81,7 +83,7 @@ public class valoracionGUI extends JFrame {
 		radio5.setActionCommand("5");
 		contentPane.add(radio5);
 		
-		JLabel lblNewLabel_1 = new JLabel("Reseña ");
+		JLabel lblNewLabel_1 = new JLabel(ResourceBundle.getBundle("Etiquetas").getString("ValoracionGUI.Titulo"));
 		lblNewLabel_1.setFont(new Font("Dialog", Font.PLAIN, 28));
 		lblNewLabel_1.setBounds(160, 0, 108, 35);
 		contentPane.add(lblNewLabel_1);
@@ -93,7 +95,7 @@ public class valoracionGUI extends JFrame {
 		contentPane.add(textoConf);
 
 		
-		JButton botonEnviar = new JButton("Enviar");
+		JButton botonEnviar = new JButton(ResourceBundle.getBundle("Etiquetas").getString("ReportarGUI.Enviar"));
 		botonEnviar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String desc = Descripcion.getText();
@@ -102,13 +104,13 @@ public class valoracionGUI extends JFrame {
 					String val = buttonGroup.getSelection().getActionCommand();
 					Valoraciones valora = new Valoraciones(prodRese,mailVend,mailComp,val,desc);
 					bl.publicarValoracion(valora);
-					textoConf.setText("Reseña enviada correctamente");
+					textoConf.setText(ResourceBundle.getBundle("Etiquetas").getString("ValoracionGUI.Exito"));
 					Timer timer = new Timer(1000, evt -> dispose());
 					timer.setRepeats(false);
 					timer.start();
 				}
 				else{
-					textoConf.setText("Error: has hecho algo mal");
+					textoConf.setText(ResourceBundle.getBundle("Etiquetas").getString("ValoracionGUI.Error"));
 				}
 			}
 		});

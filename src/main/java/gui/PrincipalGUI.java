@@ -29,7 +29,7 @@ public class PrincipalGUI extends JFrame {
 	
 
     public PrincipalGUI() {
-        setTitle("Market");
+        setTitle(ResourceBundle.getBundle("Etiquetas").getString("MainGUI.MainTitle"));
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 450, 300);
         contentPane = new JPanel();
@@ -110,11 +110,10 @@ public class PrincipalGUI extends JFrame {
 
     public void paintAgain() {
         ResourceBundle bundle = ResourceBundle.getBundle("Etiquetas");
-        
+        setTitle(bundle.getString("MainGUI.MainTitle"));
         bGuest.setText(bundle.getString("Principal.Guest"));
         bLogin.setText(bundle.getString("MainGUI.Login"));
         bRegistrar.setText(bundle.getString("MainGUI.Register"));
         Idioma.setToolTipText(bundle.getString("PrincipalGUI.Idioma"));
     }
 }
-
