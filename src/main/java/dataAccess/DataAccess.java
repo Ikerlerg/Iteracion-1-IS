@@ -239,20 +239,20 @@ public class DataAccess {
 		
 		if (tipo == 2) {
 			query = db.createQuery(
-	                "SELECT v FROM Valoraciones v, User u " +
-	                "WHERE v.eVendedor = :mail AND v.eComprador = u.email AND u.name LIKE :busq",
+					"SELECT v FROM Seller s JOIN s.valoracion v, User u " +
+			        "WHERE s.email = :mail AND v.eComprador = u.email AND u.name LIKE :busq",
 	                Valoraciones.class);
 	        query.setParameter("mail", mail);
 	        query.setParameter("busq", "%" + busq + "%");
 		} else if (tipo == 1) {
 			query = db.createQuery(
-	                "SELECT v FROM Valoraciones v, User u " +
-	                "WHERE v.eComprador = :mail AND v.eVendedor = u.email AND u.name LIKE :busq",
+					"SELECT v FROM Seller s JOIN s.valoracion v, User u " +
+					"WHERE v.eComprador = :mail AND s.email = u.email AND u.name LIKE :busq",
 	                Valoraciones.class);
 	        query.setParameter("mail", mail);
 	        query.setParameter("busq", "%" + busq + "%");
 		} else {
-			query = db.createQuery("SELECT v FROM Valoraciones v", Valoraciones.class);
+			query = db.createQuery("SELECT v FROM Seller s JOIN s.valoracion v", Valoraciones.class);
 		}
 		List<Valoraciones> reseñas = query.getResultList();
 		for (Valoraciones r : reseñas) {
