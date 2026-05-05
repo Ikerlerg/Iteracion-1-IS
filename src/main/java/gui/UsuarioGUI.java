@@ -96,28 +96,6 @@ public class UsuarioGUI extends JFrame {
 		    ex.printStackTrace();
 		}
 		
-		/*
-		btnNewButton_2.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			
-				try {
-					BufferedImage img = ImageIO.read(targetFile);
-					
-				    File outputfile = new File(basePath+targetFile.getName());
-
-				   ImageIO.write(img, "png", outputfile);  // ignore returned boolean
-				   System.out.println("file stored "+img);
-				} catch(IOException ex) {
-				 //System.out.println("Write error for " + outputfile.getPath()  ": " + ex.getMessage());
-				  }
-				
-			}
-		});
-		
-		btnNewButton_2.setBounds(137, 350, 117, 29);
-		
-		getContentPane().add(btnNewButton_2);
-		*/
 		JLabel jLabelNombre = new JLabel(ResourceBundle.getBundle("Etiquetas").getString("UsuarioGUI.nombre") +" " + usuario.getName());
 		jLabelNombre.setBounds(new Rectangle(6, 24, 92, 20));
 		jLabelNombre.setBounds(137, 26, 417, 20);
