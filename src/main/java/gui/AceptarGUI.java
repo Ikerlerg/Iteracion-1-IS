@@ -110,7 +110,7 @@ public class AceptarGUI extends JFrame {
 		this.getContentPane().add(jButtonClose);
 		jLabelMsg.setBounds(47, 286, 400, 20);
 		this.getContentPane().add(jLabelMsg);
-		CarritoButton.setBounds(366, 20, 84, 20);
+		CarritoButton.setBounds(309, 20, 165, 20);
 		
 		getContentPane().add(CarritoButton);
 		
