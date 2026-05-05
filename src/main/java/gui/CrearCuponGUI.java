@@ -1,4 +1,5 @@
 package gui;
+
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -26,50 +27,56 @@ public class CrearCuponGUI extends JFrame {
 		this.setTitle(ResourceBundle.getBundle("Etiquetas").getString("CrearCuponGUI.Titulo"));
 		this.setSize(400, 250);
 		this.getContentPane().setLayout(null);
-		
+
 		JLabel lblCodigo = new JLabel(ResourceBundle.getBundle("Etiquetas").getString("CrearCuponGUI.Codigo"));
 		lblCodigo.setBounds(40, 30, 150, 20);
 		getContentPane().add(lblCodigo);
-		
+
 		txtCodigo = new JTextField();
 		txtCodigo.setBounds(200, 30, 140, 20);
 		getContentPane().add(txtCodigo);
-		
+
 		JLabel lblPorcentaje = new JLabel(ResourceBundle.getBundle("Etiquetas").getString("CrearCuponGUI.Porcentaje"));
 		lblPorcentaje.setBounds(40, 80, 150, 20);
 		getContentPane().add(lblPorcentaje);
-		
+
 		txtPorcentaje = new JTextField();
 		txtPorcentaje.setBounds(200, 80, 140, 20);
 		getContentPane().add(txtPorcentaje);
-		
+
 		lblMensaje = new JLabel("");
 		lblMensaje.setBounds(40, 179, 300, 20);
 		getContentPane().add(lblMensaje);
-		
+
 		JButton btnCrear = new JButton(ResourceBundle.getBundle("Etiquetas").getString("CrearCuponGUI.Crear"));
 		btnCrear.setBounds(118, 138, 140, 30);
 		btnCrear.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
-					String codigo = txtCodigo.getText();
-					double porcentaje = Double.parseDouble(txtPorcentaje.getText());
-					if(porcentaje < 1 || porcentaje > 100) {
-						lblMensaje.setForeground(Color.RED);
-						lblMensaje.setText(ResourceBundle.getBundle("Etiquetas").getString("CrearCuponGUI.Error2"));
-						return;
-					}
-					porcentaje = porcentaje/100;
-					BLFacade facade = MainGUI.getBusinessLogic();
-					
-					boolean exito = facade.crearCupon(codigo, porcentaje, creadorMail);
-					
-					if(exito) {
-						lblMensaje.setForeground(Color.GREEN);
-						lblMensaje.setText(ResourceBundle.getBundle("Etiquetas").getString("CrearCuponGUI.Exito"));
+					if (!txtCodigo.getText().isBlank()) {
+						String codigo = txtCodigo.getText();
+						double porcentaje = Double.parseDouble(txtPorcentaje.getText());
+						if (porcentaje < 1 || porcentaje > 100) {
+							lblMensaje.setForeground(Color.RED);
+							lblMensaje.setText(ResourceBundle.getBundle("Etiquetas").getString("CrearCuponGUI.Error2"));
+							return;
+						}
+						porcentaje = porcentaje / 100;
+						BLFacade facade = MainGUI.getBusinessLogic();
+
+						boolean exito = facade.crearCupon(codigo, porcentaje, creadorMail);
+
+						if (exito) {
+							lblMensaje.setForeground(Color.GREEN);
+							lblMensaje.setText(ResourceBundle.getBundle("Etiquetas").getString("CrearCuponGUI.Exito"));
+						} else {
+							lblMensaje.setForeground(Color.RED);
+							lblMensaje.setText(ResourceBundle.getBundle("Etiquetas").getString("CrearCuponGUI.Error"));
+						}
 					} else {
 						lblMensaje.setForeground(Color.RED);
-						lblMensaje.setText(ResourceBundle.getBundle("Etiquetas").getString("CrearCuponGUI.Error"));
+						lblMensaje.setText(ResourceBundle.getBundle("Etiquetas").getString("CrearCuponGUI.Vacio"));
+
 					}
 				} catch (NumberFormatException ex) {
 					ex.printStackTrace();
@@ -77,16 +84,16 @@ public class CrearCuponGUI extends JFrame {
 			}
 		});
 		getContentPane().add(btnCrear);
-		//Extra que evita problemas al cerrar
-				setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-				this.addWindowListener(new java.awt.event.WindowAdapter() {
-				    @Override
-				    public void windowClosed(java.awt.event.WindowEvent windowEvent) {
-				        if (padre != null) {
-				        	padre.setVisible(true);
-				        }
-				    }
-				});
+		// Extra que evita problemas al cerrar
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		this.addWindowListener(new java.awt.event.WindowAdapter() {
+			@Override
+			public void windowClosed(java.awt.event.WindowEvent windowEvent) {
+				if (padre != null) {
+					padre.setVisible(true);
+				}
+			}
+		});
 
 	}
 }
