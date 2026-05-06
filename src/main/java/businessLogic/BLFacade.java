@@ -100,5 +100,6 @@ public interface BLFacade  {
 	@WebMethod public boolean crearCupon(String codigo, double porcentaje,String creador);
 	@WebMethod public double validarCupon(String codigo,String vendedorProductoMail);
 	@WebMethod public void usarCupon(String codigo);
+	@WebMethod public List<Valoraciones> getAllReseñas();
 
  }

@@ -164,9 +164,9 @@ public class UsuarioGUI extends JFrame {
 		getContentPane().add(btnFoto);
 		
 		String tipoTexto = null;
-		if(usuario.getTipo() == 2) {
+		if(usuario.getTipo() == 1) {
 			tipoTexto = ResourceBundle.getBundle("Etiquetas").getString("UsuarioGUI.vendedor");
-		} else if (usuario.getTipo() == 1) {
+		} else if (usuario.getTipo() == 2) {
 			tipoTexto = ResourceBundle.getBundle("Etiquetas").getString("UsuarioGUI.comprador");
 		} else {tipoTexto = ResourceBundle.getBundle("Etiquetas").getString("UsuarioGUI.admin");}
 		

@@ -90,8 +90,7 @@ public class VisualizarReseGUI extends JFrame {
 
 					BLFacade facade = MainGUI.getBusinessLogic();
 
-					List<Valoraciones> valoraciones = facade.getReseñasPublicadas(email, jTextFieldSearch.getText(),
-							tipo);
+					List<Valoraciones> valoraciones = facade.getAllReseñas();
 
 					if (valoraciones.isEmpty())
 						jLabelReseñas.setText(
@@ -102,24 +101,28 @@ public class VisualizarReseGUI extends JFrame {
 
 					if (tipo == 2) {
 						for (Valoraciones val : valoraciones) {
-							Vector<Object> row = new Vector<Object>();
-							row.add(val.geteComprador());
-							row.add(val.getProductoResena().getSale().getTitle());
-							row.add(val.getValoracion());
-							row.add(val.getDescripcion());
-							row.add(val);
-							tableModelReseñas.addRow(row);
+							if (val.geteComprador().equals(email)) {
+								Vector<Object> row = new Vector<Object>();
+								row.add(val.geteComprador());
+								row.add(val.getProductoResena().getSale().getTitle());
+								row.add(val.getValoracion());
+								row.add(val.getDescripcion());
+								row.add(val);
+								tableModelReseñas.addRow(row);
+							}
 						}
-					}
-					else if(tipo == 1) {
+					} else if (tipo == 1) {
+
 						for (Valoraciones val : valoraciones) {
-							Vector<Object> row = new Vector<Object>();
-							row.add(val.geteVendedor());
-							row.add(val.getProductoResena().getSale().getTitle());
-							row.add(val.getValoracion());
-							row.add(val.getDescripcion());
-							row.add(val);
-							tableModelReseñas.addRow(row);
+							if (val.geteVendedor().equals(email)) {
+								Vector<Object> row = new Vector<Object>();
+								row.add(val.geteComprador());
+								row.add(val.getProductoResena().getSale().getTitle());
+								row.add(val.getValoracion());
+								row.add(val.getDescripcion());
+								row.add(val);
+								tableModelReseñas.addRow(row);
+							}
 						}
 					} else {
 						for (Valoraciones val : valoraciones) {

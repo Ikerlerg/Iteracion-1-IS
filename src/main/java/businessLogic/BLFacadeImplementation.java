@@ -334,5 +334,12 @@ public class BLFacadeImplementation implements BLFacade {
 	    dbManager.close();
 
 	}
+	@WebMethod 
+	public List<Valoraciones> getAllReseñas(){
+		dbManager.open();
+		List<Valoraciones> res = dbManager.getAllReseñas();
+	    dbManager.close();
+	    return res;
+	}
 
 }
