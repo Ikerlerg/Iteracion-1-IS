@@ -729,6 +729,12 @@ public class DataAccess {
 		    return null;
 		}
 	}
+		public List<Valoraciones> getAllReseñas() {
+			System.out.println(">> DataAccess: getAllReseñas");
+			TypedQuery<Valoraciones> query = db.createQuery("SELECT o FROM Valoraciones o", Valoraciones.class);
+			return query.getResultList();
+		
+	}
 
 	public List<Reportes> getReportesRecibidos() {
 		System.out.println(">> DataAccess: getReportesRecibidos");
