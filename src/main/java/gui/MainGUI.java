@@ -48,7 +48,7 @@ public class MainGUI extends JFrame {
 	protected JLabel jLabelSelectOption;
 
 	private JPanel panel;
-	private JPanel panel_1;
+	protected JPanel panel_1;
 
 	protected final JButton bLogin = new JButton(); 
 	protected final JButton bRegist = new JButton();
@@ -400,7 +400,7 @@ public class MainGUI extends JFrame {
 			String fotoGuardadaBase64 = pFacade.obtenerImagen(this.sellerMail); 
 			panel_1.removeAll();
 
-			if (fotoGuardadaBase64 != null && !fotoGuardadaBase64.isEmpty()) {
+			if (fotoGuardadaBase64 != null && !fotoGuardadaBase64.isEmpty()&& this.sellerMail!="Sin usuario") {
 				ImageIcon icon = decodeBase64ToImageIcon(fotoGuardadaBase64);
 				panel_1.add(new JLabel(icon));
 			} else {
