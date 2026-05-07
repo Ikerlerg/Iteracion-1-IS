@@ -48,6 +48,7 @@ public class BorrarCuentaGUI extends JFrame{
 				
 				mGUI.close.setVisible(false);
 				mGUI.actualizarEstadoUsuario("Sin usuario");
+				mGUI.actualizarFotoPerfil();
 				//.loged.setText("Sin usuario");
 				if(uGUI != null) {
 					uGUI.dispose();

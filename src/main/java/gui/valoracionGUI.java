@@ -35,7 +35,7 @@ public class valoracionGUI extends JFrame {
 		
 
 		
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		//setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		// Título de la ventana
 		setTitle(ResourceBundle.getBundle("Etiquetas").getString("ValoracionGUI.Titulo"));
