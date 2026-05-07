@@ -39,7 +39,7 @@ public class ShowReseGUI extends JFrame {
 		contentPane.setLayout(null);
 		
 		JLabel lblCorreo = new JLabel(ResourceBundle.getBundle("Etiquetas").getString("ShowReseGUI.correo")+": "+v.geteVendedor());
-		lblCorreo.setBounds(62, 56, 100, 16);
+		lblCorreo.setBounds(62, 56, 211, 16);
 		contentPane.add(lblCorreo);
 		
 		JLabel lblValoracion = new JLabel(ResourceBundle.getBundle("Etiquetas").getString("ShowReseGUI.valoracion")+": "+v.getValoracion());

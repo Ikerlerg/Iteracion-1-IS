@@ -154,13 +154,13 @@ public class VisualizarReseGUI extends JFrame {
 		tableReseñas.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent mouseEvent) {
-
 				if (mouseEvent.getClickCount() == 2) {
 					JTable table = (JTable) mouseEvent.getSource();
 					Point point = mouseEvent.getPoint();
 					int row = table.rowAtPoint(point);
 					Valoraciones v = (Valoraciones) tableModelReseñas.getValueAt(row, 4);
-					new ShowReseGUI(v);
+					JFrame a = new ShowReseGUI(v);
+					a.setVisible(true);
 				}
 			}
 		});
